@@ -13,13 +13,6 @@ import finPerformanceImg from "./assets/financial-performance.jpg";
 import premCertificatesImg from "./assets/premium-certificates.jpg";
 import reinCertificatesImg from "./assets/reinsuarance-certificates.jpg";
 import finConditionImg from "./assets/financial-condition.jpg";
-import ordLifeValuationImg from "./assets/ordinary-life.jpg";
-import groupBusinessValuationImg from "./assets/business-valuation.jpg";
-import daValuationImg from "./assets/da-valuation.jpg";
-import ipsImg from "./assets/investment-policy.jpg";
-import prmfImg from "./assets/post-retirement.jpg";
-import dbdcValuationsImg from "./assets/dbdc-valuations.jpg";
-import ias19Img from "./assets/ias-19.jpg";
 import ifrs17Img from "./assets/ifrs-17.jpg";
 import shaLogo from "./assets/SHA_logo.png";
 import kenbrightLogo from "./assets/kenbright-logo-white.png";
@@ -121,69 +114,6 @@ export default function SHAModules() {
             description: "Master financial condition reporting standards and requirements.",
             image: finConditionImg,
             number: "09"
-        },
-        {
-            id: 10,
-            name: "Ordinary Life Valuation",
-            color: shaGreen,
-            status: "locked",
-            description: "Learn ordinary life insurance valuation techniques and methodologies.",
-            image: ordLifeValuationImg,
-            number: "10"
-        },
-        {
-            id: 11,
-            name: "Group Business Valuation",
-            color: shaBlue,
-            status: "locked",
-            description: "Understand group business valuation principles and applications.",
-            image: groupBusinessValuationImg,
-            number: "11"
-        },
-        {
-            id: 12,
-            name: "DA Valuation",
-            color: shaGreen,
-            status: "locked",
-            description: "Master deferred acquisition cost valuation and accounting treatment.",
-            image: daValuationImg,
-            number: "12"
-        },
-        {
-            id: 13,
-            name: "Investment Policy Statements (IPS)",
-            color: shaBlue,
-            status: "locked",
-            description: "Learn investment policy statement development and implementation.",
-            image: ipsImg,
-            number: "13"
-        },
-        {
-            id: 14,
-            name: "Post Retirement Medical Fund",
-            color: shaGreen,
-            status: "locked",
-            description: "Understand post-retirement medical fund valuation and management.",
-            image: prmfImg,
-            number: "14"
-        },
-        {
-            id: 15,
-            name: "Defined Benefit (DB) & Defined Contribution (DC) Valuations",
-            color: shaBlue,
-            status: "locked",
-            description: "Master DB and DC pension scheme valuation and funding assessment.",
-            image: dbdcValuationsImg,
-            number: "15"
-        },
-        {
-            id: 16,
-            name: "IAS 19 Valuation",
-            color: shaGreen,
-            status: "locked",
-            description: "Learn IAS 19 employee benefits valuation and reporting standards.",
-            image: ias19Img,
-            number: "16"
         }
     ];
 

@@ -1,5 +1,5 @@
 // src/MyProgress.jsx
-import React, { useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getShaThemeColors } from "./theme/sha";
 import {
@@ -37,13 +37,6 @@ import finPerformanceImg from "./assets/financial-performance.jpg";
 import premCertificatesImg from "./assets/premium-certificates.jpg";
 import reinCertificatesImg from "./assets/reinsuarance-certificates.jpg";
 import finConditionImg from "./assets/financial-condition.jpg";
-import ordLifeValuationImg from "./assets/ordinary-life.jpg";
-import groupBusinessValuationImg from "./assets/business-valuation.jpg";
-import daValuationImg from "./assets/da-valuation.jpg";
-import ipsImg from "./assets/investment-policy.jpg";
-import prmfImg from "./assets/post-retirement.jpg";
-import dbdcValuationsImg from "./assets/dbdc-valuations.jpg";
-import ias19Img from "./assets/ias-19.jpg";
 import ifrs17Img from "./assets/ifrs-17.jpg";
 
 // Carousel Slides for Dashboard
@@ -112,6 +105,9 @@ export default function MyProgress({ theme = 'dark', user }) {
   const colors = { dark: toProgressColors("dark"), light: toProgressColors("light") };
 
   const currentColors = theme === 'dark' ? colors.dark : colors.light;
+
+  // SHA available modules (10–16 removed)
+  const AVAILABLE_MODULE_IDS = useMemo(() => ([1, 2, 3, 4, 5, 6, 7, 8, 9]), []);
 
   // Fetch completed modules progress DIRECTLY from Supabase
   useEffect(() => {
@@ -246,11 +242,11 @@ export default function MyProgress({ theme = 'dark', user }) {
   };
 
   // Calculate dynamic progress bar percentage
-  const overallProgressPercentage = Math.round((completedModulesCount / 17) * 100) || 0;
+  const overallProgressPercentage = Math.round((completedModulesCount / AVAILABLE_MODULE_IDS.length) * 100) || 0;
 
   // Dashboard Quick Stats
   const quickStats = [
-    { label: "Modules Completed", value: `${completedModulesCount}/17`, icon: <BookOpen className="w-5 h-5" />, color: currentColors.cyan, progress: overallProgressPercentage, isLoading: isProgressLoading },
+    { label: "Modules Completed", value: `${completedModulesCount}/${AVAILABLE_MODULE_IDS.length}`, icon: <BookOpen className="w-5 h-5" />, color: currentColors.cyan, progress: overallProgressPercentage, isLoading: isProgressLoading },
     { label: "Study Streak", value: `${studyStreak} day${studyStreak !== 1 ? 's' : ''}`, icon: <Flame className="w-5 h-5" />, color: currentColors.orange, badge: "🔥", isLoading: isMetadataLoading },
     { label: "Multiple Choice Quiz Score Average", value: `${averageQuizScore}%`, icon: <Trophy className="w-5 h-5" />, color: currentColors.green, isLoading: isProgressLoading },
     { label: "Time Invested", value: timeInvested, icon: <Clock className="w-5 h-5" />, color: currentColors.purple, isLoading: isMetadataLoading }
@@ -266,15 +262,6 @@ export default function MyProgress({ theme = 'dark', user }) {
     { id: 7, name: "Premium Certificates", color: currentColors.purple, image: premCertificatesImg },
     { id: 8, name: "Reinsurance Certificates", color: currentColors.blue, image: reinCertificatesImg },
     { id: 9, name: "Financial Condition Report (FCR)", color: currentColors.cyan, image: finConditionImg },
-    { id: 10, name: "Ordinary Life Valuation", color: currentColors.green, image: ordLifeValuationImg },
-    { id: 11, name: "Group Business Valuation", color: currentColors.orange, image: groupBusinessValuationImg },
-    { id: 12, name: "Pension Valuation", color: currentColors.pink, image: daValuationImg },
-    { id: 13, name: "Investment Policy Statements (IPS)", color: currentColors.purple, image: ipsImg },
-    { id: 14, name: "Post Retirement Medical Fund", color: currentColors.blue, image: prmfImg },
-    { id: 15, name: "DB & DC Valuations", color: currentColors.cyan, image: dbdcValuationsImg },
-    { id: 16, name: "IAS 19 Valuation", color: currentColors.green, image: ias19Img },
-    { id: 17, name: "ESG", color: currentColors.orange, image: ifrs17Img },
-    { id: 18, name: "Business Development", color: currentColors.pink, image: prmfImg }
   ];
 
   // Helper for formatting time elapsed

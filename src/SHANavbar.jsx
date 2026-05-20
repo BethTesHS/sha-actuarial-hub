@@ -141,15 +141,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     { id: 7, name: "Premium Certificates" },
     { id: 8, name: "Reinsurance Certificates" },
     { id: 9, name: "Financial Condition Report (FCR)" },
-    { id: 10, name: "Ordinary Life Valuation" },
-    { id: 11, name: "Group Business Valuation" },
-    { id: 12, name: "Pension Valuation" },
-    { id: 13, name: "Investment Policy Statements (IPS)" },
-    { id: 14, name: "Post Retirement Medical Fund" },
-    { id: 15, name: "Defined Benefit (DB) & Defined Contribution (DC) Valuations" },
-    { id: 16, name: "IAS 19 Valuation" },
-    { id: 17, name: "ESG (Environmental, Social and Governance)" },
-    { id: 18, name: "Business Development" }
   ];
 
   // Combine items for the Global Search

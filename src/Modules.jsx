@@ -15,15 +15,6 @@ import finPerformanceImg from "./assets/financial-performance.jpg";
 import premCertificatesImg from "./assets/premium-certificates.jpg";
 import reinCertificatesImg from "./assets/reinsuarance-certificates.jpg";
 import finConditionImg from "./assets/financial-condition.jpg";
-import ordLifeValuationImg from "./assets/ordinary-life.jpg";
-import groupBusinessValuationImg from "./assets/business-valuation.jpg";
-import daValuationImg from "./assets/da-valuation.jpg";
-import ipsImg from "./assets/investment-policy.jpg";
-import prmfImg from "./assets/post-retirement.jpg";
-import bdImg from "./assets/business-development.jpg";
-import esgImg from "./assets/esg.jpg";
-import dbdcValuationsImg from "./assets/dbdc-valuations.jpg";
-import ias19Img from "./assets/ias-19.jpg";
 import ifrs17Img from "./assets/ifrs-17.jpg";
 
 export default function Modules({ theme = 'dark', user }) { 
@@ -173,87 +164,7 @@ export default function Modules({ theme = 'dark', user }) {
       image: finConditionImg,
       number: "09"
     },
-    {
-      id: 10,
-      name: "Ordinary Life Valuation",
-      color: "#E91E63", // Pink-600 to match Module 10 theme
-      status: "accessible",
-      description: "Learn ordinary life insurance valuation techniques and methodologies.",
-      image: ordLifeValuationImg,
-      number: "10"
-    },
-    {
-      id: 11,
-      name: "Group Business Valuation",
-      color: "#9333EA", // Purple-600 to match Module 11 theme
-      status: "accessible",
-      description: "Understand group business valuation principles and applications.",
-      image: groupBusinessValuationImg,
-      number: "11"
-    },
-    {
-      id: 12,
-      name: "Pension Valuation",
-      color: "#2563EB", // Blue-600 to match Module 12 theme
-      status: "accessible",
-      description: "Master deferred acquisition cost valuation and accounting treatment.",
-      image: daValuationImg,
-      number: "12"
-    },
-    {
-      id: 13,
-      name: "Investment Policy Statements (IPS)",
-      color: "#8BC53F",
-      status: "accessible",
-      description: "Learn investment policy statement development and implementation.",
-      image: ipsImg,
-      number: "13"
-    },
-    {
-      id: 14,
-      name: "Post Retirement Medical Fund",
-      color: "#9333EA", // Purple-600 to match Module 14 theme
-      status: "accessible",
-      description: "Understand post-retirement medical fund valuation and management.",
-      image: prmfImg,
-      number: "14"
-    },
-    {
-      id: 15,
-      name: "Defined Benefit (DB) & Defined Contribution (DC) Valuations",
-      color: "#E91E63", // Pink-600 to match Module 15 theme
-      status: "accessible",
-      description: "Master DB and DC pension scheme valuation and funding assessment.",
-      image: dbdcValuationsImg,
-      number: "15"
-    },
-    {
-      id: 16,
-      name: "IAS 19 Valuation",
-      color: "#0066B3",
-      status: "accessible",
-      description: "Learn IAS 19 employee benefits valuation and reporting standards.",
-      image: ias19Img,
-      number: "16"
-    },
-    {
-      id: 17,
-      name: "ESG (Environmental, Social and Governance)",
-      color: currentColors.green,
-      status: "accessible",
-      description: "Master the principles of Environmental, Social, and Governance (ESG) integration in actuarial practice. This foundational module provides essential knowledge for modern sustainability reporting and risk management.",
-      image: esgImg,
-      number: "17"
-    },
-    {
-      id: 18,
-      name: "Business Development",
-      color: "#9333EA", // Purple-600 to match Module 18 theme
-      status: "accessible",
-      description: "Learn key business development skills for actuaries, including client relationship management, proposal writing, and effective communication strategies to grow your actuarial practice.",
-      image: bdImg, 
-      number: "18"
-    }
+    
   ];
 
   const ModuleCard = ({ module, isSpecial = false }) => {
