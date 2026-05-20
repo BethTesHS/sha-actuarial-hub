@@ -32,8 +32,8 @@ const FileExplorer = ({ onFolderSelect, selectedFolder }) => {
         <div 
           className={`flex items-center gap-3 py-2 px-3 rounded-lg cursor-pointer transition-all duration-200 border ${
             isSelected
-              ? 'bg-blue-500/20 border-blue-400/40 shadow-lg'
-              : 'hover:bg-white/10 border-transparent hover:border-gray-500/30'
+              ? 'bg-blue-50 dark:bg-blue-500/20 border-blue-200 dark:border-blue-400/40 shadow-lg'
+              : 'hover:bg-gray-100 dark:hover:bg-white/10 border-transparent hover:border-gray-200 dark:hover:border-gray-500/30'
           }`}
           onClick={() => {
             if (isFolder) {
@@ -50,15 +50,15 @@ const FileExplorer = ({ onFolderSelect, selectedFolder }) => {
             <FaChevronRight className="w-3 h-3" />
           </motion.span>
           
-          <span className="text-gray-300">
+          <span className="text-gray-500 dark:text-gray-300">
             {isOpen ? (
-              <FaFolderOpen className={isSelected ? "text-blue-400" : "text-yellow-400"} />
+              <FaFolderOpen className={isSelected ? "text-blue-600 dark:text-blue-400" : "text-yellow-500 dark:text-yellow-400"} />
             ) : (
-              <FaFolder className={isSelected ? "text-blue-400" : "text-yellow-400"} />
+              <FaFolder className={isSelected ? "text-blue-600 dark:text-blue-400" : "text-yellow-500 dark:text-yellow-400"} />
             )}
           </span>
           
-          <span className={`font-medium text-sm ${isSelected ? 'text-blue-300' : 'text-white'}`}>
+          <span className={`font-medium text-sm ${isSelected ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-white'}`}>
             {name}
           </span>
         </div>
@@ -81,9 +81,9 @@ const FileExplorer = ({ onFolderSelect, selectedFolder }) => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-gray-900/90 to-gray-800/90 border border-white/10 rounded-2xl p-6 font-sans shadow-2xl backdrop-blur-sm">
+    <div className="bg-white/80 dark:bg-gradient-to-br dark:from-gray-900/90 dark:to-gray-800/90 border border-gray-200 dark:border-white/10 rounded-2xl p-6 font-sans shadow-xl dark:shadow-2xl backdrop-blur-sm">
       <div className="mb-6">
-        <h3 className="text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent flex items-center gap-2">
+        <h3 className="text-lg font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent flex items-center gap-2">
           📁 File Explorer
         </h3>
       </div>
@@ -264,7 +264,7 @@ const SequentialFolderView = ({ currentFolder, onFolderSelect, selectedFolder, o
   return (
     <div className="space-y-6">
       {/* Folder Contents */}
-      <div className="bg-gray-900/50 rounded-xl p-6 border border-gray-700/50">
+      <div className="bg-white/80 dark:bg-gray-900/50 rounded-xl p-6 border border-gray-200 dark:border-gray-700/50 shadow-sm dark:shadow-none">
         {currentFolderData.folders.length > 0 ? (
           <div className="space-y-2">
             {currentFolderData.folders.map((folderName, index) => (
@@ -277,16 +277,16 @@ const SequentialFolderView = ({ currentFolder, onFolderSelect, selectedFolder, o
                 <div 
                   className={`flex items-center gap-3 py-3 px-4 rounded-lg cursor-pointer transition-all duration-200 border ${
                     selectedFolder === folderName
-                      ? 'bg-blue-500/20 border-blue-400/40 shadow-lg'
-                      : 'bg-gray-800/50 border-gray-600 hover:bg-gray-700/50 hover:border-gray-500'
+                      ? 'bg-blue-50 dark:bg-blue-500/20 border-blue-200 dark:border-blue-400/40 shadow-lg'
+                      : 'bg-gray-50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-600 hover:bg-gray-100 hover:border-gray-300 dark:hover:bg-gray-700/50 dark:hover:border-gray-500'
                   }`}
                   onClick={() => onFolderSelect(folderName)}
                 >
-                  <FaFolder className="text-yellow-400 text-md" />
-                  <span className={`font-medium text-sm ${selectedFolder === folderName ? 'text-blue-300' : 'text-white'}`}>
+                  <FaFolder className="text-yellow-500 dark:text-yellow-400 text-md" />
+                  <span className={`font-medium text-sm ${selectedFolder === folderName ? 'text-blue-700 dark:text-blue-300' : 'text-gray-800 dark:text-white'}`}>
                     {folderName}
                   </span>
-                  <span className="ml-auto text-gray-400 text-xs">
+                  <span className="ml-auto text-gray-500 dark:text-gray-400 text-xs">
                     {folderHierarchy[folderName]?.folders?.length || 0} items
                   </span>
                   <FaChevronRight className="text-gray-400 w-3 h-3" />
@@ -296,9 +296,9 @@ const SequentialFolderView = ({ currentFolder, onFolderSelect, selectedFolder, o
           </div>
         ) : (
           <div className="text-center py-8 text-gray-400">
-            <FaFolder className="w-10 h-10 mx-auto mb-3 opacity-50" />
-            <p className="text-sm">This folder is empty</p>
-            <p className="text-xs text-gray-500">No subfolders available</p>
+            <FaFolder className="w-10 h-10 mx-auto mb-3 opacity-50 text-gray-400" />
+            <p className="text-sm text-gray-500 dark:text-gray-400">This folder is empty</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500">No subfolders available</p>
           </div>
         )}
       </div>
@@ -379,28 +379,25 @@ export default function FileSavingFormat() {
   };
 
   return (
-    <div
-      className="min-h-screen relative text-white"
-      style={{
-        background: `
-          radial-gradient(1000px at 80% 20%, rgba(124,77,255,0.08), transparent 70%),
-          radial-gradient(800px at 20% 80%, rgba(0,229,255,0.08), transparent 70%),
-          #060A1E
-        `,
-      }}
-    >
+    <div className="min-h-screen relative text-gray-900 dark:text-white bg-gray-50 dark:bg-[#060A1E] pt-20 transition-colors duration-300">
+      {/* Decorative Background - only visible in dark mode */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden dark:block">
+        <div className="absolute w-[1000px] h-[1000px] bg-[rgba(124,77,255,0.08)] rounded-full blur-3xl -top-[20%] right-[-10%]"></div>
+        <div className="absolute w-[800px] h-[800px] bg-[rgba(0,229,255,0.08)] rounded-full blur-3xl bottom-[-10%] left-[-10%]"></div>
+      </div>
+
       {/* Module Header Bar */}
-      <div className="relative bg-gradient-to-r from-gray-900/90 to-gray-800/90 border-b border-white/10 backdrop-blur-xl">
+      <div className="relative bg-white/90 dark:bg-gradient-to-r dark:from-gray-900/90 dark:to-gray-800/90 border-b border-gray-200 dark:border-white/10 backdrop-blur-xl">
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="ml-6">
-            <h1 className="text-2xl md:text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-[#00E5FF] to-[#7C4DFF]">
+            <h1 className="text-2xl md:text-3xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600 dark:from-[#00E5FF] dark:to-[#7C4DFF]">
               File Saving Format
             </h1>
-            <p className="text-gray-300 text-sm leading-relaxed max-w-4xl">
+            <div className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed max-w-4xl space-y-1">
               <p>Welcome to our standardized file organization system for actuarial projects.</p>
               <p>This structured approach ensures consistency, easy navigation, and efficient collaboration across all client engagements.</p>
               <p>Follow this hierarchy to maintain organized project documentation, from initial agreements to final deliverables.</p>
-            </p>
+            </div>
           </div>
         </div>
         
@@ -423,19 +420,19 @@ export default function FileSavingFormat() {
 
             {/* Right Panel - Sequential Folder Navigation */}
             <div className="lg:col-span-3">
-              <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-white/10 p-6">
+              <div className="bg-white/50 dark:bg-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/10 p-6 shadow-sm dark:shadow-none">
                 {/* Breadcrumb Navigation */}
                 <div className="flex items-center gap-2 mb-6">
-                  <div className="flex items-center gap-2 text-xs text-gray-300">
+                  <div className="flex flex-wrap items-center gap-2 text-xs text-gray-600 dark:text-gray-300">
                     {navigationStack.map((segment, index) => (
                       <React.Fragment key={segment}>
-                        {index > 0 && <span className="text-gray-500 text-xs">▶</span>}
+                        {index > 0 && <span className="text-gray-400 dark:text-gray-500 text-xs">▶</span>}
                         <button 
                           onClick={() => handleBreadcrumbClick(segment, index)}
                           className={`px-2 py-1 rounded transition-colors ${
                             index === navigationStack.length - 1 
-                              ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' 
-                              : 'hover:bg-gray-700/50'
+                              ? 'bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30' 
+                              : 'hover:bg-gray-200 dark:hover:bg-gray-700/50'
                           }`}
                         >
                           {segment}

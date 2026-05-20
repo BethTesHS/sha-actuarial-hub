@@ -1,0 +1,48 @@
+import {
+  module1Data,
+  module2Data,
+  module3Data,
+  module4Data,
+  module5Data,
+  module6Data,
+  module7Data,
+  module8Data,
+  module9Data,
+  module10Data,
+  module11Data,
+  module12Data,
+  module13Data,
+  module14Data,
+  module15Data,
+  module16Data,
+  module17Data,
+  module18Data,
+} from "./modules";
+
+export const MODULE_DATA_BY_ID = {
+  1: module1Data,
+  2: module2Data,
+  3: module3Data,
+  4: module4Data,
+  5: module5Data,
+  6: module6Data,
+  7: module7Data,
+  8: module8Data,
+  9: module9Data,
+  10: module10Data,
+  11: module11Data,
+  12: module12Data,
+  13: module13Data,
+  14: module14Data,
+  15: module15Data,
+  16: module16Data,
+  17: module17Data,
+  18: module18Data,
+};
+
+export const TRAINING_MODULES = Object.entries(MODULE_DATA_BY_ID).map(([id, data]) => ({
+  id: Number(id),
+  moduleId: String(id),
+  name: data?.title || `Module ${id}`,
+  data,
+}));

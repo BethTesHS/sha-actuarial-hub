@@ -261,7 +261,7 @@ export default function SHAModules() {
             };
 
             return (
-                <div className={`${baseClasses} h-64 lg:h-72 xl:h-80`} style={style}>
+                <Link to={`/modules/${module.id}`} className={`${baseClasses} h-64 lg:h-72 xl:h-80 block`} style={style}>
                     <div className="h-full flex flex-col group cursor-pointer">
                         <div className="h-1/2 relative overflow-hidden">
                             <img
@@ -312,7 +312,7 @@ export default function SHAModules() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             );
         } else {
             const style = {

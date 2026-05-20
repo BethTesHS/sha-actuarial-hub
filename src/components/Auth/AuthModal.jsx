@@ -10,15 +10,7 @@ import {
   ArrowRight,
   Sparkles
 } from "lucide-react";
-
-const colors = {
-  blue: "#0fa1e0ff",
-  green: "#8BC53F",
-  darkgreen: "#219a27ff",
-  darkBlue: "#004e89ff",
-  purple: "#9D4EDD",
-  cyan: "#00D4FF"
-};
+import { shaColors as colors } from "../../theme/sha";
 
 export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode = 'login' }) {
   const [isLogin, setIsLogin] = useState(initialMode === 'login');

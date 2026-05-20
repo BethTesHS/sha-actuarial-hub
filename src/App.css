@@ -1,11 +1,11 @@
 /* ADD ALL FONT IMPORTS AT THE VERY TOP */
-@import "@fontsource/inter/400.css";
+/* @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
 @import "@fontsource/poppins/400.css";
 @import "@fontsource/poppins/700.css";
 @import "@fontsource/nunito/400.css";
-@import "@fontsource/nunito/600.css";
+@import "@fontsource/nunito/600.css"; */
 
 /* ADD TUTORIAL HIGHLIGHT ANIMATION HERE */
 .tutorial-highlight {
@@ -101,7 +101,7 @@ body {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 3.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0066B3 0%, #8BC53F 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -132,7 +132,7 @@ body {
 .stylish-button {
   font-family: 'Inter', sans-serif;
   font-weight: 600;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #0066B3 0%, #8BC53F 100%);
   border: none;
   padding: 12px 32px;
   border-radius: 12px;
@@ -166,13 +166,13 @@ body {
 
 .stylish-button-outline {
   background: transparent;
-  border: 2px solid #667eea;
-  color: #667eea;
+  border: 2px solid #0066B3;
+  color: #0066B3;
   box-shadow: none;
 }
 
 .stylish-button-outline:hover {
-  background: #667eea;
+  background: #0066B3;
   color: white;
 }
 

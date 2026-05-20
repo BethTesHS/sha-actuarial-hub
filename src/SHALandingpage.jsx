@@ -10,22 +10,10 @@ import {
     Target,
     Shield,
     TrendingUp,
-    Users,
-    LogOut
+    Users
 } from "lucide-react";
 import AuthModal from "./components/Auth/AuthModal";
-import shaLogo from "./assets/SHA_Logo2.png";
-
-// SHA Brand Colors
-const colors = {
-    blue: "#0066B3",
-    lightblue: "#2a88cfff",
-    green: "#8BC53F",
-    darkBlue: "#003D6B",
-    purple: "#9D4EDD",
-    cyan: "#00D4FF",
-    orange: "#FF6B35"
-};
+import { shaColors as colors } from "./theme/sha";
 
 // Carousel Slides
 const carouselSlides = [
@@ -64,9 +52,7 @@ const slideBackgrounds = [
 
 export default function SHALandingpage() {
     const [currentSlide, setCurrentSlide] = useState(0);
-    const [isScrolled, setIsScrolled] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userName, setUserName] = useState("");
     const [showAuthModal, setShowAuthModal] = useState(false);
     const [authMode, setAuthMode] = useState('login');
     const navigate = useNavigate();
@@ -79,14 +65,11 @@ export default function SHALandingpage() {
                 try {
                     const userData = JSON.parse(user);
                     setIsLoggedIn(true);
-                    setUserName(userData.name || userData.email?.split('@')[0] || 'User');
                 } catch (e) {
                     setIsLoggedIn(false);
-                    setUserName("");
                 }
             } else {
                 setIsLoggedIn(false);
-                setUserName("");
             }
         };
 
@@ -106,20 +89,12 @@ export default function SHALandingpage() {
         return () => clearInterval(timer);
     }, []);
 
-    // Scroll detection
-    useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 50);
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
     const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
     const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + carouselSlides.length) % carouselSlides.length);
 
     // Show auth modal
     const showAuth = (mode = 'login') => {
-        setAuthMode(mode); // Set the mode (login or signup)
-        setShowAuthModal(true);
+        navigate(mode === 'signup' ? '/SHAAuth?mode=signup' : '/SHAAuth');
     };
 
     // Handle successful authentication - UPDATED
@@ -138,112 +113,20 @@ export default function SHALandingpage() {
         window.location.href = "/SHADashboard";
     };
 
-    const handleLogout = () => {
-        localStorage.removeItem('user');
-        sessionStorage.removeItem('showWelcome');
-        sessionStorage.removeItem('welcomeName');
-        setIsLoggedIn(false);
-        setUserName("");
-        // Refresh the page to update UI
-        window.location.reload();
-    };
-
     const goToDashboard = () => navigate('/SHADashboard');
 
     return (
-        <div className="min-h-screen bg-gray-900 overflow-hidden">
+        <div className="min-h-screen bg-gray-900 overflow-hidden pt-20">
             {/* Auth Modal */}
             <AuthModal
                 isOpen={showAuthModal}
                 onClose={() => setShowAuthModal(false)}
                 onAuthSuccess={handleAuthSuccess}
-                initialMode={authMode} // Pass the auth mode here
+                initialMode={authMode}
             />
 
-            {/* NAVBAR - Keep original height but extend logo downwards */}
-            <nav className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${isScrolled ? "bg-white/95 backdrop-blur-xl shadow-2xl" : "bg-black/20 backdrop-blur-sm"
-                }`}>
-                <div className="max-w-7xl mx-auto flex items-center justify-between px-4 lg:px-8 py-4"> {/* Keep py-4 */}
-                    {/* SHA Logo - Left - Clean big logo */}
-                    <div className="flex items-center gap-3">
-                        <div className="relative">
-                            {/* Remove the gradient background element too */}
-                            <div className="relative w-32 h-32 -mb-8 -mt-3 flex items-center justify-center">
-                                {/* Clean transparent logo */}
-                                <img
-                                    src={shaLogo}
-                                    alt="SHA Logo"
-                                    className="w-full h-full object-contain"
-                                />
-                            </div>
-                        </div>
-                        <div className={`hidden sm:block ${isScrolled ? 'text-gray-800' : 'text-white'}`}>
-                            <div className="font-bold text-lg leading-tight">SHA Actuarial Hub</div>
-                            <div className="text-xs opacity-70">Professional Training Platform</div>
-                        </div>
-                    </div>
-
-                    {/* Login/Signup or User Actions - Right */}
-                    <div className="flex items-center gap-3">
-                        {isLoggedIn ? (
-                            <>
-                                <button
-                                    onClick={goToDashboard}
-                                    className={`px-5 py-2.5 rounded-lg font-semibold transition-all duration-300 border-2 ${isScrolled
-                                        ? 'bg-white text-gray-800 border-gray-200 hover:bg-gray-50 hover:border-gray-300'
-                                        : 'bg-white/10 text-white border-white/20 hover:bg-white/20 hover:border-white/30 backdrop-blur-sm'
-                                        }`}
-                                >
-                                    Dashboard
-                                </button>
-                                <button
-                                    onClick={handleLogout}
-                                    className={`px-4 py-2.5 rounded-lg font-medium transition-all duration-300 flex items-center gap-2 ${isScrolled
-                                        ? 'text-gray-600 hover:text-red-600 hover:bg-red-50'
-                                        : 'text-white/80 hover:text-red-400 hover:bg-white/10'
-                                        }`}
-                                >
-                                    <LogOut className="w-4 h-4" />
-                                    <span className="hidden sm:inline">Logout</span>
-                                </button>
-                                {/* Moved "Hi, user" to the end */}
-                                <div className="hidden md:flex items-center gap-3 ml-4 border-l border-gray-300/50 pl-4"> {/* Added ml-4, border, and pl-4 */}
-                                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-base"
-                                        style={{ background: `linear-gradient(135deg, ${colors.purple}, ${colors.blue})` }}>
-                                        {userName?.charAt(0).toUpperCase() || 'U'}
-                                    </div>
-                                    <span className={`text-base font-medium ${isScrolled ? 'text-gray-800' : 'text-white'}`}>
-                                        Hi, {userName}
-                                    </span>
-                                </div>
-                            </>
-                        ) : (
-                            <>
-                                <button
-                                    onClick={() => showAuth('login')}  // ← Add () => and pass 'login'
-                                    className={`px-5 py-2.5 rounded-full font-semibold transition-all duration-300 ${isScrolled ? 'text-gray-700 hover:bg-gray-100' : 'text-white hover:bg-white/20'
-                                        }`}
-                                >
-                                    Login
-                                </button>
-                                <button
-                                    onClick={() => showAuth('signup')}  // ← Add () => and pass 'signup'
-                                    className="px-6 py-2.5 rounded-full font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                                    style={{
-                                        background: `linear-gradient(135deg, ${colors.lightblue}, ${colors.green})`,
-                                        boxShadow: `0 4px 20px ${colors.blue}50`
-                                    }}
-                                >
-                                    Sign Up Free
-                                </button>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </nav>
-
             {/* CAROUSEL */}
-            <div className="relative pt-28">
+            <div className="relative">
                 <div className="relative h-[500px] md:h-[600px] overflow-hidden">
                     {carouselSlides.map((slide, i) => (
                         <div

@@ -1,492 +1,456 @@
 // src/HomePage.jsx
-import React from "react";
-import { motion } from "framer-motion";
-import heroImg from "./assets/hero.jpg";
-import { Link } from "react-router-dom";
-import CountUp from "react-countup";
+import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { 
-  BarChart3, 
-  Brain, 
-  ShieldCheck, 
-  FileSpreadsheet,
-  UserCheck,
-  FileText as FileTextIcon,
-  TrendingUp,
-  Upload,
-  Search,
-  CheckCircle2,
-  Award,
-  FileText,
-  Save,
-  ExternalLink,
-  Mail,
-  MessageCircle,
-  Database,
-  Settings
+  ChevronLeft, ChevronRight, Sparkles, ArrowRight, Brain, Target,
+  Shield, TrendingUp, Users, GraduationCap, Calculator, BookOpen,
+  Award, Gamepad2, CheckCircle2, Trophy, Compass, Rocket, Star,
 } from "lucide-react";
+import { supabase } from "./supabaseClient";
+import { totalToolsCount } from "./ToolsPage";
+import ActuarialTrainingHubSlide from "./components/CarouselSlides/ActuarialTrainingHubSlide";
+import IFRS17GameSlide from "./components/CarouselSlides/IFRS17GameSlide";
+import ActuarialToolsSlide from "./components/CarouselSlides/ActuarialToolsSlide";
+import QualificationPathwaysSlide from "./components/CarouselSlides/QualificationPathwaysSlide";
+import Learn17Slide from "./components/CarouselSlides/Learn17Slide";
+import Footer from "./components/footer";
 
-export default function HomePage() {
-  const currentHero = heroImg;
+const colors = {
+  dark: {
+    cyan: "#00E5FF",
+    purple: "#7C4DFF",
+    blue: "#3B82F6",
+    green: "#10B981",
+    orange: "#F97316",
+    pink: "#E91E63",
+    bg: "#0A0F1E",
+    card: "#1A1F2E",
+    text: "#FFFFFF",
+    textSecondary: "#9CA3AF",
+    gray: "#c2c2c2",
+    red: "#ff3b3b"
+  },
+  light: {
+    cyan: "#00E5FF",
+    purple: "#7C4DFF",
+    blue: "#3B82F6",
+    green: "#10B981",
+    orange: "#F97316",
+    pink: "#E91E63",
+    bg: "#E1E7EE",
+    card: "#F8FAFC",
+    text: "#0F172A",
+    textSecondary: "#475569",
+    gray: "#616161",
+    red: "#ff0000"
+  }
+};
 
-  // 2-column staggered grid data
-  const learningOutcomes = [
-    { icon: <BarChart3 className="w-6 h-6" />, text: "Gain strong analytical and pricing fundamentals.", color: "blue" },
-    { icon: <Brain className="w-6 h-6" />, text: "Develop strategic actuarial judgment.", color: "green" },
-    { icon: <ShieldCheck className="w-6 h-6" />, text: "Understand risk, regulation, and control frameworks.", color: "purple" },
-    { icon: <FileSpreadsheet className="w-6 h-6" />, text: "Build practical models and valuation tools.", color: "orange" }
-  ];
+const carouselSlides = [
+  { component: ActuarialTrainingHubSlide, id: 'actuarial-training' },
+  { component: Learn17Slide, id: 'learn-17' },
+  { component: ActuarialToolsSlide, id: 'actuarial-tools' },
+  { component: QualificationPathwaysSlide, id: 'qualification-pathways' },
+  { component: IFRS17GameSlide, id: 'ifrs-17-game' },
+];
 
-  // Process steps timeline
-  const processSteps = [
-    { icon: <Upload className="w-6 h-6" />, title: "Upload data", description: "Submit your work through the platform", color: "blue" },
-    { icon: <Search className="w-6 h-6" />, title: "Run model", description: "Execute actuarial calculations", color: "green" },
-    { icon: <CheckCircle2 className="w-6 h-6" />, title: "Validate outputs", description: "Review and verify results", color: "purple" },
-    { icon: <Award className="w-6 h-6" />, title: "Approve & submit", description: "Get supervisor approval", color: "orange" }
-  ];
+function useCountUp(end, duration = 2000, shouldStart) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!shouldStart) return;
+    let startTime, animationFrame;
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+      if (progress < 1) animationFrame = requestAnimationFrame(animate);
+    };
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, shouldStart]);
+  return count;
+}
 
-  // Resources section
-  const resources = [
-    { 
-      icon: <FileText className="w-6 h-6" />, 
-      title: "QAS Reports & Policies", 
-      description: "Access Quality Assurance Standards, documentation templates, and internal policy summaries for actuarial and risk teams.",
-      color: "blue"
-    },
-    { 
-      icon: <Save className="w-6 h-6" />, 
-      title: "File Naming & Saving Formats", 
-      description: "Reference the company's standard format for client deliverables, ensuring audit traceability and version control consistency.",
-      color: "green"
-    },
-    { 
-      icon: <ExternalLink className="w-6 h-6" />, 
-      title: "Training & External Learning Links", 
-      description: "Explore curated external actuarial courses, technical tutorials, and CPD resources for skill enhancement.",
-      color: "purple"
+export default function HomePage({ theme = 'dark', user }) {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [statsVisible, setStatsVisible] = useState(false);
+  const [targetUserCount, setTargetUserCount] = useState(1500); // Dynamic user count
+  const statsRef = useRef(null);
+  const navigate = useNavigate();
+
+  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
+  const autoScrollIntervalRef = useRef(null);
+  const restartAutoScrollTimeoutRef = useRef(null);
+
+  const currentColors = theme === 'dark' ? colors.dark : colors.light;
+
+  // Function to start auto-scrolling
+  const startAutoScrolling = () => {
+    if (autoScrollIntervalRef.current) {
+      clearInterval(autoScrollIntervalRef.current);
     }
-  ];
+    autoScrollIntervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselSlides.length);
+    }, 5000);
+  };
 
-  // Support channels
-  const supportChannels = [
-    { 
-      icon: <UserCheck className="w-5 h-5" />, 
-      title: "Supervisor Support", 
-      description: "For module clarifications and feedback", 
-      contact: "Contact your Supervisor",
-      color: "blue",
-      link: "mailto:supervisor@kenbright.com"
-    },
-    { 
-      icon: <MessageCircle className="w-5 h-5" />, 
-      title: "Technical Support", 
-      description: "For login or access issues", 
-      contact: "IT Help Desk",
-      color: "purple", 
-      link: "mailto:help@kenbright.com"
-    },
-    { 
-      icon: <FileText className="w-5 h-5" />, 
-      title: "Content Support", 
-      description: "Training material questions", 
-      contact: "Senior Actuarial Team",
-      color: "green",
-      link: "mailto:training@kenbright.com"
+  // Function to stop auto-scrolling
+  const stopAutoScrolling = () => {
+    if (autoScrollIntervalRef.current) {
+      clearInterval(autoScrollIntervalRef.current);
     }
-  ];
+  };
 
-  // Color utility function
-  const getColorClasses = (color, type = "card") => {
-    const colors = {
-      blue: {
-        card: "bg-blue-500/20 border border-blue-400/30 hover:bg-blue-500/30",
-        icon: "bg-blue-600/40 text-blue-400",
-        text: "text-blue-400",
-        button: "bg-blue-500 hover:bg-blue-600"
-      },
-      green: {
-        card: "bg-green-500/20 border border-green-400/30 hover:bg-green-500/30",
-        icon: "bg-green-600/40 text-green-400",
-        text: "text-green-400",
-        button: "bg-green-500 hover:bg-green-600"
-      },
-      purple: {
-        card: "bg-purple-500/20 border border-purple-400/30 hover:bg-purple-500/30",
-        icon: "bg-purple-600/40 text-purple-400",
-        text: "text-purple-400",
-        button: "bg-purple-500 hover:bg-purple-600"
-      },
-      orange: {
-        card: "bg-orange-500/20 border border-orange-400/30 hover:bg-orange-500/30",
-        icon: "bg-orange-600/40 text-orange-400",
-        text: "text-orange-400",
-        button: "bg-orange-500 hover:bg-orange-600"
-      },
-      yellow: {
-        card: "bg-yellow-500/20 border border-yellow-400/30 hover:bg-yellow-500/30",
-        icon: "bg-yellow-600/40 text-yellow-400",
-        text: "text-yellow-400",
-        button: "bg-yellow-500 hover:bg-yellow-600"
-      },
-      emerald: {
-        card: "bg-emerald-500/20 border border-emerald-400/30 hover:bg-emerald-500/30",
-        icon: "bg-emerald-600/40 text-emerald-400",
-        text: "text-emerald-400",
-        button: "bg-emerald-500 hover:bg-emerald-600"
+  // Effect to manage auto-scrolling state
+  useEffect(() => {
+    if (isAutoScrolling) {
+      startAutoScrolling();
+    } else {
+      stopAutoScrolling();
+    }
+
+    return () => {
+      stopAutoScrolling();
+      if (restartAutoScrollTimeoutRef.current) {
+        clearTimeout(restartAutoScrollTimeoutRef.current);
       }
     };
-    
-    return colors[color]?.[type] || colors.blue[type];
+  }, [isAutoScrolling]);
+
+  // Fetch actual user count from Supabase
+  useEffect(() => {
+    const fetchUserCount = async () => {
+      try {
+        const { data, error } = await supabase.rpc('get_user_count');
+        
+        if (error) throw error;
+        if (data !== null) {
+          // Update to the actual number from the database
+          setTargetUserCount(data); 
+        }
+      } catch (error) {
+        console.error("Error fetching user count:", error);
+      }
+    };
+
+    fetchUserCount();
+  }, []);
+
+  const userCount = useCountUp(targetUserCount, 2000, statsVisible);
+  const moduleCount = useCountUp(17, 2000, statsVisible);
+  const toolCount = useCountUp(totalToolsCount, 2000, statsVisible);
+  const successRate = useCountUp(95, 2000, statsVisible);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStatsVisible(true); },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleManualNavigation = (direction) => {
+    setCurrentSlide((prev) => {
+      const newSlide = direction === 'next'
+        ? (prev + 1) % carouselSlides.length
+        : (prev - 1 + carouselSlides.length) % carouselSlides.length;
+      return newSlide;
+    });
+
+    setIsAutoScrolling(false);
+
+    if (restartAutoScrollTimeoutRef.current) {
+      clearTimeout(restartAutoScrollTimeoutRef.current);
+    }
+
+    restartAutoScrollTimeoutRef.current = setTimeout(() => {
+      setIsAutoScrolling(true);
+    }, 7000);
+  };
+
+  const nextSlide = () => handleManualNavigation('next');
+  const prevSlide = () => handleManualNavigation('prev');
+
+  // Helper function to handle external vs internal routing safely
+  const handleNavigation = (path) => {
+    if (!path) return;
+
+    // Centralized logic for navigation
+    if (path.startsWith('http')) {
+      window.open(path, '_blank', 'noopener,noreferrer');
+    } else {
+      navigate(path);
+    }
+  };
+
+  const handlePrimaryAction = () => {
+    if (user) {
+      navigate('/my-progress');
+    } else {
+      navigate('/auth?mode=login');
+    }
+  };
+
+  const getGradient = (slideIndex) => {
+    const gradients = {
+      dark: [
+        `linear-gradient(135deg, ${colors.dark.blue} 0%, ${colors.dark.cyan} 50%, ${colors.dark.purple} 100%)`,
+        `linear-gradient(135deg, ${colors.dark.purple} 0%, #9D4EDD 50%, ${colors.dark.blue} 100%)`,
+        `linear-gradient(135deg, ${colors.dark.green} 0%, #48C774 50%, ${colors.dark.blue} 100%)`,
+        `linear-gradient(135deg, ${colors.dark.orange} 0%, #FF8C42 50%, ${colors.dark.purple} 100%)`,
+        `linear-gradient(135deg, ${colors.dark.pink} 0%, ${colors.dark.purple} 50%, ${colors.dark.blue} 100%)`
+      ],
+      light: [
+        `linear-gradient(135deg, ${colors.light.blue} 0%, ${colors.light.cyan} 50%, ${colors.light.purple} 100%)`,
+        `linear-gradient(135deg, ${colors.light.purple} 0%, #9D4EDD 50%, ${colors.light.blue} 100%)`,
+        `linear-gradient(135deg, ${colors.light.green} 0%, #48C774 50%, ${colors.light.blue} 100%)`,
+        `linear-gradient(135deg, ${colors.light.orange} 0%, #FF8C42 50%, ${colors.light.purple} 100%)`,
+        `linear-gradient(135deg, ${colors.light.pink} 0%, ${colors.light.purple} 50%, ${colors.light.blue} 100%)`
+      ]
+    };
+    return gradients[theme][slideIndex];
   };
 
   return (
-    <div className="font-sans text-white min-h-screen bg-slate-900">
-      {/* HERO SECTION - Your original hero kept intact */}
-      <header className="relative h-screen flex items-center justify-center overflow-hidden -mt-20 pt-0">
-        <div
-          className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${currentHero})`,
-            filter: "brightness(0.55) contrast(1.02)",
-            zIndex: 0,
-          }}
-        />
-
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(800px 300px at 15% 30%, rgba(0,229,255,0.06), transparent 10%), radial-gradient(600px 200px at 85% 70%, rgba(124,77,255,0.04), transparent 12%)",
-            zIndex: 1,
-          }}
-        />
-
-        <div className="relative z-10 max-w-5xl px-6 text-center mt-0 pt-0">
-          <motion.h1
-            initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.9, ease: "easeOut" }}
-            className="leading-tight"
-          >
-            <span className="block text-2xl md:text-3xl font-medium text-gray-300 mb-2">
-              Welcome to
-            </span>
-            <span
-              className="block text-4xl md:text-6xl font-extrabold"
-              style={{
-                background:
-                  "linear-gradient(90deg, #00E5FF 0%, #7C4DFF 70%)",
-                WebkitBackgroundClip: "text",
-                color: "transparent",
-                filter: "drop-shadow(0 6px 24px rgba(0,0,0,0.6))",
-              }}
-            >
-              Kenbright Training Hub
-            </span>
-          </motion.h1>
-
-          <motion.div
-            initial={{ opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-            className="mt-8 flex justify-center gap-4"
-          >
-            <Link
-              to="/modules"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-              style={{
-                background:
-                  "linear-gradient(90deg, #00E5FF, #7C4DFF)",
-                color: "#041027",
-              }}
-            >
-              Start Training
-            </Link>
-
-            <a
-              href="#learning"
-              className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-white/10 border border-white/20 text-gray-200 hover:bg-white/15 transition-all duration-300 hover:scale-105"
-            >
-              Learn More
-            </a>
-          </motion.div>
-        </div>
-      </header>
-
-      {/* SVG DIVIDER */}
+    <div className="min-h-screen overflow-hidden transition-colors duration-300 pt-20" style={{ background: currentColors.bg }}>
+      {/* HERO CAROUSEL */}
       <div className="relative">
-        <svg
-          className="absolute -top-[1px] w-full h-20 text-slate-900"
-          preserveAspectRatio="none"
-          viewBox="0 0 1440 150"
-        >
-          <path
-            fill="currentColor"
-            d="M0,32L80,42.7C160,53,320,75,480,85.3C640,96,800,96,960,80C1120,64,1280,32,1360,16L1440,0L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
-          ></path>
-        </svg>
+        <div className="relative h-[550px] md:h-[650px] overflow-hidden">
+          {carouselSlides.map((slide, i) => {
+            const SlideComponent = slide.component;
+            return (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  currentSlide === i ? 'opacity-100' : 'opacity-0'
+                }`}
+              >
+                <SlideComponent
+                  isActive={currentSlide === i}
+                  user={user}
+                  handleNavigation={handleNavigation}
+                  totalToolsCount={totalToolsCount}
+                />
+              </div>
+            );
+          })}
+
+          <button onClick={prevSlide} className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full transition-all hover:scale-110 backdrop-blur-sm shadow-xl"
+            style={{ background: theme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.8)', color: theme === 'dark' ? 'white' : currentColors.text }}>
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+          <button onClick={nextSlide} className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-4 rounded-full transition-all hover:scale-110 backdrop-blur-sm shadow-xl"
+            style={{ background: theme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(255,255,255,0.8)', color: theme === 'dark' ? 'white' : currentColors.text }}>
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+            {carouselSlides.map((_, i) => (
+              <button key={i} onClick={() => setCurrentSlide(i)}
+                className={`h-3 rounded-full transition-all duration-500 ${currentSlide === i ? 'w-10' : 'w-3'}`}
+                style={{ 
+                  background: currentSlide === i 
+                    ? (theme === 'dark' ? 'white' : currentColors.cyan)
+                    : (theme === 'dark' ? 'rgba(255,255,255,0.4)' : 'rgba(0,0,0,0.3)'),
+                  boxShadow: currentSlide === i ? '0 2px 10px rgba(0,0,0,0.3)' : 'none'
+                }} />
+            ))}
+          </div>
+        </div>
       </div>
 
-      <main className="relative z-10 bg-slate-900">
-        {/* 2-Column Staggered Grid with Colorful Cards */}
-        <section id="learning" className="py-20 bg-slate-800/50 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Learning Outcomes
-              </h2>
-              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-                Develop essential actuarial capabilities through comprehensive training
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {learningOutcomes.map((outcome, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  whileHover={{ scale: 1.02, y: -5 }}
-                  className={`rounded-[30px] p-6 flex items-center gap-4 transition-all duration-300 ${getColorClasses(outcome.color, "card")}`}
-                >
-                  <div className={`p-4 rounded-2xl flex-shrink-0 ${getColorClasses(outcome.color, "icon")}`}>
-                    {outcome.icon}
-                  </div>
-                  <p className="text-white font-medium text-lg">
-                    {outcome.text}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+      {/* PLATFORM OVERVIEW */}
+      <section id="features" className="py-20 px-4 lg:px-8 transition-colors duration-300" 
+        style={{ background: theme === 'dark' ? `linear-gradient(180deg, ${currentColors.card} 0%, ${currentColors.bg} 100%)` : '#FFFFFF' }}>
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4" 
+              style={{ background: `linear-gradient(135deg, ${currentColors.cyan}, ${currentColors.purple})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              All Your Actuarial Needs in One Platform
+            </h2>
+            <p className="text-lg max-w-3xl mx-auto" style={{ color: currentColors.textSecondary }}>From training and tools to exams and games - everything you need to succeed in your actuarial journey</p>
           </div>
-        </section>
 
-        {/* Process Steps Timeline - Colorful Version */}
-        <section className="py-20 bg-slate-900/50 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Your Learning Journey
-              </h2>
-              <p className="text-xl text-gray-300">
-                Simple, structured process from start to completion
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-4 gap-6 relative">
-              {/* Connecting line */}
-              <div className="hidden md:block absolute top-12 left-0 right-0 h-0.5 bg-gradient-to-r from-blue-500/30 via-green-500/30 to-purple-500/30 transform translate-y-6"></div>
-              
-              {processSteps.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2, duration: 0.5 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="text-center relative"
-                >
-                  {/* Step connector dots */}
-                  <div className={`hidden md:block absolute -top-4 left-1/2 transform -translate-x-1/2 w-3 h-3 rounded-full ${getColorClasses(step.color, "button")}`}></div>
-                  
-                  <div className={`w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center border ${getColorClasses(step.color, "card")} ${getColorClasses(step.color, "icon")}`}>
-                    {step.icon}
-                  </div>
-                  <h3 className={`text-xl font-bold mb-2 ${getColorClasses(step.color, "text")}`}>
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-300 text-sm">
-                    {step.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: <GraduationCap className="w-8 h-8" />, title: "Actuarial Training Hub", desc: "17+ comprehensive modules covering everything from data cleanup to IAS 19 valuation", features: ["Structured learning paths", "Real-world case studies", "Progress tracking"], color: currentColors.cyan, link: "/modules" },
+              { icon: <BookOpen className="w-8 h-8" />, title: "IFRS 17 Training Hub", desc: "Dedicated platform for mastering the new insurance accounting standard", features: ["25+ detailed lessons", "Interactive examples", "Certification prep"], color: currentColors.purple, link: "https://learn17.com/" },
+              { icon: <Calculator className="w-8 h-8" />, title: "Valuation Tools", desc: "Professional-grade models for risk adjustment, LRC, and liability calculations", features: [`${totalToolsCount} actuarial tools`, "Excel integration", "Instant calculations"], color: currentColors.green, link: "/tools" },
+              { icon: <Award className="w-8 h-8" />, title: "Qualification Pathways", desc: "Complete roadmap for actuarial professional exams and certifications", features: ["15+ exam guides", "Study resources", "Career planning"], color: currentColors.orange, link: "/modules" },
+              { icon: <Gamepad2 className="w-8 h-8" />, title: "IFRS 17 Game", desc: "Gamified learning experience with competitive leaderboards", features: ["100+ quiz questions", "Global rankings", "Achievement badges"], color: currentColors.pink, link: "https://www.ifrs17game.com/" },
+              { icon: <Compass className="w-8 h-8" />, title: "Integrated Experience", desc: "Seamless navigation between all platforms with unified progress tracking", features: ["Single dashboard", "Cross-platform sync", "Unified analytics"], color: currentColors.blue, link: "/my-progress" }
+            ].map((platform, i) => (
+              <div key={i} onClick={() => handleNavigation(platform.link)} className="group p-6 rounded-2xl border-2 transition-all duration-500 hover:scale-105 cursor-pointer"
+                style={{ 
+                  background: theme === 'dark' ? `linear-gradient(135deg, ${platform.color}10, ${platform.color}05)` : currentColors.card,
+                  borderColor: `${platform.color}30`, 
+                  boxShadow: theme === 'dark' ? `0 4px 20px ${platform.color}15` : '0 2px 15px rgba(0,0,0,0.08)'
+                }}
+                onMouseEnter={(e) => { 
+                  e.currentTarget.style.boxShadow = theme === 'dark' ? `0 15px 50px ${platform.color}40` : `0 10px 30px ${platform.color}30`; 
+                  e.currentTarget.style.borderColor = `${platform.color}60`; 
+                }}
+                onMouseLeave={(e) => { 
+                  e.currentTarget.style.boxShadow = theme === 'dark' ? `0 4px 20px ${platform.color}15` : '0 2px 15px rgba(0,0,0,0.08)'; 
+                  e.currentTarget.style.borderColor = `${platform.color}30`; 
+                }}>
+                <div className="p-3 rounded-xl w-fit mb-4 transition-transform group-hover:scale-110 group-hover:rotate-3" 
+                  style={{ background: `${platform.color}20`, color: platform.color }}>{platform.icon}</div>
+                <h3 className="text-xl font-bold mb-2" style={{ color: currentColors.text }}>{platform.title}</h3>
+                <p className="mb-4 leading-relaxed text-sm" style={{ color: currentColors.textSecondary }}>{platform.desc}</p>
+                <ul className="space-y-2">
+                  {platform.features.map((feature, j) => (
+                    <li key={j} className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: platform.color }} />
+                      <span className="text-xs" style={{ color: currentColors.textSecondary }}>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
-        </section>
 
-        {/* Resources Section - Colorful Cards */}
-        <section className="py-20 bg-slate-800/50 backdrop-blur-sm">
-          <div className="max-w-6xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Resources & Reference Materials
-              </h2>
-              <p className="text-xl text-gray-300">
-                Essential tools and documentation for your training journey
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {resources.map((resource, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className={`rounded-[30px] p-6 transition-all duration-300 ${getColorClasses(resource.color, "card")}`}
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`p-3 rounded-2xl flex-shrink-0 ${getColorClasses(resource.color, "icon")}`}>
-                      {resource.icon}
-                    </div>
-                    <h3 className={`text-lg font-semibold ${getColorClasses(resource.color, "text")}`}>
-                      {resource.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-300">
-                    {resource.description}
-                  </p>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className={`mt-4 px-4 py-2 rounded-lg text-white transition-all ${getColorClasses(resource.color, "button")}`}
-                  >
-                    Access Resource
-                  </motion.button>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-         {/* Support Section */}
-        <section className="py-20 bg-slate-800">
-          <div className="max-w-6xl mx-auto px-6">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-center mb-16"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Get Support
-              </h2>
-              <p className="text-xl text-gray-300">
-                Dedicated channels for all your training needs
-              </p>
-            </motion.div>
-
-            <div className="grid md:grid-cols-3 gap-6">
-              {supportChannels.map((channel, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className={`p-6 rounded-xl border-2 transition-all duration-300 ${
-                    channel.color === 'cyan' 
-                      ? 'border-cyan-500/30 bg-cyan-500/10 hover:border-cyan-400' 
-                      : channel.color === 'purple'
-                      ? 'border-purple-500/30 bg-purple-500/10 hover:border-purple-400'
-                      : 'border-teal-500/30 bg-teal-500/10 hover:border-teal-400'
-                  }`}
-                >
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className={`relative flex-shrink-0 w-12 h-12 rounded-full border-2 flex items-center justify-center ${
-                      channel.color === 'cyan' 
-                        ? 'border-cyan-400 text-cyan-400' 
-                        : channel.color === 'purple'
-                        ? 'border-purple-400 text-purple-400'
-                        : 'border-teal-400 text-teal-400'
-                    }`}>
-                      {channel.icon}
-                      {/* Ping animation */}
-                      <div className={`absolute inset-0 rounded-full border-2 animate-ping ${
-                        channel.color === 'cyan' ? 'border-cyan-400' 
-                        : channel.color === 'purple' ? 'border-purple-400'
-                        : 'border-teal-400'
-                      }`}></div>
-                    </div>
-                    <h3 className="text-xl font-bold text-white">
-                      {channel.title}
-                    </h3>
-                  </div>
-                  <p className="text-gray-300 mb-4">
-                    {channel.description}
-                  </p>
-                  <a 
-                    href={channel.link}
-                    className={`inline-flex items-center gap-2 text-sm font-medium ${
-                      channel.color === 'cyan' ? 'text-cyan-400 hover:text-cyan-300'
-                      : channel.color === 'purple' ? 'text-purple-400 hover:text-purple-300'
-                      : 'text-teal-400 hover:text-teal-300'
-                    } transition-colors`}
-                  >
-                    <Mail className="w-4 h-4" />
-                    {channel.contact}
-                  </a>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>  
-
-        {/* Final CTA Section
-        <section className="py-20 bg-gradient-to-br from-blue-900/40 via-purple-900/40 to-emerald-900/40 backdrop-blur-sm">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                Start Your Learning Journey
-              </h2>
-              <p className="text-xl text-gray-200 mb-8 max-w-2xl mx-auto">
-                Join hundreds of actuaries who have transformed their skills through our structured training program
-              </p>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link
-                  to="/modules"
-                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold rounded-full text-lg transition-all duration-300 shadow-lg hover:shadow-xl"
-                >
-                  Begin Training Now
-                </Link>
-              </motion.div>
-            </motion.div>
-          </div>
-        </section> */}
-      </main>
-
-      {/* FOOTER */}
-      <footer className="py-12 bg-black/40 backdrop-blur-xl border-t border-white/10">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <div className="text-gray-400 text-sm mb-4">
-            © {new Date().getFullYear()} Kenbright Actuarial Training Platform
-          </div>
-          <div className="text-gray-500 text-xs">
-            Powered by Kenbright AI
+          <div className="mt-16 text-center">
+            <button onClick={handlePrimaryAction} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center gap-3"
+              style={{ 
+                background: `linear-gradient(135deg, ${currentColors.cyan}, ${currentColors.purple})`, 
+                boxShadow: `0 10px 40px ${currentColors.cyan}40`,
+                color: theme === 'dark' ? '#1A1F2E' : 'white'
+              }}>
+              <Star className="w-6 h-6" />
+              {user ? "Go to My Progress" : "Get Started Free - No Credit Card Required"}
+              <ArrowRight className="w-6 h-6" />
+            </button>
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* WHY CHOOSE KENBRIGHT */}
+      <section id="training" className="py-20 px-4 lg:px-8 relative overflow-hidden">
+        <div className="absolute inset-0" style={{ 
+          background: theme === 'dark' 
+            ? `linear-gradient(135deg, ${currentColors.cyan}15, ${currentColors.purple}15)` 
+            : `linear-gradient(135deg, ${currentColors.cyan}10, ${currentColors.purple}10)` 
+        }} />
+        
+        <div className="max-w-6xl mx-auto relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl lg:text-4xl font-black mb-4" 
+              style={{ background: `linear-gradient(135deg, ${currentColors.cyan}, ${currentColors.purple})`, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              Why Choose Kenbright?
+            </h2>
+            <p className="text-lg max-w-2xl mx-auto" style={{ color: currentColors.textSecondary }}>Comprehensive actuarial platform designed by industry experts</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { icon: <Brain className="w-8 h-8" />, title: "Expert Content", desc: "Industry-leading curriculum", color: currentColors.cyan },
+              { icon: <Target className="w-8 h-8" />, title: "Practical Skills", desc: "Real-world applications", color: currentColors.green },
+              { icon: <Shield className="w-8 h-8" />, title: "Compliance Ready", desc: "IFRS 17 & regulations", color: currentColors.purple },
+              { icon: <TrendingUp className="w-8 h-8" />, title: "Career Growth", desc: "Advance your expertise", color: currentColors.blue }
+            ].map((item, i) => (
+              <div key={i} className="group relative h-full flex flex-col">
+                <div className="absolute -inset-1 rounded-3xl opacity-0 group-hover:opacity-100 transition-all duration-500 blur-xl" 
+                  style={{ background: `linear-gradient(135deg, ${item.color}40, ${item.color}20)` }} />
+                <div className="relative p-8 rounded-3xl border-2 transition-all duration-500 hover:scale-105 cursor-pointer backdrop-blur-xl overflow-hidden flex-grow"
+                  style={{ 
+                    background: theme === 'dark' ? `linear-gradient(135deg, ${item.color}20, ${item.color}10)` : currentColors.card,
+                    borderColor: `${item.color}50`, 
+                    boxShadow: theme === 'dark' ? `0 8px 32px ${item.color}20` : `0 4px 20px ${item.color}15`
+                  }}
+                  onMouseEnter={(e) => { 
+                    e.currentTarget.style.transform = 'translateY(-8px) scale(1.02)'; 
+                    e.currentTarget.style.boxShadow = `0 20px 60px ${item.color}40`; 
+                  }}
+                  onMouseLeave={(e) => { 
+                    e.currentTarget.style.transform = 'translateY(0) scale(1)'; 
+                    e.currentTarget.style.boxShadow = theme === 'dark' ? `0 8px 32px ${item.color}20` : `0 4px 20px ${item.color}15`; 
+                  }}>
+                  <div className="relative z-10">
+                    <div className="p-4 rounded-2xl w-fit mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6" 
+                      style={{ background: `${item.color}25`, color: item.color, boxShadow: `0 4px 20px ${item.color}30` }}>{item.icon}</div>
+                    <h3 className="text-xl font-bold mb-2" style={{ color: currentColors.text }}>{item.title}</h3>
+                    <p style={{ color: currentColors.textSecondary }}>{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* STATS */}
+      <section ref={statsRef} className="py-20 px-4 lg:px-8 transition-colors duration-300" 
+        style={{ background: theme === 'dark' ? currentColors.card : '#FFFFFF' }}>
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8 text-center">
+            {[
+              { icon: <Users className="w-8 h-8" />, value: userCount, suffix: "+", label: "Active Users", color: currentColors.cyan },
+              { icon: <GraduationCap className="w-8 h-8" />, value: moduleCount, suffix: "+", label: "Training Modules", color: currentColors.purple },
+              { icon: <Calculator className="w-8 h-8" />, value: toolCount, suffix: "", label: "Valuation Tools", color: currentColors.green },
+              { icon: <Trophy className="w-8 h-8" />, value: successRate, suffix: "%", label: "Success Rate", color: currentColors.orange }
+            ].map((stat, i) => (
+              <div key={i} className="group">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-4 transition-transform group-hover:scale-110" 
+                  style={{ background: `${stat.color}20`, color: stat.color }}>{stat.icon}</div>
+                <div className="text-5xl font-black mb-2" 
+                  style={{ 
+                    color: stat.color,
+                    textShadow: theme === 'light' ? '0 2px 4px rgba(0,0,0,0.1)' : 'none'
+                  }}>
+                  {stat.value}{stat.suffix}
+                </div>
+                <div className="font-medium" style={{ color: currentColors.textSecondary }}>{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="py-20 px-4 lg:px-8" 
+        style={{ background: theme === 'dark' ? `linear-gradient(135deg, ${currentColors.cyan}20, ${currentColors.purple}20)` : `linear-gradient(135deg, ${currentColors.cyan}10, ${currentColors.purple}10)` }}>
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl lg:text-5xl font-black mb-6" style={{ color: currentColors.text }}>Ready to Accelerate Your Actuarial Career?</h2>
+          <p className="text-xl mb-10" style={{ color: currentColors.textSecondary }}>Join {targetUserCount.toLocaleString()}+ professionals already learning with Kenbright. Start your free account today.</p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {user ? (
+              <button onClick={() => navigate('/my-progress')} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
+                style={{ 
+                  background: currentColors.cyan, 
+                  boxShadow: `0 10px 40px ${currentColors.cyan}50`,
+                  color: theme === 'dark' ? '#1A1F2E' : 'white'
+                }}>
+                <TrendingUp className="w-6 h-6" />
+                Go to My Progress
+              </button>
+            ) : (
+              <>
+                <button onClick={() => navigate('/auth?mode=signup')} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
+                  style={{ 
+                    background: currentColors.cyan, 
+                    boxShadow: `0 10px 40px ${currentColors.cyan}50`,
+                    color: theme === 'dark' ? '#1A1F2E' : 'white'
+                  }}>
+                  <Rocket className="w-6 h-6" />
+                  Create Free Account
+                </button>
+                <button onClick={() => navigate('/auth?mode=login')} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
+                  style={{ 
+                    background: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.8)', 
+                    border: `2px solid ${theme === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.1)'}`,
+                    color: currentColors.text
+                  }}>
+                  Already have an account? Log In
+                </button>
+              </>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <Footer theme={theme} />
     </div>
   );
 }

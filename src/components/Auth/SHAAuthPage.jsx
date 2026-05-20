@@ -1,6 +1,8 @@
 // src/components/Auth/SHAAuthPage.jsx
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { supabase } from "../../supabaseClient";
+import { shaColors as colors } from "../../theme/sha";
 import {
   Mail,
   Lock,
@@ -16,19 +18,9 @@ import {
   GraduationCap
 } from "lucide-react";
 
-// SHA Brand Colors
-const colors = {
-  blue: "#0066B3",
-  green: "#8BC53F",
-  darkBlue: "#003D6B",
-  purple: "#9D4EDD",
-  cyan: "#00D4FF",
-  orange: "#FF6B35"
-};
-
-// src/components/Auth/SHAAuthPage.jsx (add this useEffect at the beginning)
 export default function SHAAuthPage({ onAuthSuccess }) {
-  const [isLogin, setIsLogin] = useState(true);
+  const [searchParams] = useSearchParams();
+  const [isLogin, setIsLogin] = useState(searchParams.get("mode") !== "signup");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -47,7 +39,6 @@ export default function SHAAuthPage({ onAuthSuccess }) {
     password: "",
     confirmPassword: "",
     company: "",
-    role: ""
   });
 
   const handleChange = (e) => {
@@ -93,39 +84,61 @@ export default function SHAAuthPage({ onAuthSuccess }) {
       }
     }
 
-    // Simulate API call
-    setTimeout(() => {
-      const userData = {
-        id: Date.now(),
-        name: formData.name || formData.email.split("@")[0],
-        email: formData.email,
-        company: formData.company || "SHA",
-        role: formData.role || "Actuarial Analyst",
-        userRole: "user",
-        createdAt: new Date().toISOString()
-      };
+    try {
+      let data, error;
 
-      // Save to localStorage
-      localStorage.setItem("user", JSON.stringify(userData));
-
-      // Set welcome session flag
-      sessionStorage.setItem("showWelcome", "true");
-      sessionStorage.setItem("welcomeName", userData.name);
-
-      setLoading(false);
-
-      // Call the auth success callback
-      if (onAuthSuccess) {
-        onAuthSuccess(userData);
+      if (isLogin) {
+        ({ data, error } = await supabase.auth.signInWithPassword({
+          email: formData.email,
+          password: formData.password,
+        }));
+      } else {
+        ({ data, error } = await supabase.auth.signUp({
+          email: formData.email,
+          password: formData.password,
+          options: {
+            data: {
+              full_name: formData.name,
+              name: formData.name,
+              username: formData.name?.toLowerCase().replace(/\s+/g, "_"),
+              company: formData.company,
+            },
+            emailRedirectTo: `${window.location.origin}/auth/callback`,
+          },
+        }));
       }
 
-      // Navigate to dashboard
+      if (error) throw error;
+
+      if (!isLogin && data.user?.identities?.length === 0) {
+        setError("User already exists. Please sign in instead.");
+        return;
+      }
+
+      if (!isLogin) {
+        setError("");
+        alert("Registration successful! Please check your email to confirm your account.");
+        setIsLogin(true);
+        return;
+      }
+
+      sessionStorage.setItem("showWelcome", "true");
+      sessionStorage.setItem("welcomeName", formData.name || formData.email.split("@")[0]);
+
+      if (onAuthSuccess && data.user) {
+        onAuthSuccess(data.user);
+      }
       navigate("/SHADashboard");
-    }, 1500);
+    } catch (err) {
+      console.error("Auth error:", err);
+      setError(err.message || "Authentication failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const features = [
-    { icon: <GraduationCap className="w-5 h-5" />, text: "Access 17+ actuarial training modules" },
+    { icon: <GraduationCap className="w-5 h-5" />, text: "Access 18 actuarial training modules" },
     { icon: <Shield className="w-5 h-5" />, text: "IFRS 17 compliance training" },
     { icon: <Building2 className="w-5 h-5" />, text: "Industry-recognized certification" },
     { icon: <CheckCircle className="w-5 h-5" />, text: "Track your learning progress" }

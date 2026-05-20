@@ -1,12 +1,24 @@
-# React + Vite
+# SHA Actuarial Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Actuarial training platform (functional parity with KAFS Training Module) with **SHA** branding and a **dedicated Supabase** backend.
 
-Currently, two official plugins are available:
+## Quick start
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. Copy `.env.example` → `.env` and set Supabase + optional Gemini keys.
+2. Follow [SUPABASE_SETUP.md](./SUPABASE_SETUP.md) to create the project, run migrations, and copy training files from KAFS.
+3. `npm install` → `npm run dev` → open `http://localhost:5173`
 
-## Expanding the ESLint configuration
+## Routes
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+| Path | Description |
+|------|-------------|
+| `/` | Public landing |
+| `/SHAAuth` | Sign in / sign up |
+| `/SHADashboard` | Main hub (after login) |
+| `/SHAmodules` or `/modules` | Module gallery |
+| `/modules/:id` | Module content, quizzes, assignments |
+| `/superadmin/login` | Admin console |
+
+## Stack
+
+React 19, Vite, Tailwind, Supabase (auth, Postgres, storage), Gemini (client-side AI quiz grading).
