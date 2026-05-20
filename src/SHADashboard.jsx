@@ -3,7 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import shaLogo from "./assets/SHA_Logo2.png";
-import kenbrightLogo from "./assets/Kenbright-logo-white.png";
+import kenbrightLogo from "./assets/kenbright-logo-white.png";
 import {
     BarChart3,
     FileText,
