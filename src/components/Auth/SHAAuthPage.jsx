@@ -128,7 +128,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
       if (onAuthSuccess && data.user) {
         onAuthSuccess(data.user);
       }
-      navigate("/SHADashboard");
+      navigate("/");
     } catch (err) {
       console.error("Auth error:", err);
       setError(err.message || "Authentication failed");

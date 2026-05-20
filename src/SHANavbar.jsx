@@ -10,10 +10,19 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   const [showIfrs17Menu, setShowIfrs17Menu] = useState(false);
   const [showIfrs17GameSubmenu, setShowIfrs17GameSubmenu] = useState(false);
   const [showResourcesMenu, setShowResourcesMenu] = useState(false);
-  const [showResourcesIndustrySubmenu, setShowResourcesIndustrySubmenu] = useState(false);
   const [, setShowToolsMenu] = useState(false);
+  const [showAnalyticsMenu, setShowAnalyticsMenu] = useState(false);
+  const [showTrainingMenu, setShowTrainingMenu] = useState(false);
+  const [showPricingMenu, setShowPricingMenu] = useState(false);
+  const [showRiskMenu, setShowRiskMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showMobileAnalytics, setShowMobileAnalytics] = useState(false);
+  const [showMobileTraining, setShowMobileTraining] = useState(false);
+  const [showMobileIfrs17, setShowMobileIfrs17] = useState(false);
+  const [showMobilePricing, setShowMobilePricing] = useState(false);
+  const [showMobileRisk, setShowMobileRisk] = useState(false);
+  const [showMobileResources, setShowMobileResources] = useState(false);
   
   // Search State
   const [showSearchModal, setShowSearchModal] = useState(false);
@@ -41,6 +50,10 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
       if (!e.target.closest('.resources-dropdown')) setShowResourcesMenu(false);
       if (!e.target.closest('.tools-dropdown')) setShowToolsMenu(false);
       if (!e.target.closest('.ifrs17-dropdown')) setShowIfrs17Menu(false);
+      if (!e.target.closest('.analytics-dropdown')) setShowAnalyticsMenu(false);
+      if (!e.target.closest('.training-dropdown')) setShowTrainingMenu(false);
+      if (!e.target.closest('.pricing-dropdown')) setShowPricingMenu(false);
+      if (!e.target.closest('.risk-dropdown')) setShowRiskMenu(false);
       if (!e.target.closest('.mobile-menu-button') && !e.target.closest('.mobile-menu-container')) {
         setShowMobileMenu(false);
       }
@@ -53,10 +66,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     if (!showIfrs17Menu) setShowIfrs17GameSubmenu(false);
   }, [showIfrs17Menu]);
 
-  useEffect(() => {
-    if (!showResourcesMenu) setShowResourcesIndustrySubmenu(false);
-  }, [showResourcesMenu]);
-
   // Focus search input when modal opens
   useEffect(() => {
     if (showSearchModal && searchInputRef.current) {
@@ -66,11 +75,11 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     }
   }, [showSearchModal]);
 
-  const homePath = isLoggedIn ? "/SHADashboard" : "/";
+  const homePath = "/";
 
   const isActive = (path) => {
     if (path === homePath) {
-      return currentPath === "/" || currentPath === "/SHADashboard";
+      return currentPath === "/";
     }
     return currentPath === path || currentPath.startsWith(`${path}/`);
   };
@@ -79,9 +88,31 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
 
   const navItems = [
     { path: homePath, label: "Home", icon: <Home className="w-5 h-5" /> },
-    { path: "/my-progress", label: "My Progress", icon: <TrendingUp className="w-5 h-5" /> },
-    { path: "/modules", label: "Training", icon: <BookOpen className="w-5 h-5" /> },
     ...(user?.role === "supervisor" ? [{ path: "/supervisor", label: "Supervisor", icon: <ShieldCheck className="w-5 h-5" /> }] : []),
+  ];
+
+  const externalLinks = {
+    analytics: {
+      claimsAnalysis: "",
+      contributionsAnalysis: "",
+      lossRatiosAnalysis: "",
+      frequencySeverityAnalysis: "",
+    },
+    risk: {
+      fraudRiskMatrix: "",
+    },
+  };
+
+  const analyticsItems = [
+    { label: "Claims Analysis", url: externalLinks.analytics.claimsAnalysis },
+    { label: "Contributions Analysis", url: externalLinks.analytics.contributionsAnalysis },
+    { label: "Loss Ratios Analysis", url: externalLinks.analytics.lossRatiosAnalysis },
+    { label: "Frequency & Severity Analysis", url: externalLinks.analytics.frequencySeverityAnalysis },
+  ];
+
+  const trainingItems = [
+    { label: "Training Modules", path: "/modules", internal: true },
+    { label: "My Progress", path: "/my-progress", internal: true },
   ];
 
   const ifrs17GameOptions = [
@@ -104,25 +135,21 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     { label: "Learn17", url: "https://learn17.com/", icon: <BookOpen className="w-4 h-4" /> },
     { label: "IFRS 17 Insurance Contracts", url: "/pdfs/ifrs-17-insurance-contracts.pdf", icon: <FileText className="w-4 h-4" />, download: true },
     { label: "IFRS 17 Illustrative Examples", url: "/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf", icon: <FileText className="w-4 h-4" />, download: true },
+    { label: "SHA IFRS 17 Policy Papers", url: "/ifrs17-policy-papers", icon: <BookOpen className="w-4 h-4" />, internal: true },
   ];
 
-  const toolItems = [
-    { label: "LRC Model", url: "https://kenbright-lrc-model.share.connect.posit.cloud/", icon: <Calculator className="w-4 h-4" /> },
-    { label: "Risk Adjustment", url: "https://kenbright-risk-adjustment-and-loss-triangles-model.share.connect.posit.cloud", icon: <Calculator className="w-4 h-4" /> },
-    { label: "IFRS 17 Exam", url: "https://ifrs-17-exam-sha.vercel.app/dashboard", icon: <Calculator className="w-4 h-4" /> },
-    { label: "PRMF Calculator", url: "https://prmf-calculator.vercel.app/", icon: <Calculator className="w-4 h-4" /> }
+  const pricingItems = [
+    { label: "Pricing Tool", path: "/tools", internal: true, icon: <Calculator className="w-4 h-4" /> },
+    { label: "PRMF tool", url: "https://prmf-calculator.vercel.app/", icon: <Calculator className="w-4 h-4" /> },
   ];
 
-  const industryReportRegions = [
-    { label: "Kenya", url: "/" },
-    { label: "Uganda", url: "/" },
-    { label: "Tanzania", url: "/" },
+  const riskItems = [
+    { label: "Fraud Risk Matrix", url: externalLinks.risk.fraudRiskMatrix, icon: <ShieldCheck className="w-4 h-4" /> },
   ];
 
   const resourceItems = [
-    { label: "QAS Reports", path: "/qas-reports", icon: <BookOpen className="w-4 h-4" /> },
+    { label: "Tools", path: "/tools", icon: <Calculator className="w-4 h-4" /> },
     { label: "Training Links", path: "/training-links", icon: <BookOpen className="w-4 h-4" /> },
-    { label: "File Formats", path: "/file-saving-format", icon: <BookOpen className="w-4 h-4" /> },
     { label: "Qualification Pathway", url: "/pdfs/qualification-handbook-2025-2026.pdf", icon: <BookOpen className="w-4 h-4" /> },
   ];
 
@@ -153,14 +180,10 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
       type: "IFRS 17",
       icon: <Gamepad2 className="w-4 h-4" />,
     })),
-    ...toolItems.map(i => ({ title: i.label, link: i.url, type: "Tool", icon: i.icon })),
+    ...pricingItems.map(i => ({ title: i.label, link: i.internal ? i.path : i.url, type: "Pricing", icon: i.icon })),
     ...resourceItems.map(i => ({ title: i.label, link: i.path || i.url, type: "Resource", icon: i.icon })),
-    ...industryReportRegions.map((r) => ({
-      title: `Industry report — ${r.label}`,
-      link: r.url,
-      type: "Resource",
-      icon: <BookOpen className="w-4 h-4" />,
-    })),
+    ...analyticsItems.map(i => ({ title: i.label, link: i.url, type: "Analytics", icon: <TrendingUp className="w-4 h-4" /> })),
+    ...riskItems.map(i => ({ title: i.label, link: i.url, type: "Risk", icon: i.icon })),
     { title: "Dashboard", link: "/SHADashboard", type: "Page", icon: <Home className="w-4 h-4" /> },
     { title: "Tools Dashboard", link: "/tools", type: "Page", icon: <Calculator className="w-4 h-4" /> },
     { title: "Profile", link: "/profile", type: "Account", icon: <User className="w-4 h-4" /> }
@@ -195,6 +218,42 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     } else {
       navigate(item.link);
     }
+  };
+
+  const renderExternalMenuItem = ({ label, url, icon, className = "", style = {} }) => {
+    const isEnabled = !!url;
+    if (!isEnabled) {
+      return (
+        <div
+          className={`flex items-center gap-3 px-4 py-3 text-sm select-none ${className}`}
+          style={{ color: colors.textSecondary, opacity: 0.6, ...style }}
+        >
+          {icon}
+          <span className="font-medium whitespace-nowrap">{label}</span>
+        </div>
+      );
+    }
+    return (
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`flex items-center gap-3 px-4 py-3 transition-all text-sm hover:bg-white/5 ${className}`}
+        style={{ color: colors.text, ...style }}
+      >
+        {icon}
+        <span className="font-medium whitespace-nowrap">{label}</span>
+      </a>
+    );
+  };
+
+  const closeAllDropdowns = () => {
+    setShowAnalyticsMenu(false);
+    setShowTrainingMenu(false);
+    setShowIfrs17Menu(false);
+    setShowPricingMenu(false);
+    setShowRiskMenu(false);
+    setShowResourcesMenu(false);
   };
 
   const renderShaLogo = () => (
@@ -328,110 +387,190 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
         }}
       >
         <div className="w-full px-4 lg:px-6">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-24">
             {/* Logo */}
             <div className="flex items-center gap-3">
               {renderShaLogo()}
             </div>
 
-            {/* Center Navigation - Desktop */}
-            <div className="absolute left-1/2 transform -translate-x-1/2">
-              <div className="hidden lg:flex items-center gap-1">
-                {navItems.map((item) => (
-                  <Link
-                    key={item.path}
-                    to={item.path}
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 ${isActive(item.path) ? 'font-semibold' : 'hover:scale-105'}`}
-                    style={{
-                      color: isActive(item.path) ? colors.primary : colors.text,
-                      background: isActive(item.path) ? `${colors.primary}15` : 'transparent'
-                    }}
-                  >
-                    {item.icon}
-                    <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
-                  </Link>
-                ))}
+            {/* Left Navigation - Desktop */}
+            <div className="hidden lg:flex items-center gap-1 ml-4 flex-1 justify-start">
+              {navItems.map((item) => (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 ${isActive(item.path) ? 'font-semibold' : 'hover:scale-105'}`}
+                  style={{
+                    color: isActive(item.path) ? colors.primary : colors.text,
+                    background: isActive(item.path) ? `${colors.primary}15` : 'transparent'
+                  }}
+                >
+                  {item.icon}
+                  <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
+                </Link>
+              ))}
 
-                <div className="relative ifrs17-dropdown">
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setShowIfrs17Menu(!showIfrs17Menu); setShowToolsMenu(false); setShowResourcesMenu(false); }}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
-                    style={{ color: showIfrs17Menu ? colors.primary : colors.text, background: showIfrs17Menu ? `${colors.primary}15` : 'transparent' }}
-                  >
-                    <BookOpen className="w-5 h-5" />
-                    <span className="text-sm font-medium whitespace-nowrap">IFRS</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${showIfrs17Menu ? 'rotate-180' : ''}`} />
-                  </button>
-                  {showIfrs17Menu && (
-                    <div className="absolute top-full left-0 mt-2 w-72 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+              <div className="relative analytics-dropdown">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowAnalyticsMenu(!showAnalyticsMenu);
+                    setShowTrainingMenu(false);
+                    setShowIfrs17Menu(false);
+                    setShowPricingMenu(false);
+                    setShowRiskMenu(false);
+                    setShowResourcesMenu(false);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+                  style={{ color: showAnalyticsMenu ? colors.primary : colors.text, background: showAnalyticsMenu ? `${colors.primary}15` : 'transparent' }}
+                >
+                  <TrendingUp className="w-5 h-5" />
+                  <span className="text-sm font-medium whitespace-nowrap">Analytics</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showAnalyticsMenu ? 'rotate-180' : ''}`} />
+                </button>
+                {showAnalyticsMenu && (
+                  <div className="absolute top-full left-0 mt-2 w-72 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+                    {analyticsItems.map((it, idx) => (
+                      <div key={it.label} style={{ borderBottom: idx < analyticsItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}>
+                        {renderExternalMenuItem({ label: it.label, url: it.url, icon: <TrendingUp className="w-4 h-4 shrink-0" /> })}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              <div className="relative training-dropdown">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowTrainingMenu(!showTrainingMenu);
+                    setShowAnalyticsMenu(false);
+                    setShowIfrs17Menu(false);
+                    setShowPricingMenu(false);
+                    setShowRiskMenu(false);
+                    setShowResourcesMenu(false);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+                  style={{ color: showTrainingMenu ? colors.primary : colors.text, background: showTrainingMenu ? `${colors.primary}15` : 'transparent' }}
+                >
+                  <BookOpen className="w-5 h-5" />
+                  <span className="text-sm font-medium whitespace-nowrap">Training</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showTrainingMenu ? 'rotate-180' : ''}`} />
+                </button>
+                {showTrainingMenu && (
+                  <div className="absolute top-full left-0 mt-2 w-60 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+                    {trainingItems.map((it, idx) => (
                       <Link
-                        to="/modules/IFRS 17"
+                        key={it.path}
+                        to={it.path}
+                        onClick={() => closeAllDropdowns()}
                         className="flex items-center gap-3 px-4 py-3 transition-all text-sm hover:bg-white/5"
-                        style={{ color: colors.text, borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+                        style={{ color: colors.text, borderBottom: idx < trainingItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}
                       >
                         <BookOpen className="w-4 h-4 shrink-0" />
-                        <span className="font-medium whitespace-nowrap">Module 0 (IFRS 17)</span>
+                        <span className="font-medium whitespace-nowrap">{it.label}</span>
                       </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-                      <div
-                        className="relative border-b border-white/5"
-                        onMouseEnter={() => setShowIfrs17GameSubmenu(true)}
-                        onMouseLeave={() => setShowIfrs17GameSubmenu(false)}
+              <div className="relative ifrs17-dropdown">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowIfrs17Menu(!showIfrs17Menu); setShowToolsMenu(false); setShowResourcesMenu(false); setShowAnalyticsMenu(false); setShowTrainingMenu(false); setShowPricingMenu(false); setShowRiskMenu(false); }}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+                  style={{ color: showIfrs17Menu ? colors.primary : colors.text, background: showIfrs17Menu ? `${colors.primary}15` : 'transparent' }}
+                >
+                  <BookOpen className="w-5 h-5" />
+                  <span className="text-sm font-medium whitespace-nowrap">IFRS 17</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showIfrs17Menu ? 'rotate-180' : ''}`} />
+                </button>
+                {showIfrs17Menu && (
+                  <div className="absolute top-full left-0 mt-2 w-72 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+                    <Link
+                      to="/modules/IFRS 17"
+                      onClick={() => closeAllDropdowns()}
+                      className="flex items-center gap-3 px-4 py-3 transition-all text-sm hover:bg-white/5"
+                      style={{ color: colors.text, borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+                    >
+                      <BookOpen className="w-4 h-4 shrink-0" />
+                      <span className="font-medium whitespace-nowrap">Module 0 (IFRS 17)</span>
+                    </Link>
+
+                    <div
+                      className="relative border-b border-white/5"
+                      onMouseEnter={() => setShowIfrs17GameSubmenu(true)}
+                      onMouseLeave={() => setShowIfrs17GameSubmenu(false)}
+                    >
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setShowIfrs17GameSubmenu((v) => !v);
+                        }}
+                        className="w-full flex items-center justify-between gap-3 px-4 py-3 transition-all text-sm text-left hover:bg-white/5"
+                        style={{ color: colors.text }}
                       >
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setShowIfrs17GameSubmenu((v) => !v);
-                          }}
-                          className="w-full flex items-center justify-between gap-3 px-4 py-3 transition-all text-sm text-left hover:bg-white/5"
-                          style={{ color: colors.text }}
+                        <span className="flex items-center gap-3 min-w-0">
+                          <Gamepad2 className="w-4 h-4 shrink-0" />
+                          <span className="font-medium whitespace-nowrap">Game</span>
+                        </span>
+                        <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${showIfrs17GameSubmenu ? 'rotate-90' : ''}`} style={{ color: colors.textSecondary }} />
+                      </button>
+
+                      {showIfrs17GameSubmenu && (
+                        <div
+                          className="absolute left-full top-0 ml-1 pl-1 z-[60] min-w-[20rem] max-w-[22rem]"
+                          onMouseEnter={() => setShowIfrs17GameSubmenu(true)}
+                          onMouseLeave={() => setShowIfrs17GameSubmenu(false)}
                         >
-                          <span className="flex items-center gap-3 min-w-0">
-                            <Gamepad2 className="w-4 h-4 shrink-0" />
-                            <span className="font-medium whitespace-nowrap">Game</span>
-                          </span>
-                          <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${showIfrs17GameSubmenu ? 'rotate-90' : ''}`} style={{ color: colors.textSecondary }} />
-                        </button>
-
-                        {showIfrs17GameSubmenu && (
                           <div
-                            className="absolute left-full top-0 ml-1 pl-1 z-[60] min-w-[20rem] max-w-[22rem]"
-                            onMouseEnter={() => setShowIfrs17GameSubmenu(true)}
-                            onMouseLeave={() => setShowIfrs17GameSubmenu(false)}
+                            className="rounded-xl shadow-2xl overflow-hidden"
+                            style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}
                           >
-                            <div
-                              className="rounded-xl shadow-2xl overflow-hidden"
-                              style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}
-                            >
-                              {ifrs17GameOptions.map((opt, idx) => (
-                                <a
-                                  key={opt.url}
-                                  href={opt.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="block px-4 py-3 transition-all hover:bg-white/5"
-                                  style={{
-                                    borderBottom: idx < ifrs17GameOptions.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined,
-                                  }}
-                                >
-                                  <div className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: colors.primary }}>
-                                    {opt.label}
-                                  </div>
-                                  <div className="text-sm font-semibold leading-snug mb-1" style={{ color: colors.text }}>
-                                    {opt.headline}
-                                  </div>
-                                  <div className="text-xs leading-relaxed" style={{ color: colors.textSecondary }}>
-                                    {opt.description}
-                                  </div>
-                                </a>
-                              ))}
-                            </div>
+                            {ifrs17GameOptions.map((opt, idx) => (
+                              <a
+                                key={opt.url}
+                                href={opt.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block px-4 py-3 transition-all hover:bg-white/5"
+                                style={{
+                                  borderBottom: idx < ifrs17GameOptions.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined,
+                                }}
+                              >
+                                <div className="text-xs font-semibold uppercase tracking-wide mb-1" style={{ color: colors.primary }}>
+                                  {opt.label}
+                                </div>
+                                <div className="text-sm font-semibold leading-snug mb-1" style={{ color: colors.text }}>
+                                  {opt.headline}
+                                </div>
+                                <div className="text-xs leading-relaxed" style={{ color: colors.textSecondary }}>
+                                  {opt.description}
+                                </div>
+                              </a>
+                            ))}
                           </div>
-                        )}
-                      </div>
+                        </div>
+                      )}
+                    </div>
 
-                      {ifrs17Items.slice(1).map((item, i) => (
+                    {ifrs17Items.slice(1).map((item, i) => {
+                      if (item.internal) {
+                        return (
+                          <Link
+                            key={item.url}
+                            to={item.url}
+                            onClick={() => closeAllDropdowns()}
+                            className="flex items-center gap-3 px-4 py-3 transition-all text-sm hover:bg-white/5"
+                            style={{ color: colors.text, borderBottom: i < ifrs17Items.slice(1).length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}
+                          >
+                            {item.icon}
+                            <span className="font-medium whitespace-nowrap">{item.label}</span>
+                          </Link>
+                        );
+                      }
+                      return (
                         <a
                           key={item.url}
                           href={item.url}
@@ -444,126 +583,132 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                           {item.icon}
                           <span className="font-medium whitespace-nowrap">{item.label}</span>
                         </a>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
 
-                <Link
-                  to="/tools"
-                  className={`flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 ${isActive('/tools') ? 'font-semibold' : 'hover:scale-105'}`}
-                  style={{ color: isActive('/tools') ? colors.primary : colors.text, background: isActive('/tools') ? `${colors.primary}15` : 'transparent' }}
+              <div className="relative pricing-dropdown">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowPricingMenu(!showPricingMenu);
+                    setShowAnalyticsMenu(false);
+                    setShowTrainingMenu(false);
+                    setShowIfrs17Menu(false);
+                    setShowRiskMenu(false);
+                    setShowResourcesMenu(false);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+                  style={{ color: showPricingMenu ? colors.primary : colors.text, background: showPricingMenu ? `${colors.primary}15` : 'transparent' }}
                 >
                   <Calculator className="w-5 h-5" />
-                  <span className="text-sm font-medium whitespace-nowrap">Tools</span>
-                </Link>
-
-                <div className="relative resources-dropdown">
-                  <button
-                    onClick={(e) => { e.stopPropagation(); setShowResourcesMenu(!showResourcesMenu); setShowToolsMenu(false); setShowIfrs17Menu(false); }}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
-                    style={{ color: showResourcesMenu ? colors.primary : colors.text, background: showResourcesMenu ? `${colors.primary}15` : 'transparent' }}
-                  >
-                    <BookOpen className="w-5 h-5" />
-                    <span className="text-sm font-medium whitespace-nowrap">Resources</span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${showResourcesMenu ? 'rotate-180' : ''}`} />
-                  </button>
-                  {showResourcesMenu && (
-                    <div className="absolute top-full left-0 mt-2 w-56 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
-                      {resourceItems.slice(0, 3).map((item) => {
-                        const href = item.path || item.url;
-                        const isExternal = /^https?:\/\//i.test(href);
-                        if (!isExternal) {
-                          return (
-                            <Link
-                              key={href}
-                              to={href}
-                              className="flex items-center gap-3 px-4 py-3 text-sm transition-all hover:bg-white/5"
-                              style={{ color: colors.text, borderBottom: '1px solid rgba(255,255,255,0.05)' }}
-                            >
-                              {item.icon} <span className="whitespace-nowrap">{item.label}</span>
-                            </Link>
-                          );
-                        }
+                  <span className="text-sm font-medium whitespace-nowrap">Pricing</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showPricingMenu ? 'rotate-180' : ''}`} />
+                </button>
+                {showPricingMenu && (
+                  <div className="absolute top-full left-0 mt-2 w-56 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+                    {pricingItems.map((it, idx) => {
+                      if (it.internal) {
                         return (
-                          <a
-                            key={href}
-                            href={href}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                          <Link
+                            key={it.path}
+                            to={it.path}
+                            onClick={() => closeAllDropdowns()}
                             className="flex items-center gap-3 px-4 py-3 text-sm transition-all hover:bg-white/5"
-                            style={{ color: colors.text, borderBottom: '1px solid rgba(255,255,255,0.05)' }}
+                            style={{ color: colors.text, borderBottom: idx < pricingItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}
                           >
-                            {item.icon} <span className="whitespace-nowrap">{item.label}</span>
-                          </a>
+                            {it.icon} <span className="whitespace-nowrap font-medium">{it.label}</span>
+                          </Link>
                         );
-                      })}
+                      }
+                      return (
+                        <div key={it.url} style={{ borderBottom: idx < pricingItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}>
+                          {renderExternalMenuItem({ label: it.label, url: it.url, icon: it.icon })}
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
 
-                      <div
-                        className="relative border-b border-white/5"
-                        onMouseEnter={() => setShowResourcesIndustrySubmenu(true)}
-                        onMouseLeave={() => setShowResourcesIndustrySubmenu(false)}
-                      >
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setShowResourcesIndustrySubmenu((v) => !v);
-                          }}
-                          className="w-full flex items-center justify-between gap-3 px-4 py-3 text-sm text-left transition-all hover:bg-white/5"
-                          style={{ color: colors.text }}
-                        >
-                          <span className="flex items-center gap-3 min-w-0">
-                            <BookOpen className="w-4 h-4 shrink-0" />
-                            <span className="font-medium whitespace-nowrap">Industry report</span>
-                          </span>
-                          <ChevronRight className={`w-4 h-4 shrink-0 transition-transform ${showResourcesIndustrySubmenu ? 'rotate-90' : ''}`} style={{ color: colors.textSecondary }} />
-                        </button>
-
-                        {showResourcesIndustrySubmenu && (
-                          <div
-                            className="absolute left-full top-0 ml-1 pl-1 z-[60] min-w-[12rem]"
-                            onMouseEnter={() => setShowResourcesIndustrySubmenu(true)}
-                            onMouseLeave={() => setShowResourcesIndustrySubmenu(false)}
-                          >
-                            <div
-                              className="rounded-xl shadow-2xl overflow-hidden"
-                              style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}
-                            >
-                              {industryReportRegions.map((r, idx) => {
-                                const isExternal = /^https?:\/\//i.test(r.url);
-                                return (
-                                  <a
-                                    key={r.label}
-                                    href={r.url}
-                                    {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                                    className="flex items-center gap-3 px-4 py-3 text-sm font-medium transition-all hover:bg-white/5"
-                                    style={{
-                                      color: colors.text,
-                                      borderBottom: idx < industryReportRegions.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined,
-                                    }}
-                                  >
-                                    {r.label}
-                                  </a>
-                                );
-                              })}
-                            </div>
-                          </div>
-                        )}
+              <div className="relative risk-dropdown">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowRiskMenu(!showRiskMenu);
+                    setShowAnalyticsMenu(false);
+                    setShowTrainingMenu(false);
+                    setShowIfrs17Menu(false);
+                    setShowPricingMenu(false);
+                    setShowResourcesMenu(false);
+                  }}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+                  style={{ color: showRiskMenu ? colors.primary : colors.text, background: showRiskMenu ? `${colors.primary}15` : 'transparent' }}
+                >
+                  <ShieldCheck className="w-5 h-5" />
+                  <span className="text-sm font-medium whitespace-nowrap">Risk</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showRiskMenu ? 'rotate-180' : ''}`} />
+                </button>
+                {showRiskMenu && (
+                  <div className="absolute top-full left-0 mt-2 w-60 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+                    {riskItems.map((it, idx) => (
+                      <div key={it.label} style={{ borderBottom: idx < riskItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}>
+                        {renderExternalMenuItem({ label: it.label, url: it.url, icon: it.icon })}
                       </div>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-                      {qualificationPathwayItem && (
+              <div className="relative resources-dropdown">
+                <button
+                  onClick={(e) => { e.stopPropagation(); setShowResourcesMenu(!showResourcesMenu); setShowToolsMenu(false); setShowIfrs17Menu(false); setShowAnalyticsMenu(false); setShowTrainingMenu(false); setShowPricingMenu(false); setShowRiskMenu(false); }}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+                  style={{ color: showResourcesMenu ? colors.primary : colors.text, background: showResourcesMenu ? `${colors.primary}15` : 'transparent' }}
+                >
+                  <BookOpen className="w-5 h-5" />
+                  <span className="text-sm font-medium whitespace-nowrap">Resources</span>
+                  <ChevronDown className={`w-4 h-4 transition-transform ${showResourcesMenu ? 'rotate-180' : ''}`} />
+                </button>
+                {showResourcesMenu && (
+                  <div className="absolute top-full left-0 mt-2 w-56 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+                    {resourceItems.map((item, idx) => {
+                      const href = item.path || item.url;
+                      const isExternal = /^https?:\/\//i.test(href);
+                      const isDownload = item.label === "Qualification Pathway";
+
+                      if (!isExternal && item.path) {
+                        return (
+                          <Link
+                            key={href}
+                            to={href}
+                            onClick={() => closeAllDropdowns()}
+                            className="flex items-center gap-3 px-4 py-3 text-sm transition-all hover:bg-white/5"
+                            style={{ color: colors.text, borderBottom: idx < resourceItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}
+                          >
+                            {item.icon} <span className="whitespace-nowrap font-medium">{item.label}</span>
+                          </Link>
+                        );
+                      }
+
+                      return (
                         <a
-                          href={qualificationPathwayItem.url}
+                          key={href}
+                          href={href}
+                          {...(isDownload ? { download: true } : {})}
+                          target={isDownload ? undefined : "_blank"}
+                          rel={isDownload ? undefined : "noopener noreferrer"}
                           className="flex items-center gap-3 px-4 py-3 text-sm transition-all hover:bg-white/5"
-                          style={{ color: colors.text }}
+                          style={{ color: colors.text, borderBottom: idx < resourceItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}
                         >
-                          {qualificationPathwayItem.icon} <span className="whitespace-nowrap">{qualificationPathwayItem.label}</span>
+                          {item.icon} <span className="whitespace-nowrap font-medium">{item.label}</span>
                         </a>
-                      )}
-                    </div>
-                  )}
-                </div>
+                      );
+                    })}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -638,10 +783,180 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
               <div className="pt-4 border-t border-white/10">
                 <div className="flex flex-col gap-1 px-2">
                   <Link to={homePath} onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}><Home className="w-5 h-5"/> Home</Link>
-                  <Link to="/my-progress" onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}><TrendingUp className="w-5 h-5"/> My Progress</Link>
-                  <Link to="/modules" onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}><BookOpen className="w-5 h-5"/> Training</Link>
-                  <Link to="/tools" onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}><Calculator className="w-5 h-5"/> Tools</Link>
-                  <Link to="/qas-reports" onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}><FileText className="w-5 h-5"/> QAS Reports</Link>
+
+                  <button
+                    type="button"
+                    onClick={() => setShowMobileAnalytics((v) => !v)}
+                    className="px-4 py-3 rounded-lg flex items-center justify-between text-sm"
+                    style={{ color: colors.text }}
+                  >
+                    <span className="flex gap-3 items-center whitespace-nowrap">
+                      <TrendingUp className="w-5 h-5" /> Analytics
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showMobileAnalytics ? 'rotate-180' : ''}`} />
+                  </button>
+                  {showMobileAnalytics && (
+                    <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
+                      {analyticsItems.map((it) => (
+                        <div key={it.label} className="rounded-lg">
+                          {renderExternalMenuItem({
+                            label: it.label,
+                            url: it.url,
+                            icon: <TrendingUp className="w-4 h-4" />,
+                            className: "rounded-lg",
+                            style: { paddingLeft: 0, paddingRight: 0 },
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setShowMobileTraining((v) => !v)}
+                    className="px-4 py-3 rounded-lg flex items-center justify-between text-sm"
+                    style={{ color: colors.text }}
+                  >
+                    <span className="flex gap-3 items-center whitespace-nowrap">
+                      <BookOpen className="w-5 h-5" /> Training
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showMobileTraining ? 'rotate-180' : ''}`} />
+                  </button>
+                  {showMobileTraining && (
+                    <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
+                      {trainingItems.map((it) => (
+                        <Link
+                          key={it.path}
+                          to={it.path}
+                          onClick={() => setShowMobileMenu(false)}
+                          className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5"
+                          style={{ color: colors.text }}
+                        >
+                          {it.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setShowMobileIfrs17((v) => !v)}
+                    className="px-4 py-3 rounded-lg flex items-center justify-between text-sm"
+                    style={{ color: colors.text }}
+                  >
+                    <span className="flex gap-3 items-center whitespace-nowrap">
+                      <BookOpen className="w-5 h-5" /> IFRS 17
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showMobileIfrs17 ? 'rotate-180' : ''}`} />
+                  </button>
+                  {showMobileIfrs17 && (
+                    <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
+                      <Link to="/modules/IFRS 17" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        Module 0 (IFRS 17)
+                      </Link>
+                      <a href="https://learn17.com/" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        Learn17
+                      </a>
+                      <a href="/pdfs/ifrs-17-insurance-contracts.pdf" download className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        IFRS 17 Insurance Contracts
+                      </a>
+                      <a href="/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf" download className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        IFRS 17 Illustrative Examples
+                      </a>
+                      <div className="pt-1 pb-1 text-xs uppercase tracking-wide" style={{ color: colors.textSecondary }}>
+                        Game
+                      </div>
+                      {ifrs17GameOptions.map((g) => (
+                        <a key={g.url} href={g.url} target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                          {g.label}
+                        </a>
+                      ))}
+                      <Link to="/ifrs17-policy-papers" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        SHA IFRS 17 Policy Papers
+                      </Link>
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setShowMobilePricing((v) => !v)}
+                    className="px-4 py-3 rounded-lg flex items-center justify-between text-sm"
+                    style={{ color: colors.text }}
+                  >
+                    <span className="flex gap-3 items-center whitespace-nowrap">
+                      <Calculator className="w-5 h-5" /> Pricing
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showMobilePricing ? 'rotate-180' : ''}`} />
+                  </button>
+                  {showMobilePricing && (
+                    <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
+                      <Link to="/tools" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        Pricing Tool
+                      </Link>
+                      <a href="https://prmf-calculator.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        PRMF tool
+                      </a>
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setShowMobileRisk((v) => !v)}
+                    className="px-4 py-3 rounded-lg flex items-center justify-between text-sm"
+                    style={{ color: colors.text }}
+                  >
+                    <span className="flex gap-3 items-center whitespace-nowrap">
+                      <ShieldCheck className="w-5 h-5" /> Risk
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showMobileRisk ? 'rotate-180' : ''}`} />
+                  </button>
+                  {showMobileRisk && (
+                    <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
+                      {riskItems.map((it) => (
+                        <div key={it.label} className="rounded-lg">
+                          {renderExternalMenuItem({
+                            label: it.label,
+                            url: it.url,
+                            icon: it.icon,
+                            className: "rounded-lg",
+                            style: { paddingLeft: 0, paddingRight: 0 },
+                          })}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setShowMobileResources((v) => !v)}
+                    className="px-4 py-3 rounded-lg flex items-center justify-between text-sm"
+                    style={{ color: colors.text }}
+                  >
+                    <span className="flex gap-3 items-center whitespace-nowrap">
+                      <BookOpen className="w-5 h-5" /> Resources
+                    </span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${showMobileResources ? 'rotate-180' : ''}`} />
+                  </button>
+                  {showMobileResources && (
+                    <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
+                      <Link to="/tools" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        Tools
+                      </Link>
+                      <Link to="/training-links" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        Training Links
+                      </Link>
+                      <a href="/pdfs/qualification-handbook-2025-2026.pdf" download className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        Qualification Pathway
+                      </a>
+                    </div>
+                  )}
+
+                  {user?.role === "supervisor" && (
+                    <Link to="/supervisor" onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}>
+                      <ShieldCheck className="w-5 h-5"/> Supervisor
+                    </Link>
+                  )}
+
                   <button onClick={handleLogout} className="px-4 py-3 rounded-lg flex gap-3 text-sm text-red-500 mt-4 whitespace-nowrap"><LogOut className="w-5 h-5"/> Sign Out</button>
                 </div>
               </div>

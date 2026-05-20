@@ -27,6 +27,7 @@ import SHAAuthPage from "./components/Auth/SHAAuthPage";
 import UserProfile from "./components/UserProfile";
 import ForgotPassword from "./components/Auth/ForgotPassword";
 import ResetPassword from "./components/Auth/ResetPassword";
+import IFRS17PolicyPapers from "./IFRS17PolicyPapers";
 
 // Components
 import SHANavbar from "./SHANavbar";
@@ -146,9 +147,9 @@ function AppShell({ user, onLogout, onAuthSuccess, onUserUpdate, onSuperAdminLog
         <Route path="/auth" element={<Navigate to="/SHAAuth" replace />} />
         <Route
           path="/SHAAuth"
-          element={user ? <Navigate to="/SHADashboard" replace /> : <SHAAuthPage onAuthSuccess={onAuthSuccess} theme={theme} />}
+          element={user ? <Navigate to="/" replace /> : <SHAAuthPage onAuthSuccess={onAuthSuccess} theme={theme} />}
         />
-        <Route path="/forgot-password" element={user ? <Navigate to="/SHADashboard" replace /> : <ForgotPassword theme={theme} />} />
+        <Route path="/forgot-password" element={user ? <Navigate to="/" replace /> : <ForgotPassword theme={theme} />} />
         {/* Supabase recovery links create a session; allow access even if `user` exists */}
         <Route path="/reset-password" element={<ResetPassword theme={theme} />} />
 
@@ -156,7 +157,7 @@ function AppShell({ user, onLogout, onAuthSuccess, onUserUpdate, onSuperAdminLog
         <Route
           path="/"
           element={
-            user && isVerified ? <Navigate to="/SHADashboard" replace /> : <SHALandingpage />
+            <SHALandingpage />
           }
         />
         <Route
@@ -175,11 +176,11 @@ function AppShell({ user, onLogout, onAuthSuccess, onUserUpdate, onSuperAdminLog
         />
         <Route
           path="/awaiting-verification"
-          element={user && isVerified ? <Navigate to="/SHADashboard" replace /> : <AwaitVerification theme={theme} />}
+          element={user && isVerified ? <Navigate to="/" replace /> : <AwaitVerification theme={theme} />}
         />
         <Route
           path="/access-denied"
-          element={user && isVerified ? <Navigate to="/SHADashboard" replace /> : <AccessDenied theme={theme} />}
+          element={user && isVerified ? <Navigate to="/" replace /> : <AccessDenied theme={theme} />}
         />
 
         {/* Legal Pages */}
@@ -268,6 +269,12 @@ function AppShell({ user, onLogout, onAuthSuccess, onUserUpdate, onSuperAdminLog
         />
 
         {/* Protected Static Pages */}
+        <Route
+          path="/ifrs17-policy-papers"
+          element={
+            user ? (isVerified ? <IFRS17PolicyPapers theme={theme} /> : <Navigate to={verificationStatus === "denied" ? "/access-denied" : "/awaiting-verification"} replace />) : <Navigate to="/SHAAuth" replace />
+          }
+        />
         <Route
           path="/training-links"
           element={
@@ -530,7 +537,7 @@ function App() {
           if (window.location.pathname.includes('/SHAAuth') || window.location.pathname.includes('/auth')) {
             setLoading(true);
             setTimeout(() => {
-              window.location.href = '/SHADashboard';
+              window.location.href = '/';
             }, 1500);
           }
         } else {

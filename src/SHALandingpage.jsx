@@ -109,8 +109,8 @@ export default function SHALandingpage() {
         // Close modal
         setShowAuthModal(false);
 
-        // Force page reload to update App.jsx state and navigate to dashboard
-        window.location.href = "/SHADashboard";
+        // Force page reload to update App.jsx state and land on homepage
+        window.location.href = "/";
     };
 
     const goToDashboard = () => navigate('/SHADashboard');
