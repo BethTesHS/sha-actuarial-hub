@@ -105,33 +105,33 @@ export const module8Data = {
     },
   ],
 
-  aiQuizQuestions: [
-    {
-      id: "aq1",
-      question: "Explain the primary purpose of a reinsurance certificate and why it is a critical document for regulatory compliance, specifically with regulatory bodies like the IRA.",
-      hint: "Consider how the certificate formally evidences the reinsurance program, assures regulators of adequate protection, and outlines the risk transfer arrangements."
-    },
-    {
-      id: "aq2",
-      question: "Differentiate between proportional treaties (such as Quota Share and Surplus) and non-proportional treaties (like Risk XoL and Catastrophe XoL). How is risk fundamentally shared in each type?",
-      hint: "Think about whether losses and premiums are shared based on a fixed percentage/line amount, or if the reinsurer only steps in when losses exceed a specific retention threshold."
-    },
-    {
-      id: "aq3",
-      question: "Discuss the importance of reinsurer credit ratings (e.g., from agencies like AM Best or S&P). Why must a ceding company consider these ratings when structuring its reinsurance program?",
-      hint: "Focus on the correlation between a rating and the reinsurer's financial strength, specifically their claims-paying ability in the event of major losses."
-    },
-    {
-      id: "aq4",
-      question: "What is a Minimum and Deposit Premium (MDP) in a reinsurance treaty, and how is the deposit premium typically calculated using the Estimated Gross Net Premium Income (EGNPI)?",
-      hint: "Consider why reinsurers require a guaranteed minimum premium to cover fixed costs, regardless of the actual volume of business ceded during the period."
-    },
-    {
-      id: "aq5",
-      question: "Describe the role of a reinsurance broker in the placement process. Why might regulatory frameworks require the disclosure of a broker's incorporation and local participation details?",
-      hint: "Look at the broker's function as an intermediary negotiating terms, and the regulatory need to ensure compliance with local ownership and participation rules."
-    }
-  ],
+  // aiQuizQuestions: [
+  //   {
+  //     id: "aq1",
+  //     question: "Explain the primary purpose of a reinsurance certificate and why it is a critical document for regulatory compliance, specifically with regulatory bodies like the IRA.",
+  //     hint: "Consider how the certificate formally evidences the reinsurance program, assures regulators of adequate protection, and outlines the risk transfer arrangements."
+  //   },
+  //   {
+  //     id: "aq2",
+  //     question: "Differentiate between proportional treaties (such as Quota Share and Surplus) and non-proportional treaties (like Risk XoL and Catastrophe XoL). How is risk fundamentally shared in each type?",
+  //     hint: "Think about whether losses and premiums are shared based on a fixed percentage/line amount, or if the reinsurer only steps in when losses exceed a specific retention threshold."
+  //   },
+  //   {
+  //     id: "aq3",
+  //     question: "Discuss the importance of reinsurer credit ratings (e.g., from agencies like AM Best or S&P). Why must a ceding company consider these ratings when structuring its reinsurance program?",
+  //     hint: "Focus on the correlation between a rating and the reinsurer's financial strength, specifically their claims-paying ability in the event of major losses."
+  //   },
+  //   {
+  //     id: "aq4",
+  //     question: "What is a Minimum and Deposit Premium (MDP) in a reinsurance treaty, and how is the deposit premium typically calculated using the Estimated Gross Net Premium Income (EGNPI)?",
+  //     hint: "Consider why reinsurers require a guaranteed minimum premium to cover fixed costs, regardless of the actual volume of business ceded during the period."
+  //   },
+  //   {
+  //     id: "aq5",
+  //     question: "Describe the role of a reinsurance broker in the placement process. Why might regulatory frameworks require the disclosure of a broker's incorporation and local participation details?",
+  //     hint: "Look at the broker's function as an intermediary negotiating terms, and the regulatory need to ensure compliance with local ownership and participation rules."
+  //   }
+  // ],
 
   
 

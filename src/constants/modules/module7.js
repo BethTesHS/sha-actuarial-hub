@@ -67,38 +67,38 @@ export const module7Data = {
     ]
   },
 
-  aiQuizQuestions: [
-    {
-      id: "aq1",
-      question: "What is the primary purpose of conducting a Premium Certification in general insurance, and why is data reconciliation between the premium register and management accounts a critical first step?",
-      hint: "Consider the regulatory requirements for IRA approval and how data integrity directly impacts the reliability of loss and expense ratio calculations."
-    },
-    {
-      id: "aq2",
-      question: "Explain the components of the combined ratio. If an insurer's combined ratio is consistently above 110%, what does this indicate about their pricing, and what recommendations should an actuary make?",
-      hint: "The combined ratio includes both the loss ratio and expense ratio. A ratio consistently over 100% indicates underwriting strain and unsustainable pricing."
-    },
-    {
-      id: "aq3",
-      question: "Detail the formula for calculating the minimum adequate premium. Why is it necessary to incorporate a margin alongside the pure premium and expenses?",
-      hint: "Recall the formula: (Pure Premium + Expenses) / (1 – Margin). Think about how recovering costs plus a margin ensures long-term capital sustainability."
-    },
-    {
-      id: "aq4",
-      question: "Under what specific circumstances would an actuary issue a 'Conditional Approval' (Approve with Conditions) for proposed premium rates rather than an outright approval or refusal?",
-      hint: "Consider scenarios where rates are near the adequacy threshold, but emerging risks or deteriorating trends necessitate close monitoring."
-    },
-    {
-      id: "aq5",
-      question: "How does claims inflation affect the loss ratio, and what specific risk management actions (such as adjusting policy structures) can an insurer take to mitigate rapid increases in claim severity?",
-      hint: "Inflation primarily increases the average cost per claim (severity). Think about how implementing or increasing deductibles controls high severity exposures."
-    },
-    {
-      id: "aq6",
-      question: "Why is the analysis of the average premium rate essential during the certification process, and how does it help an actuary detect pricing drift over time?",
-      hint: "Evaluate how comparing the actual charged rates against the theoretical adequate rates year-over-year helps identify if a portfolio is silently becoming underpriced."
-    }
-  ],
+  // aiQuizQuestions: [
+  //   {
+  //     id: "aq1",
+  //     question: "What is the primary purpose of conducting a Premium Certification in general insurance, and why is data reconciliation between the premium register and management accounts a critical first step?",
+  //     hint: "Consider the regulatory requirements for IRA approval and how data integrity directly impacts the reliability of loss and expense ratio calculations."
+  //   },
+  //   {
+  //     id: "aq2",
+  //     question: "Explain the components of the combined ratio. If an insurer's combined ratio is consistently above 110%, what does this indicate about their pricing, and what recommendations should an actuary make?",
+  //     hint: "The combined ratio includes both the loss ratio and expense ratio. A ratio consistently over 100% indicates underwriting strain and unsustainable pricing."
+  //   },
+  //   {
+  //     id: "aq3",
+  //     question: "Detail the formula for calculating the minimum adequate premium. Why is it necessary to incorporate a margin alongside the pure premium and expenses?",
+  //     hint: "Recall the formula: (Pure Premium + Expenses) / (1 – Margin). Think about how recovering costs plus a margin ensures long-term capital sustainability."
+  //   },
+  //   {
+  //     id: "aq4",
+  //     question: "Under what specific circumstances would an actuary issue a 'Conditional Approval' (Approve with Conditions) for proposed premium rates rather than an outright approval or refusal?",
+  //     hint: "Consider scenarios where rates are near the adequacy threshold, but emerging risks or deteriorating trends necessitate close monitoring."
+  //   },
+  //   {
+  //     id: "aq5",
+  //     question: "How does claims inflation affect the loss ratio, and what specific risk management actions (such as adjusting policy structures) can an insurer take to mitigate rapid increases in claim severity?",
+  //     hint: "Inflation primarily increases the average cost per claim (severity). Think about how implementing or increasing deductibles controls high severity exposures."
+  //   },
+  //   {
+  //     id: "aq6",
+  //     question: "Why is the analysis of the average premium rate essential during the certification process, and how does it help an actuary detect pricing drift over time?",
+  //     hint: "Evaluate how comparing the actual charged rates against the theoretical adequate rates year-over-year helps identify if a portfolio is silently becoming underpriced."
+  //   }
+  // ],
 
 
   // ---------- Quiz Questions ----------

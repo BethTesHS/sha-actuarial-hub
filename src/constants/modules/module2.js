@@ -75,33 +75,33 @@ export const module2Data = {
     ]
   },
 
-  aiQuizQuestions: [
-    {
-      id: "aq1",
-      question: "Explain the difference between frequency and severity in insurance pricing. How do these two measures interact to determine the overall risk premium for a portfolio?",
-      hint: "Consider how frequency measures the likelihood of claims occurring while severity measures their financial impact, and how the risk premium is derived from their product."
-    },
-    {
-      id: "aq2",
-      question: "Describe how exposure is measured in insurance and explain why accurate exposure measurement is critical for calculating meaningful frequency and severity statistics.",
-      hint: "Think about how exposures can be measured in days, months, or years, and how mismatched exposure bases can distort frequency calculations."
-    },
-    {
-      id: "aq3",
-      question: "Walk through the process of calculating an office premium starting from the risk premium. What additional loadings must be applied, and why?",
-      hint: "Consider the transition from pure risk premium to office premium, including expense loadings, profit margins, and commission allowances."
-    },
-    {
-      id: "aq4",
-      question: "Given a claims dataset, explain how you would calculate the loss ratio and interpret its significance for evaluating the pricing adequacy of an insurance portfolio.",
-      hint: "Focus on the relationship between earned premiums and incurred claims, and what a loss ratio above or below 100% indicates about pricing performance."
-    },
-    {
-      id: "aq5",
-      question: "Discuss how inflation and changes in policy limits impact the severity of claims over time. Why is it important to trend historical severity data when setting future premiums?",
-      hint: "Consider how the cost of repairs or medical treatments rises with general inflation, and how trending adjusts past historical data to reflect expected future costs."
-    }
-  ],
+  // aiQuizQuestions: [
+  //   {
+  //     id: "aq1",
+  //     question: "Explain the difference between frequency and severity in insurance pricing. How do these two measures interact to determine the overall risk premium for a portfolio?",
+  //     hint: "Consider how frequency measures the likelihood of claims occurring while severity measures their financial impact, and how the risk premium is derived from their product."
+  //   },
+  //   {
+  //     id: "aq2",
+  //     question: "Describe how exposure is measured in insurance and explain why accurate exposure measurement is critical for calculating meaningful frequency and severity statistics.",
+  //     hint: "Think about how exposures can be measured in days, months, or years, and how mismatched exposure bases can distort frequency calculations."
+  //   },
+  //   {
+  //     id: "aq3",
+  //     question: "Walk through the process of calculating an office premium starting from the risk premium. What additional loadings must be applied, and why?",
+  //     hint: "Consider the transition from pure risk premium to office premium, including expense loadings, profit margins, and commission allowances."
+  //   },
+  //   {
+  //     id: "aq4",
+  //     question: "Given a claims dataset, explain how you would calculate the loss ratio and interpret its significance for evaluating the pricing adequacy of an insurance portfolio.",
+  //     hint: "Focus on the relationship between earned premiums and incurred claims, and what a loss ratio above or below 100% indicates about pricing performance."
+  //   },
+  //   {
+  //     id: "aq5",
+  //     question: "Discuss how inflation and changes in policy limits impact the severity of claims over time. Why is it important to trend historical severity data when setting future premiums?",
+  //     hint: "Consider how the cost of repairs or medical treatments rises with general inflation, and how trending adjusts past historical data to reflect expected future costs."
+  //   }
+  // ],
 
   
   

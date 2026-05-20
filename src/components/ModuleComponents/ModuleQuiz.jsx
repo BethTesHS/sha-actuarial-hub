@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FileText, Brain, Loader2, ArrowLeft, Award, Check, Sparkles, RotateCcw, AlertCircle, MessageSquare, ChevronUp, ChevronDown, Send } from 'lucide-react';
 import { supabase } from "../../supabaseClient";
 import { gradeAiQuiz } from "../../services/ai-quiz.service";
@@ -18,6 +18,15 @@ export default function ModuleQuiz({
   isFetchingAiQuiz
 }) {
   const { title, description, shortDescription, objectives, learningOutcomes, courseContent, assignments, aiQuizQuestions, quizQuestions } = moduleData;
+  const hasAiGradedQuestions = Array.isArray(aiQuizQuestions) && aiQuizQuestions.length > 0;
+
+  useEffect(() => {
+    // If a module has no AI-graded questions defined in its JS data,
+    // keep the quiz UI as multiple-choice only.
+    if (!hasAiGradedQuestions && quizSubTab !== 'multiple-choice') {
+      setQuizSubTab('multiple-choice');
+    }
+  }, [hasAiGradedQuestions, quizSubTab, setQuizSubTab]);
 
   const handleAnswerSelect = (questionId, answer) => {
     setQuizAnswers(prev => ({
@@ -190,30 +199,32 @@ export default function ModuleQuiz({
 
   return (
     <div className={`rounded-3xl ${styles.cardBg} backdrop-blur-xl border ${styles.border} p-6`}>
-      <div className="mb-6">
-        <div className={`flex gap-2 p-1 rounded-xl ${theme === 'light' ? 'bg-gray-100' : 'bg-white/5'}`}>
-          <button
-            onClick={() => setQuizSubTab('multiple-choice')}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              quizSubTab === 'multiple-choice'
-                ? theme === 'light' ? 'bg-white text-indigo-700 shadow-md' : 'bg-indigo-500/20 text-white border border-indigo-400/30'
-                : theme === 'light' ? 'text-gray-500 hover:text-gray-700 hover:bg-white/50' : 'text-gray-400 hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <FileText className="w-4 h-4" /> Multiple Choice
-          </button>
-          <button
-            onClick={() => setQuizSubTab('ai-graded')}
-            className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-              quizSubTab === 'ai-graded'
-                ? theme === 'light' ? 'bg-white text-purple-700 shadow-md' : 'bg-purple-500/20 text-white border border-purple-400/30'
-                : theme === 'light' ? 'text-gray-500 hover:text-gray-700 hover:bg-white/50' : 'text-gray-400 hover:text-white hover:bg-white/5'
-            }`}
-          >
-            <Brain className="w-4 h-4" /> AI-Graded
-          </button>
+      {hasAiGradedQuestions && (
+        <div className="mb-6">
+          <div className={`flex gap-2 p-1 rounded-xl ${theme === 'light' ? 'bg-gray-100' : 'bg-white/5'}`}>
+            <button
+              onClick={() => setQuizSubTab('multiple-choice')}
+              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                quizSubTab === 'multiple-choice'
+                  ? theme === 'light' ? 'bg-white text-indigo-700 shadow-md' : 'bg-indigo-500/20 text-white border border-indigo-400/30'
+                  : theme === 'light' ? 'text-gray-500 hover:text-gray-700 hover:bg-white/50' : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <FileText className="w-4 h-4" /> Multiple Choice
+            </button>
+            <button
+              onClick={() => setQuizSubTab('ai-graded')}
+              className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                quizSubTab === 'ai-graded'
+                  ? theme === 'light' ? 'bg-white text-purple-700 shadow-md' : 'bg-purple-500/20 text-white border border-purple-400/30'
+                  : theme === 'light' ? 'text-gray-500 hover:text-gray-700 hover:bg-white/50' : 'text-gray-400 hover:text-white hover:bg-white/5'
+              }`}
+            >
+              <Brain className="w-4 h-4" /> AI-Graded
+            </button>
+          </div>
         </div>
-      </div>
+      )}
 
       {quizSubTab === 'multiple-choice' && (
         isFetchingQuiz ? (
@@ -400,7 +411,7 @@ export default function ModuleQuiz({
         )
       )}
 
-      {quizSubTab === 'ai-graded' && (
+      {hasAiGradedQuestions && quizSubTab === 'ai-graded' && (
         isFetchingAiQuiz ? (
           <div className="flex flex-col justify-center items-center py-16 gap-4">
             <Loader2 className={`w-10 h-10 animate-spin ${theme === 'light' ? 'text-purple-600' : 'text-purple-400'}`} />

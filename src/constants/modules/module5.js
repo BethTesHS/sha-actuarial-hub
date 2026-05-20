@@ -101,33 +101,33 @@ export const module5Data = {
     },
   ],
 
-  aiQuizQuestions: [
-    {
-      id: "aq1",
-      question: "Explain the fundamental components of the Capital Adequacy Ratio (CAR) formula under the IRA guidelines. Why is this ratio a critical indicator of an insurer's financial stability?",
-      hint: "Consider the relationship between Available Capital and Required Capital, and how CAR demonstrates the insurer's ability to meet its obligations even in adverse scenarios."
-    },
-    {
-      id: "aq2",
-      question: "Differentiate between Tier 1 and Tier 2 capital. Why do regulators place strict limits on the proportion of Tier 2 capital that can be included in an insurer's Total Available Capital?",
-      hint: "Think about the permanence and loss-absorbing capacity of core capital (like ordinary shares) versus supplementary capital (like subordinated debt)."
-    },
-    {
-      id: "aq3",
-      question: "Describe the treatment of inadmissible assets when calculating Available Capital. Give three examples of such assets and explain the regulatory rationale for excluding them.",
-      hint: "Focus on assets that lack liquidity or have highly uncertain valuations in a liquidation scenario, such as intangible assets, computer software, or unsecured loans to directors."
-    },
-    {
-      id: "aq4",
-      question: "When calculating Risk-Based Capital (Required Capital), how is the square-root formula used to aggregate different risk charges? What is the concept of 'diversification benefit' in this context?",
-      hint: "Consider how insurance, market, and credit risks are correlated, and why adding them up linearly would overstate the total risk exposure."
-    },
-    {
-      id: "aq5",
-      question: "Outline the supervisory ladder of intervention used by the IRA based on different CAR thresholds. What specific actions might the regulator take if an insurer's CAR falls below the 100% minimum?",
-      hint: "Think about regulatory responses such as requiring a remedial plan, restricting dividend payments, suspending new business, or placing the company under statutory management."
-    }
-  ],
+  // aiQuizQuestions: [
+  //   {
+  //     id: "aq1",
+  //     question: "Explain the fundamental components of the Capital Adequacy Ratio (CAR) formula under the IRA guidelines. Why is this ratio a critical indicator of an insurer's financial stability?",
+  //     hint: "Consider the relationship between Available Capital and Required Capital, and how CAR demonstrates the insurer's ability to meet its obligations even in adverse scenarios."
+  //   },
+  //   {
+  //     id: "aq2",
+  //     question: "Differentiate between Tier 1 and Tier 2 capital. Why do regulators place strict limits on the proportion of Tier 2 capital that can be included in an insurer's Total Available Capital?",
+  //     hint: "Think about the permanence and loss-absorbing capacity of core capital (like ordinary shares) versus supplementary capital (like subordinated debt)."
+  //   },
+  //   {
+  //     id: "aq3",
+  //     question: "Describe the treatment of inadmissible assets when calculating Available Capital. Give three examples of such assets and explain the regulatory rationale for excluding them.",
+  //     hint: "Focus on assets that lack liquidity or have highly uncertain valuations in a liquidation scenario, such as intangible assets, computer software, or unsecured loans to directors."
+  //   },
+  //   {
+  //     id: "aq4",
+  //     question: "When calculating Risk-Based Capital (Required Capital), how is the square-root formula used to aggregate different risk charges? What is the concept of 'diversification benefit' in this context?",
+  //     hint: "Consider how insurance, market, and credit risks are correlated, and why adding them up linearly would overstate the total risk exposure."
+  //   },
+  //   {
+  //     id: "aq5",
+  //     question: "Outline the supervisory ladder of intervention used by the IRA based on different CAR thresholds. What specific actions might the regulator take if an insurer's CAR falls below the 100% minimum?",
+  //     hint: "Think about regulatory responses such as requiring a remedial plan, restricting dividend payments, suspending new business, or placing the company under statutory management."
+  //   }
+  // ],
 
   
 

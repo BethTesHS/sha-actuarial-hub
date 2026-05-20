@@ -150,33 +150,33 @@ additionalResources: [
   },
 ],
 
-  aiQuizQuestions: [
-    {
-      id: "aq1",
-      question: "Explain the primary purpose of the Financial Condition Report (FCR) and the significance of the statutory actuary's opinion within it.",
-      hint: "Consider how the FCR evaluates the insurer's current and future financial soundness, and why a formal statement confirming the actuarial valuation approach is critical for regulators and the Board."
-    },
-    {
-      id: "aq2",
-      question: "Discuss the role of Asset-Liability Management (ALM) analysis within the FCR. Why is it important to ensure that investment assets mature in line with liability cashflows?",
-      hint: "Think about liquidity risk, interest rate risk, and the insurer's ability to consistently meet its long-term future obligations to policyholders as they fall due."
-    },
-    {
-      id: "aq3",
-      question: "How should an actuary evaluate an insurer's reinsurance arrangements when preparing an FCR?",
-      hint: "Focus on whether the reinsurance program genuinely reduces risk, provides adequate risk transfer, and improves net solvency, especially under adverse scenarios or capital stress."
-    },
-    {
-      id: "aq4",
-      question: "What constitutes a 'material risk' in the context of an FCR, and why is the rigorous documentation of justifiable actuarial assumptions so important?",
-      hint: "Consider the potential financial impact of a risk on the insurer's solvency margin, and how transparent methods and assumptions promote auditability and stakeholder understanding."
-    },
-    {
-      id: "aq5",
-      question: "Why must the actuary review the insurer's realistic business plan within the FCR, and what specific findings might trigger a formal actuarial recommendation?",
-      hint: "Think about assessing whether projected premium growth is supported by adequate capital, and how persistent divergences between assumed and actual experience require corrective strategic actions."
-    }
-  ],
+  // aiQuizQuestions: [
+  //   {
+  //     id: "aq1",
+  //     question: "Explain the primary purpose of the Financial Condition Report (FCR) and the significance of the statutory actuary's opinion within it.",
+  //     hint: "Consider how the FCR evaluates the insurer's current and future financial soundness, and why a formal statement confirming the actuarial valuation approach is critical for regulators and the Board."
+  //   },
+  //   {
+  //     id: "aq2",
+  //     question: "Discuss the role of Asset-Liability Management (ALM) analysis within the FCR. Why is it important to ensure that investment assets mature in line with liability cashflows?",
+  //     hint: "Think about liquidity risk, interest rate risk, and the insurer's ability to consistently meet its long-term future obligations to policyholders as they fall due."
+  //   },
+  //   {
+  //     id: "aq3",
+  //     question: "How should an actuary evaluate an insurer's reinsurance arrangements when preparing an FCR?",
+  //     hint: "Focus on whether the reinsurance program genuinely reduces risk, provides adequate risk transfer, and improves net solvency, especially under adverse scenarios or capital stress."
+  //   },
+  //   {
+  //     id: "aq4",
+  //     question: "What constitutes a 'material risk' in the context of an FCR, and why is the rigorous documentation of justifiable actuarial assumptions so important?",
+  //     hint: "Consider the potential financial impact of a risk on the insurer's solvency margin, and how transparent methods and assumptions promote auditability and stakeholder understanding."
+  //   },
+  //   {
+  //     id: "aq5",
+  //     question: "Why must the actuary review the insurer's realistic business plan within the FCR, and what specific findings might trigger a formal actuarial recommendation?",
+  //     hint: "Think about assessing whether projected premium growth is supported by adequate capital, and how persistent divergences between assumed and actual experience require corrective strategic actions."
+  //   }
+  // ],
 
   
 

@@ -64,33 +64,33 @@ export const module6Data = {
     ]
   },
 
-  aiQuizQuestions: [
-    {
-      id: "aq1",
-      question: "Explain the components of the Combined Ratio. What does a Combined Ratio of over 100% indicate about an insurer's underwriting performance?",
-      hint: "Consider the Loss Ratio and Expense Ratio. Think about whether the insurer is making a profit from its core insurance operations before investment income is factored in."
-    },
-    {
-      id: "aq2",
-      question: "How is the Retention Ratio calculated, and what does a very low retention ratio suggest about an insurer's risk appetite and reliance on reinsurance?",
-      hint: "Look at the relationship between Net Written Premiums and Gross Written Premiums. Consider the impact of passing a large portion of risk to reinsurers."
-    },
-    {
-      id: "aq3",
-      question: "Discuss the significance of the Liquidity Ratio and the Current Ratio for an insurance company. Why might a Current Ratio below 1.0 be an immediate cause for concern?",
-      hint: "Focus on the insurer's ability to meet short-term obligations, such as claim payouts and operational expenses, using its current and liquid assets."
-    },
-    {
-      id: "aq4",
-      question: "In the context of financial performance analysis, how do high Premium-to-Surplus ratios relate to capital strain?",
-      hint: "Think about the relationship between aggressive underwriting growth (written premiums) and the available capital (surplus) backing those risks."
-    },
-    {
-      id: "aq5",
-      question: "How do Return on Equity (ROE) and Investment Yield interact to reflect an insurer's overall financial health? What benchmarks are typically considered acceptable for these metrics?",
-      hint: "Consider the balance between underwriting and investment performance, and refer to standard benchmarks like ROE > 5% and Yield targets relative to inflation."
-    }
-  ],
+  // aiQuizQuestions: [
+  //   {
+  //     id: "aq1",
+  //     question: "Explain the components of the Combined Ratio. What does a Combined Ratio of over 100% indicate about an insurer's underwriting performance?",
+  //     hint: "Consider the Loss Ratio and Expense Ratio. Think about whether the insurer is making a profit from its core insurance operations before investment income is factored in."
+  //   },
+  //   {
+  //     id: "aq2",
+  //     question: "How is the Retention Ratio calculated, and what does a very low retention ratio suggest about an insurer's risk appetite and reliance on reinsurance?",
+  //     hint: "Look at the relationship between Net Written Premiums and Gross Written Premiums. Consider the impact of passing a large portion of risk to reinsurers."
+  //   },
+  //   {
+  //     id: "aq3",
+  //     question: "Discuss the significance of the Liquidity Ratio and the Current Ratio for an insurance company. Why might a Current Ratio below 1.0 be an immediate cause for concern?",
+  //     hint: "Focus on the insurer's ability to meet short-term obligations, such as claim payouts and operational expenses, using its current and liquid assets."
+  //   },
+  //   {
+  //     id: "aq4",
+  //     question: "In the context of financial performance analysis, how do high Premium-to-Surplus ratios relate to capital strain?",
+  //     hint: "Think about the relationship between aggressive underwriting growth (written premiums) and the available capital (surplus) backing those risks."
+  //   },
+  //   {
+  //     id: "aq5",
+  //     question: "How do Return on Equity (ROE) and Investment Yield interact to reflect an insurer's overall financial health? What benchmarks are typically considered acceptable for these metrics?",
+  //     hint: "Consider the balance between underwriting and investment performance, and refer to standard benchmarks like ROE > 5% and Yield targets relative to inflation."
+  //   }
+  // ],
 
   // ---------- Quiz Questions ----------
   

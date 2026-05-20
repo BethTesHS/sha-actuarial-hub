@@ -166,33 +166,33 @@ export const module4Data = {
     },
   ],
 
-  aiQuizQuestions: [
-    {
-      id: "aq1",
-      question: "What is the primary difference between the Liability for Remaining Coverage (LRC) and the Liability for Incurred Claims (LIC) under IFRS 17 for general insurance?",
-      hint: "Think about the timing of the claims. Which liability relates to future unexpired risk versus claims that have already occurred?"
-    },
-    {
-      id: "aq2",
-      question: "How does the Bornhuetter-Ferguson method differ from the basic Chain Ladder method when projecting ultimate claims?",
-      hint: "Consider what additional expected information the Bornhuetter-Ferguson method incorporates that the Chain Ladder method relies purely on past development for."
-    },
-    {
-      id: "aq3",
-      question: "Under IFRS 17, what is the purpose of adding a Risk Adjustment for Non-Financial Risk to the best estimate liabilities?",
-      hint: "Think about the uncertainty inherent in insurance cash flows and what compensation an insurer requires to bear that uncertainty."
-    },
-    {
-      id: "aq4",
-      question: "Describe the 'bottom-up' approach to determining discount rates under IFRS 17.",
-      hint: "What is the starting baseline rate, and what specific premium is added to reflect the characteristics of the insurance obligations?"
-    },
-    {
-      id: "aq5",
-      question: "What triggers the recognition of a Loss Component for a group of general insurance contracts under IFRS 17?",
-      hint: "Consider the relationship between the expected present value of future cash outflows, inflows, and the risk adjustment when a contract group is identified as onerous."
-    }
-  ],
+  // aiQuizQuestions: [
+  //   {
+  //     id: "aq1",
+  //     question: "What is the primary difference between the Liability for Remaining Coverage (LRC) and the Liability for Incurred Claims (LIC) under IFRS 17 for general insurance?",
+  //     hint: "Think about the timing of the claims. Which liability relates to future unexpired risk versus claims that have already occurred?"
+  //   },
+  //   {
+  //     id: "aq2",
+  //     question: "How does the Bornhuetter-Ferguson method differ from the basic Chain Ladder method when projecting ultimate claims?",
+  //     hint: "Consider what additional expected information the Bornhuetter-Ferguson method incorporates that the Chain Ladder method relies purely on past development for."
+  //   },
+  //   {
+  //     id: "aq3",
+  //     question: "Under IFRS 17, what is the purpose of adding a Risk Adjustment for Non-Financial Risk to the best estimate liabilities?",
+  //     hint: "Think about the uncertainty inherent in insurance cash flows and what compensation an insurer requires to bear that uncertainty."
+  //   },
+  //   {
+  //     id: "aq4",
+  //     question: "Describe the 'bottom-up' approach to determining discount rates under IFRS 17.",
+  //     hint: "What is the starting baseline rate, and what specific premium is added to reflect the characteristics of the insurance obligations?"
+  //   },
+  //   {
+  //     id: "aq5",
+  //     question: "What triggers the recognition of a Loss Component for a group of general insurance contracts under IFRS 17?",
+  //     hint: "Consider the relationship between the expected present value of future cash outflows, inflows, and the risk adjustment when a contract group is identified as onerous."
+  //   }
+  // ],
 
   // ---------- Quiz Questions ----------
   
