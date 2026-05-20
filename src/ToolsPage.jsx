@@ -4,15 +4,9 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import {
   Calculator,
-  Database,
-  BarChart2,
-  Activity,
   TrendingUp,
   ExternalLink,
   Search,
-  Globe,
-  PieChart,
-  BookOpen,
   GraduationCap
 } from "lucide-react";
 import toolsImage from "/src/assets/tools.jpg";
@@ -24,20 +18,8 @@ export const toolCategories = [
       { 
         name: 'LRC Model', 
         url: 'https://kenbright-lrc-model.share.connect.posit.cloud/',
-        icon: Database,
+        icon: Calculator,
         theme: 'purple'
-      },
-      { 
-        name: 'UPR & GEP Model', 
-        url: 'https://kenbright-upr-and-gep-model.share.connect.posit.cloud',
-        icon: BarChart2,
-        theme: 'blue'
-      },
-      { 
-        name: 'Exposure, Frequency & Severity Model', 
-        url: 'https://kenbright-exposure-frequency-and-severity-model.share.connect.posit.cloud',
-        icon: Activity,
-        theme: 'blue'
       },
       { 
         name: 'Risk Adjustment', 
@@ -46,44 +28,16 @@ export const toolCategories = [
         theme: 'purple'
       },
       {
-        name: 'IFRS 17 Training Modules',
-        url: 'https://ira-kenbright.shinyapps.io/IFRS17TrainingModules/#',
-        icon: BookOpen,
-        theme: 'blue'
-      },
-      {
         name: 'IFRS 17 Exam',
         url: 'https://ifrs-17-exam-sha.vercel.app/dashboard',
         icon: GraduationCap,
         theme: 'purple'
-      }
-    ]
-  },
-  {
-    title: "Reinsurance",
-    tools: [
-      { 
-        name: 'Retrocession Hub', 
-        url: 'https://www.retrocessionhub.com/',
-        icon: Globe,
-        theme: 'blue'
-      }
-    ]
-  },
-  {
-    title: "Pensions",
-    tools: [
+      },
       { 
         name: 'PRMF Calculator', 
         url: 'https://prmf-calculator.vercel.app/',
         icon: Calculator,
         theme: 'blue'
-      },
-      { 
-        name: 'Pension Calculator', 
-        url: 'https://pensioncalculator.kenbright.africa/',
-        icon: PieChart,
-        theme: 'purple'
       }
     ]
   }

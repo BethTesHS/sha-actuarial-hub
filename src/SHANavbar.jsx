@@ -107,11 +107,10 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   ];
 
   const toolItems = [
-    { label: "UPR & GEP Model", url: "https://kenbright-upr-and-gep-model.share.connect.posit.cloud", icon: <Calculator className="w-4 h-4" /> },
     { label: "LRC Model", url: "https://kenbright-lrc-model.share.connect.posit.cloud/", icon: <Calculator className="w-4 h-4" /> },
-    { label: "Exposure, Frequency & Severity Model", url: "https://kenbright-exposure-frequency-and-severity-model.share.connect.posit.cloud", icon: <Calculator className="w-4 h-4" /> },
-    { label: "Risk Adjustment & Loss Triangles", url: "https://kenbright-risk-adjustment-and-loss-triangles-model.share.connect.posit.cloud", icon: <Calculator className="w-4 h-4" /> },
-    { label: "PRMF Calculator", url: "https://prmf-calculator.vercel.app/ ", icon: <Calculator className="w-4 h-4" /> }
+    { label: "Risk Adjustment", url: "https://kenbright-risk-adjustment-and-loss-triangles-model.share.connect.posit.cloud", icon: <Calculator className="w-4 h-4" /> },
+    { label: "IFRS 17 Exam", url: "https://ifrs-17-exam-sha.vercel.app/dashboard", icon: <Calculator className="w-4 h-4" /> },
+    { label: "PRMF Calculator", url: "https://prmf-calculator.vercel.app/", icon: <Calculator className="w-4 h-4" /> }
   ];
 
   const industryReportRegions = [
