@@ -11,13 +11,11 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   const [showIfrs17GameSubmenu, setShowIfrs17GameSubmenu] = useState(false);
   const [showResourcesMenu, setShowResourcesMenu] = useState(false);
   const [, setShowToolsMenu] = useState(false);
-  const [showAnalyticsMenu, setShowAnalyticsMenu] = useState(false);
   const [showTrainingMenu, setShowTrainingMenu] = useState(false);
   const [showPricingMenu, setShowPricingMenu] = useState(false);
   const [showRiskMenu, setShowRiskMenu] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-  const [showMobileAnalytics, setShowMobileAnalytics] = useState(false);
   const [showMobileTraining, setShowMobileTraining] = useState(false);
   const [showMobileIfrs17, setShowMobileIfrs17] = useState(false);
   const [showMobilePricing, setShowMobilePricing] = useState(false);
@@ -50,7 +48,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
       if (!e.target.closest('.resources-dropdown')) setShowResourcesMenu(false);
       if (!e.target.closest('.tools-dropdown')) setShowToolsMenu(false);
       if (!e.target.closest('.ifrs17-dropdown')) setShowIfrs17Menu(false);
-      if (!e.target.closest('.analytics-dropdown')) setShowAnalyticsMenu(false);
       if (!e.target.closest('.training-dropdown')) setShowTrainingMenu(false);
       if (!e.target.closest('.pricing-dropdown')) setShowPricingMenu(false);
       if (!e.target.closest('.risk-dropdown')) setShowRiskMenu(false);
@@ -92,23 +89,9 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   ];
 
   const externalLinks = {
-    analytics: {
-      claimsAnalysis: "",
-      contributionsAnalysis: "",
-      lossRatiosAnalysis: "",
-      frequencySeverityAnalysis: "",
-    },
-    risk: {
-      fraudRiskMatrix: "",
-    },
+    analytics: "",
+    fraudRiskMatrix: "",
   };
-
-  const analyticsItems = [
-    { label: "Claims Analysis", url: externalLinks.analytics.claimsAnalysis },
-    { label: "Contributions Analysis", url: externalLinks.analytics.contributionsAnalysis },
-    { label: "Loss Ratios Analysis", url: externalLinks.analytics.lossRatiosAnalysis },
-    { label: "Frequency & Severity Analysis", url: externalLinks.analytics.frequencySeverityAnalysis },
-  ];
 
   const trainingItems = [
     { label: "Training Modules", path: "/modules", internal: true },
@@ -141,10 +124,11 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   const pricingItems = [
     { label: "Pricing Tool", path: "/tools", internal: true, icon: <Calculator className="w-4 h-4" /> },
     { label: "PRMF tool", url: "https://prmf-calculator.vercel.app/", icon: <Calculator className="w-4 h-4" /> },
+    { label: "Analytics", url: externalLinks.analytics, icon: <TrendingUp className="w-4 h-4" /> },
   ];
 
   const riskItems = [
-    { label: "Fraud Risk Matrix", url: externalLinks.risk.fraudRiskMatrix, icon: <ShieldCheck className="w-4 h-4" /> },
+    { label: "Fraud Risk Matrix", url: externalLinks.fraudRiskMatrix, icon: <ShieldCheck className="w-4 h-4" /> },
   ];
 
   const resourceItems = [
@@ -182,7 +166,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     })),
     ...pricingItems.map(i => ({ title: i.label, link: i.internal ? i.path : i.url, type: "Pricing", icon: i.icon })),
     ...resourceItems.map(i => ({ title: i.label, link: i.path || i.url, type: "Resource", icon: i.icon })),
-    ...analyticsItems.map(i => ({ title: i.label, link: i.url, type: "Analytics", icon: <TrendingUp className="w-4 h-4" /> })),
+    { title: "Analytics", link: externalLinks.analytics, type: "Pricing", icon: <TrendingUp className="w-4 h-4" /> },
     ...riskItems.map(i => ({ title: i.label, link: i.url, type: "Risk", icon: i.icon })),
     { title: "Dashboard", link: "/SHADashboard", type: "Page", icon: <Home className="w-4 h-4" /> },
     { title: "Tools Dashboard", link: "/tools", type: "Page", icon: <Calculator className="w-4 h-4" /> },
@@ -248,7 +232,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   };
 
   const closeAllDropdowns = () => {
-    setShowAnalyticsMenu(false);
     setShowTrainingMenu(false);
     setShowIfrs17Menu(false);
     setShowPricingMenu(false);
@@ -387,14 +370,14 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
         }}
       >
         <div className="w-full px-4 lg:px-6">
-          <div className="flex items-center justify-between h-24">
+          <div className="relative flex items-center justify-between h-24">
             {/* Logo */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 shrink-0 z-10">
               {renderShaLogo()}
             </div>
 
-            {/* Left Navigation - Desktop */}
-            <div className="hidden lg:flex items-center gap-1 ml-4 flex-1 justify-start">
+            {/* Center Navigation - Desktop */}
+            <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-1 z-10">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
@@ -410,41 +393,11 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                 </Link>
               ))}
 
-              <div className="relative analytics-dropdown">
-                <button
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowAnalyticsMenu(!showAnalyticsMenu);
-                    setShowTrainingMenu(false);
-                    setShowIfrs17Menu(false);
-                    setShowPricingMenu(false);
-                    setShowRiskMenu(false);
-                    setShowResourcesMenu(false);
-                  }}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
-                  style={{ color: showAnalyticsMenu ? colors.primary : colors.text, background: showAnalyticsMenu ? `${colors.primary}15` : 'transparent' }}
-                >
-                  <TrendingUp className="w-5 h-5" />
-                  <span className="text-sm font-medium whitespace-nowrap">Analytics</span>
-                  <ChevronDown className={`w-4 h-4 transition-transform ${showAnalyticsMenu ? 'rotate-180' : ''}`} />
-                </button>
-                {showAnalyticsMenu && (
-                  <div className="absolute top-full left-0 mt-2 w-72 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
-                    {analyticsItems.map((it, idx) => (
-                      <div key={it.label} style={{ borderBottom: idx < analyticsItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}>
-                        {renderExternalMenuItem({ label: it.label, url: it.url, icon: <TrendingUp className="w-4 h-4 shrink-0" /> })}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-
               <div className="relative training-dropdown">
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowTrainingMenu(!showTrainingMenu);
-                    setShowAnalyticsMenu(false);
                     setShowIfrs17Menu(false);
                     setShowPricingMenu(false);
                     setShowRiskMenu(false);
@@ -477,7 +430,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
 
               <div className="relative ifrs17-dropdown">
                 <button
-                  onClick={(e) => { e.stopPropagation(); setShowIfrs17Menu(!showIfrs17Menu); setShowToolsMenu(false); setShowResourcesMenu(false); setShowAnalyticsMenu(false); setShowTrainingMenu(false); setShowPricingMenu(false); setShowRiskMenu(false); }}
+                  onClick={(e) => { e.stopPropagation(); setShowIfrs17Menu(!showIfrs17Menu); setShowToolsMenu(false); setShowResourcesMenu(false); setShowTrainingMenu(false); setShowPricingMenu(false); setShowRiskMenu(false); }}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
                   style={{ color: showIfrs17Menu ? colors.primary : colors.text, background: showIfrs17Menu ? `${colors.primary}15` : 'transparent' }}
                 >
@@ -594,7 +547,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowPricingMenu(!showPricingMenu);
-                    setShowAnalyticsMenu(false);
                     setShowTrainingMenu(false);
                     setShowIfrs17Menu(false);
                     setShowRiskMenu(false);
@@ -638,7 +590,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     setShowRiskMenu(!showRiskMenu);
-                    setShowAnalyticsMenu(false);
                     setShowTrainingMenu(false);
                     setShowIfrs17Menu(false);
                     setShowPricingMenu(false);
@@ -664,7 +615,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
 
               <div className="relative resources-dropdown">
                 <button
-                  onClick={(e) => { e.stopPropagation(); setShowResourcesMenu(!showResourcesMenu); setShowToolsMenu(false); setShowIfrs17Menu(false); setShowAnalyticsMenu(false); setShowTrainingMenu(false); setShowPricingMenu(false); setShowRiskMenu(false); }}
+                  onClick={(e) => { e.stopPropagation(); setShowResourcesMenu(!showResourcesMenu); setShowToolsMenu(false); setShowIfrs17Menu(false); setShowTrainingMenu(false); setShowPricingMenu(false); setShowRiskMenu(false); }}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
                   style={{ color: showResourcesMenu ? colors.primary : colors.text, background: showResourcesMenu ? `${colors.primary}15` : 'transparent' }}
                 >
@@ -713,7 +664,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
             </div>
 
             {/* Right Section - Desktop */}
-            <div className="hidden lg:flex items-center gap-4">
+            <div className="hidden lg:flex items-center gap-4 shrink-0 z-10">
               {/* Search Button */}
               <button
                 onClick={() => setShowSearchModal(true)}
@@ -783,33 +734,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
               <div className="pt-4 border-t border-white/10">
                 <div className="flex flex-col gap-1 px-2">
                   <Link to={homePath} onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}><Home className="w-5 h-5"/> Home</Link>
-
-                  <button
-                    type="button"
-                    onClick={() => setShowMobileAnalytics((v) => !v)}
-                    className="px-4 py-3 rounded-lg flex items-center justify-between text-sm"
-                    style={{ color: colors.text }}
-                  >
-                    <span className="flex gap-3 items-center whitespace-nowrap">
-                      <TrendingUp className="w-5 h-5" /> Analytics
-                    </span>
-                    <ChevronDown className={`w-4 h-4 transition-transform ${showMobileAnalytics ? 'rotate-180' : ''}`} />
-                  </button>
-                  {showMobileAnalytics && (
-                    <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
-                      {analyticsItems.map((it) => (
-                        <div key={it.label} className="rounded-lg">
-                          {renderExternalMenuItem({
-                            label: it.label,
-                            url: it.url,
-                            icon: <TrendingUp className="w-4 h-4" />,
-                            className: "rounded-lg",
-                            style: { paddingLeft: 0, paddingRight: 0 },
-                          })}
-                        </div>
-                      ))}
-                    </div>
-                  )}
 
                   <button
                     type="button"
@@ -896,6 +820,15 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                       <a href="https://prmf-calculator.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         PRMF tool
                       </a>
+                      <div className="rounded-lg">
+                        {renderExternalMenuItem({
+                          label: "Analytics",
+                          url: externalLinks.analytics,
+                          icon: <TrendingUp className="w-4 h-4" />,
+                          className: "rounded-lg",
+                          style: { paddingLeft: 12, paddingRight: 12 },
+                        })}
+                      </div>
                     </div>
                   )}
 

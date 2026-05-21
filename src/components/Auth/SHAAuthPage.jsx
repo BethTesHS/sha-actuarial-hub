@@ -117,7 +117,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
 
       if (!isLogin) {
         setError("");
-        alert("Registration successful! Please check your email to confirm your account.");
+        // alert("Registration successful! Please check your email to confirm your account.");
         setIsLogin(true);
         return;
       }
