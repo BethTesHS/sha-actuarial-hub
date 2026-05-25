@@ -2,7 +2,7 @@ export const module1Data = {
   id: 1,
   title: "GI Data Clean Up",
   shortDescription: "Learn how to validate, clean, and standardize General Insurance Premium and Claims data. This module equips you with practical techniques to prepare actuarially fit datasets for pricing, reserving, and solvency monitoring.",
-  themeColor: "purple",
+  themeColor: "blue",
 
   objectives: {
     text: [

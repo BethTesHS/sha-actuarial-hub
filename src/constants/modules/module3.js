@@ -2,7 +2,7 @@ export const module3Data = {
   id: 3,
   title: "Liability for Remaining Coverage (LRC)",
   shortDescription: "Master the calculation and analysis of Liability for Remaining Coverage under IFRS 17. Learn to calculate Unearned Premium Reserve, Earned Premium, Deferred Acquisition Costs, and perform comprehensive LRC roll-forward calculations.",
-  themeColor: "green",
+  themeColor: "blue",
   objectives: {
     text: [
       "This module aims to equip learners with practical skills in calculating and analyzing the Liability for Remaining Coverage (‘LRC’). By the end of the module, participants will be able to determine Unearned Premium Reserve (‘UPR’), calculate Earned Premium, apply Deferred Acquisition Costs (‘DAC’), and derive the LRC using real insurance data. This will strengthen the accuracy of actuarial valuations, improve the reliability of financial reporting, and support compliance with IFRS 17 requirements.",

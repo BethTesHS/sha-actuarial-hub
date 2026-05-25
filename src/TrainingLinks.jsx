@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { Grid, HardDrive, BarChart2, Code, FileText, Database, ExternalLink, Search } from "lucide-react";
+import { getShaThemeColors } from "./theme/sha";
 
 export default function TrainingLinks({ theme = 'dark' }) {
   const [searchTerm, setSearchTerm] = useState("");
@@ -11,93 +12,101 @@ export default function TrainingLinks({ theme = 'dark' }) {
   }, []);
 
   const isDark = theme === 'dark';
+  const shaTheme = getShaThemeColors(theme);
+  const rgba = (hex, alpha) => {
+    const h = hex.replace("#", "");
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
 
-  // Theme-specific color schemes
+  // SHA Actuarial Hub color scheme
   const colors = {
     dark: {
-      background: 'linear-gradient(to bottom right, #0f172a, #020617)',
-      text: '#ffffff',
-      title: 'linear-gradient(135deg, #60a5fa, #a78bfa)',
-      subtitle: '#94a3b8',
+      background: shaTheme.pageGradient,
+      text: shaTheme.text,
+      title: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.green})`,
+      subtitle: shaTheme.textSecondary,
       blue: {
-        cardBg: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1))',
-        cardBorder: 'rgba(96, 165, 250, 0.3)',
-        iconBg: 'linear-gradient(to bottom right, #3b82f6, #06b6d4)',
-        iconShadow: 'rgba(59, 130, 246, 0.3)',
-        headerText: 'linear-gradient(to right, #93c5fd, #67e8f9)',
-        linkBg: 'rgba(59, 130, 246, 0.1)',
-        linkBorder: 'rgba(96, 165, 250, 0.2)',
-        linkHover: 'rgba(59, 130, 246, 0.2)',
-        linkText: '#bfdbfe',
-        sourceBg: 'rgba(59, 130, 246, 0.3)',
-        sourceText: '#93c5fd',
-        sourceBorder: 'rgba(96, 165, 250, 0.4)',
-        iconColor: '#60a5fa',
-        cardShadow: 'rgba(59, 130, 246, 0.2)'
+        cardBg: `linear-gradient(135deg, ${rgba(shaTheme.darkBlue, 0.82)}, ${rgba(shaTheme.blue, 0.16)})`,
+        cardBorder: rgba(shaTheme.blue, 0.42),
+        iconBg: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.cyan})`,
+        iconShadow: rgba(shaTheme.blue, 0.3),
+        headerText: `linear-gradient(to right, ${shaTheme.cyan}, ${shaTheme.blue})`,
+        linkBg: rgba(shaTheme.blue, 0.12),
+        linkBorder: rgba(shaTheme.blue, 0.24),
+        linkHover: rgba(shaTheme.blue, 0.22),
+        linkText: '#D6F4FF',
+        sourceBg: rgba(shaTheme.blue, 0.26),
+        sourceText: '#B7ECFF',
+        sourceBorder: rgba(shaTheme.cyan, 0.35),
+        iconColor: shaTheme.cyan,
+        cardShadow: rgba(shaTheme.blue, 0.18)
       },
       purple: {
-        cardBg: 'linear-gradient(to bottom right, rgba(139, 92, 246, 0.1), rgba(217, 70, 239, 0.1))',
-        cardBorder: 'rgba(167, 139, 250, 0.3)',
-        iconBg: 'linear-gradient(to bottom right, #8b5cf6, #d946ef)',
-        iconShadow: 'rgba(139, 92, 246, 0.3)',
-        headerText: 'linear-gradient(to right, #c4b5fd, #f0abfc)',
-        linkBg: 'rgba(139, 92, 246, 0.1)',
-        linkBorder: 'rgba(167, 139, 250, 0.2)',
-        linkHover: 'rgba(139, 92, 246, 0.2)',
-        linkText: '#ddd6fe',
-        sourceBg: 'rgba(139, 92, 246, 0.3)',
-        sourceText: '#c4b5fd',
-        sourceBorder: 'rgba(167, 139, 250, 0.4)',
-        iconColor: '#a78bfa',
-        cardShadow: 'rgba(139, 92, 246, 0.2)'
+        cardBg: `linear-gradient(135deg, ${rgba(shaTheme.green, 0.16)}, ${rgba(shaTheme.darkBlue, 0.55)})`,
+        cardBorder: rgba(shaTheme.green, 0.35),
+        iconBg: `linear-gradient(135deg, ${shaTheme.green}, ${shaTheme.blue})`,
+        iconShadow: rgba(shaTheme.green, 0.28),
+        headerText: `linear-gradient(to right, ${shaTheme.green}, ${shaTheme.blue})`,
+        linkBg: rgba(shaTheme.green, 0.12),
+        linkBorder: rgba(shaTheme.green, 0.24),
+        linkHover: rgba(shaTheme.green, 0.2),
+        linkText: '#E7F8D8',
+        sourceBg: rgba(shaTheme.green, 0.22),
+        sourceText: '#D6F5BC',
+        sourceBorder: rgba(shaTheme.green, 0.35),
+        iconColor: shaTheme.green,
+        cardShadow: rgba(shaTheme.green, 0.16)
       },
       glows: [
-        { color: '#a855f7', opacity: 0.15, size: '300px', position: { top: '20%', left: '10%' } },
-        { color: '#06b6d4', opacity: 0.15, size: '400px', position: { bottom: '15%', right: '10%' } },
-        { color: '#3b82f6', opacity: 0.15, size: '250px', position: { top: '50%', right: '30%' } }
+        { color: shaTheme.blue, opacity: 0.12, size: '320px', position: { top: '18%', left: '8%' } },
+        { color: shaTheme.green, opacity: 0.12, size: '420px', position: { bottom: '15%', right: '10%' } },
+        { color: shaTheme.darkBlue, opacity: 0.2, size: '260px', position: { top: '50%', right: '30%' } }
       ]
     },
     light: {
-      background: 'linear-gradient(to bottom right, #f8fafc, #e2e8f0)',
-      text: '#0f172a',
-      title: 'linear-gradient(135deg, #2563eb, #7c3aed)',
-      subtitle: '#475569',
+      background: shaTheme.pageGradient,
+      text: shaTheme.text,
+      title: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.green})`,
+      subtitle: shaTheme.textSecondary,
       blue: {
-        cardBg: 'linear-gradient(to bottom right, rgba(37, 99, 235, 0.08), rgba(14, 165, 233, 0.08))',
-        cardBorder: 'rgba(37, 99, 235, 0.25)',
-        iconBg: 'linear-gradient(to bottom right, #2563eb, #0ea5e9)',
-        iconShadow: 'rgba(37, 99, 235, 0.25)',
-        headerText: 'linear-gradient(to right, #1d4ed8, #0284c7)',
-        linkBg: 'rgba(37, 99, 235, 0.06)',
-        linkBorder: 'rgba(37, 99, 235, 0.15)',
-        linkHover: 'rgba(37, 99, 235, 0.12)',
-        linkText: '#1e40af',
-        sourceBg: 'rgba(37, 99, 235, 0.15)',
-        sourceText: '#1e40af',
-        sourceBorder: 'rgba(37, 99, 235, 0.3)',
-        iconColor: '#2563eb',
-        cardShadow: 'rgba(37, 99, 235, 0.15)'
+        cardBg: `linear-gradient(135deg, ${rgba(shaTheme.darkBlue, 0.18)}, ${rgba(shaTheme.blue, 0.12)})`,
+        cardBorder: rgba(shaTheme.blue, 0.32),
+        iconBg: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.cyan})`,
+        iconShadow: rgba(shaTheme.blue, 0.24),
+        headerText: `linear-gradient(to right, ${shaTheme.blue}, ${shaTheme.cyan})`,
+        linkBg: rgba(shaTheme.blue, 0.06),
+        linkBorder: rgba(shaTheme.blue, 0.15),
+        linkHover: rgba(shaTheme.blue, 0.12),
+        linkText: shaTheme.blue,
+        sourceBg: rgba(shaTheme.blue, 0.12),
+        sourceText: shaTheme.blue,
+        sourceBorder: rgba(shaTheme.blue, 0.26),
+        iconColor: shaTheme.blue,
+        cardShadow: rgba(shaTheme.blue, 0.12)
       },
       purple: {
-        cardBg: 'linear-gradient(to bottom right, rgba(124, 58, 237, 0.08), rgba(192, 38, 211, 0.08))',
-        cardBorder: 'rgba(124, 58, 237, 0.25)',
-        iconBg: 'linear-gradient(to bottom right, #7c3aed, #c026d3)',
-        iconShadow: 'rgba(124, 58, 237, 0.25)',
-        headerText: 'linear-gradient(to right, #6d28d9, #a21caf)',
-        linkBg: 'rgba(124, 58, 237, 0.06)',
-        linkBorder: 'rgba(124, 58, 237, 0.15)',
-        linkHover: 'rgba(124, 58, 237, 0.12)',
-        linkText: '#6b21a8',
-        sourceBg: 'rgba(124, 58, 237, 0.15)',
-        sourceText: '#6b21a8',
-        sourceBorder: 'rgba(124, 58, 237, 0.3)',
-        iconColor: '#7c3aed',
-        cardShadow: 'rgba(124, 58, 237, 0.15)'
+        cardBg: `linear-gradient(135deg, ${rgba(shaTheme.green, 0.1)}, ${rgba(shaTheme.blue, 0.03)})`,
+        cardBorder: rgba(shaTheme.green, 0.28),
+        iconBg: `linear-gradient(135deg, ${shaTheme.green}, ${shaTheme.blue})`,
+        iconShadow: rgba(shaTheme.green, 0.24),
+        headerText: `linear-gradient(to right, ${shaTheme.green}, ${shaTheme.blue})`,
+        linkBg: rgba(shaTheme.green, 0.07),
+        linkBorder: rgba(shaTheme.green, 0.18),
+        linkHover: rgba(shaTheme.green, 0.13),
+        linkText: shaTheme.darkBlue,
+        sourceBg: rgba(shaTheme.green, 0.14),
+        sourceText: shaTheme.darkBlue,
+        sourceBorder: rgba(shaTheme.green, 0.3),
+        iconColor: shaTheme.green,
+        cardShadow: rgba(shaTheme.green, 0.13)
       },
       glows: [
-        { color: '#a855f7', opacity: 0.04, size: '300px', position: { top: '20%', left: '10%' } },
-        { color: '#06b6d4', opacity: 0.04, size: '400px', position: { bottom: '15%', right: '10%' } },
-        { color: '#3b82f6', opacity: 0.04, size: '250px', position: { top: '50%', right: '30%' } }
+        { color: shaTheme.blue, opacity: 0.05, size: '320px', position: { top: '18%', left: '8%' } },
+        { color: shaTheme.green, opacity: 0.07, size: '420px', position: { bottom: '15%', right: '10%' } },
+        { color: shaTheme.darkBlue, opacity: 0.04, size: '260px', position: { top: '50%', right: '30%' } }
       ]
     }
   };
@@ -108,9 +117,9 @@ export default function TrainingLinks({ theme = 'dark' }) {
     { theme: 'blue', icon: Grid, title: 'Excel', links: [{ name: 'Master Microsoft Excel', source: 'LinkedIn', url: 'https://www.linkedin.com/learning/paths/master-microsoft-excel' }] },
     { theme: 'blue', icon: HardDrive, title: 'Power Query', links: [{ name: 'Excel Power Query', source: 'LinkedIn', url: 'https://www.linkedin.com/learning/excel-power-query-get-transform-23753644' }] },
     { theme: 'blue', icon: BarChart2, title: 'Power BI', links: [{ name: 'Power BI Masterclass', source: 'Udemy', url: 'https://www.udemy.com/course/70-778-analyzing-and-visualizing-data-with-power-bi/' }] },
-    { theme: 'purple', icon: FileText, title: 'VBA', links: [{ name: 'Excel VBA Automation', source: 'Udemy', url: 'https://www.udemy.com/course/excel-vba-and-macros-course/' }] },
-    { theme: 'purple', icon: Database, title: 'SQL', links: [{ name: 'SQL Database Training', source: 'Udemy', url: 'https://www.udemy.com/course/the-ultimate-mysql-bootcamp-go-from-sql-beginner-to-expert/' }] },
-    { theme: 'purple', icon: Code, title: 'R & Python', links: [{ name: 'Data Science Path', source: 'DataCamp', url: 'https://www.datacamp.com' }] }
+    { theme: 'blue', icon: FileText, title: 'VBA', links: [{ name: 'Excel VBA Automation', source: 'Udemy', url: 'https://www.udemy.com/course/excel-vba-and-macros-course/' }] },
+    { theme: 'blue', icon: Database, title: 'SQL', links: [{ name: 'SQL Database Training', source: 'Udemy', url: 'https://www.udemy.com/course/the-ultimate-mysql-bootcamp-go-from-sql-beginner-to-expert/' }] },
+    { theme: 'blue', icon: Code, title: 'R & Python', links: [{ name: 'Data Science Path', source: 'DataCamp', url: 'https://www.datacamp.com' }] }
   ];
 
   // Intelligent filter logic
@@ -136,7 +145,7 @@ export default function TrainingLinks({ theme = 'dark' }) {
 
   return (
     <div 
-      className="relative p-6 pt-24 md:p-10 md:pt-28 min-h-screen font-sans transition-colors duration-300"
+      className="relative px-6 pt-24 pb-12 md:px-10 md:pt-28 md:pb-16 min-h-screen font-sans transition-colors duration-300"
       style={{ background: currentColors.background, color: currentColors.text }}
     >
       {/* Background glow circles */}
@@ -157,16 +166,16 @@ export default function TrainingLinks({ theme = 'dark' }) {
 
         {/* In-Page Search Bar */}
         <div className="relative w-full max-w-2xl mx-auto">
-          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: currentColors.subtitle }} />
           <input
             type="text"
             placeholder="Search categories, courses, or platforms..."
             className="w-full border rounded-full py-4 pl-14 pr-6 focus:outline-none transition-all shadow-md text-lg"
             style={{
-              background: isDark ? 'rgba(255,255,255,0.05)' : '#ffffff',
-              borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+              background: shaTheme.inputBg,
+              borderColor: shaTheme.inputBorder,
               color: currentColors.text,
-              boxShadow: isDark ? '0 4px 20px rgba(0,0,0,0.2)' : '0 4px 15px rgba(0,0,0,0.05)'
+              boxShadow: isDark ? `0 4px 20px ${rgba(shaTheme.blue, 0.14)}` : `0 4px 15px ${rgba(shaTheme.blue, 0.08)}`
             }}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -228,9 +237,9 @@ export default function TrainingLinks({ theme = 'dark' }) {
           })}
         </div>
       ) : (
-        <div className="max-w-6xl mx-auto py-16 text-center rounded-2xl border border-dashed" style={{ borderColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)', background: isDark ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)' }}>
+        <div className="max-w-6xl mx-auto py-16 text-center rounded-2xl border border-dashed" style={{ borderColor: shaTheme.cardBorder, background: isDark ? rgba(shaTheme.blue, 0.06) : rgba(shaTheme.blue, 0.03) }}>
           <p className="text-xl" style={{ color: currentColors.subtitle }}>No resources found matching "{searchTerm}"</p>
-          <button onClick={() => setSearchTerm("")} className="mt-4 font-medium transition-colors hover:underline text-blue-500 hover:text-blue-400">
+          <button onClick={() => setSearchTerm("")} className="mt-4 font-medium transition-colors hover:underline" style={{ color: shaTheme.blue }}>
             Clear search
           </button>
         </div>

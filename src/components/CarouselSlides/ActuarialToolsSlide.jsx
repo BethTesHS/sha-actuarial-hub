@@ -3,7 +3,7 @@ import './ActuarialToolsSlide.css';
 
 const ActuarialToolsSlide = ({ isActive, user, handleNavigation, totalToolsCount }) => {
   const handlePrimaryAction = () => {
-    const path = user ? '/tools' : '/auth?mode=signup';
+    const path = user ? '/tools' : '/SHAAuth?mode=signup';
     handleNavigation(path);
   };
 

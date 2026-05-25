@@ -1,14 +1,14 @@
 :root {
-    --orange: #ff8a3d;
-    --orange-deep: #f05a2b;
-    --pink-deep: #d64a88;
-    --purple: #8b4dbd;
+    --orange: #FF6B35;
+    --orange-deep: #E55A2B;
+    --pink-deep: #9D4EDD;
+    --purple: #0066B3;
     --cream: #fff3d6;
     --ink: #ffffff;
-    --ink-dark: #1a0f36;
+    --ink-dark: #003D6B;
     --muted: rgba(255, 255, 255, 0.85);
-    --cta-cyan: #3ee0e8;
-    --cta-cyan-deep: #1ec0c8;
+    --cta-cyan: #00D4FF;
+    --cta-cyan-deep: #00A8CC;
   }
   
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -26,14 +26,14 @@
     align-items: center;
     overflow: hidden;
     background:
-      radial-gradient(ellipse at 15% 30%, rgba(255, 179, 71, 0.55) 0%, transparent 55%),
-      radial-gradient(ellipse at 90% 90%, rgba(91, 33, 182, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 30%, rgba(255, 107, 53, 0.55) 0%, transparent 55%),
+      radial-gradient(ellipse at 90% 90%, rgba(0, 102, 179, 0.55) 0%, transparent 55%),
       linear-gradient(110deg,
-        #ff8a3d 0%,
-        #f05a2b 25%,
-        #d64a88 55%,
-        #8b4dbd 80%,
-        #5b21b6 100%);
+        #FF6B35 0%,
+        #E55A2B 25%,
+        #9D4EDD 55%,
+        #0066B3 80%,
+        #003D6B 100%);
   }
   
   .slide::before {

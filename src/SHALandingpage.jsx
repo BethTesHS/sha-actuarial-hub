@@ -446,16 +446,7 @@ export default function SHALandingpage() {
                         <span className="text-white/60">© {new Date().getFullYear()} SHA Actuarial Hub. All rights reserved.</span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <span className="text-white/60">Powered by</span>
-                        <div
-                            className="px-6 py-3 rounded-xl font-bold text-white"
-                            style={{
-                                background: `linear-gradient(135deg, ${colors.blue}40, ${colors.green}40)`,
-                                border: `1px solid ${colors.green}50`
-                            }}
-                        >
-                            KENBRIGHT
-                        </div>
+                        <span className="text-white/60">Powered by <span className="text-white font-bold text-lg">Kenbright AI</span></span>
                     </div>
                 </div>
             </footer>

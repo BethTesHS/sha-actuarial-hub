@@ -241,6 +241,8 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
         iconGradientTo: c.gradientToLight,
         tabBorder: c.tabBorderLight,
         tabBg: c.tabBgLight,
+        tabActive: `border-b-2 border-current ${c.accentText} font-semibold ${c.tabBgLight}`,
+        tabInactive: 'border-transparent text-slate-600 hover:text-slate-900 hover:border-slate-300',
         tabHoverBorder: '',
         tabHoverBg: '',
         bgOverlay: c.overlayLight,
@@ -269,6 +271,8 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
       iconGradientTo: c.gradientToDarkIcon,
       tabBorder: 'border-gray-500',
       tabBg: c.tabBgDark,
+      tabActive: `border-b-2 border-white text-white font-semibold ${c.tabBgDark}`,
+      tabInactive: `border-transparent text-gray-200 hover:text-white ${c.tabHoverBorderDark} ${c.tabHoverBgDark}`,
       tabHoverBorder: c.tabHoverBorderDark,
       tabHoverBg: c.tabHoverBgDark,
       bgOverlay: c.overlayDark,
@@ -391,7 +395,7 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
       setProgressPercentage(0);
       return;
     }
-    // Prevent calculation/saving until all background fetches are complete
+    // Prevent calculation/saving until progress-counted background fetches are complete
     if (isFetchingQuiz || isFetchingAiQuiz || isFetchingAssignment) return;
 
     let completed = 0;
@@ -551,10 +555,10 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
         />
       </div>
 
-      <main className={`relative z-10 max-w-6xl mx-auto px-4 pt-8 pb-8 ${styles.transition}`}>
+      <main className={`relative z-10 max-w-6xl mx-auto px-4 pt-12 pb-8 ${styles.transition}`}>
         <Link
           to="/modules"
-          className={`fixed left-4 top-24 z-20 flex items-center justify-center w-10 h-10 rounded-full ${theme === 'light'
+          className={`fixed left-4 top-28 z-20 flex items-center justify-center w-10 h-10 rounded-full ${theme === 'light'
             ? 'bg-white hover:bg-gray-50 text-gray-900 hover:text-gray-950 shadow-xl hover:shadow-2xl backdrop-blur-md border border-gray-200'
             : 'bg-white/30 hover:bg-white/40 text-white hover:text-white backdrop-blur-md border-2 border-white/40 hover:border-white/60 shadow-2xl'
             } transition-all duration-300 hover:scale-110 ${styles.transition}`}
@@ -647,9 +651,9 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
                 <button
                   key={tab}
                   onClick={() => switchTab(tab)}
-                  className={`pb-4 text-sm font-medium border-b-2 transition-all duration-200 whitespace-nowrap ${activeTab === tab
-                    ? `border-white text-white font-semibold ${styles.tabBg} px-3 py-1 rounded-t-lg`
-                    : `border-transparent ${theme === 'light' ? 'text-white/80 hover:text-white hover:border-white' : `text-gray-200 hover:text-white ${styles.tabHoverBorder} ${styles.tabHoverBg}`} px-1`
+                  className={`pb-4 text-sm font-medium transition-all duration-200 whitespace-nowrap ${activeTab === tab
+                    ? `${styles.tabActive} px-3 py-1 rounded-t-lg`
+                    : `${styles.tabInactive} px-1`
                     }`}
                 >
                   {tab === 'resources' ? 'Additional Resources' : tab.charAt(0).toUpperCase() + tab.slice(1)}

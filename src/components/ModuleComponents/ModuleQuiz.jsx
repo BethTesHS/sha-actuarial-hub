@@ -206,7 +206,7 @@ export default function ModuleQuiz({
               onClick={() => setQuizSubTab('multiple-choice')}
               className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 quizSubTab === 'multiple-choice'
-                  ? theme === 'light' ? 'bg-white text-indigo-700 shadow-md' : 'bg-indigo-500/20 text-white border border-indigo-400/30'
+                  ? theme === 'light' ? `bg-white ${styles.accent} shadow-md` : `${styles.accentBg} text-white border ${styles.accentBorder}`
                   : theme === 'light' ? 'text-gray-500 hover:text-gray-700 hover:bg-white/50' : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -216,7 +216,7 @@ export default function ModuleQuiz({
               onClick={() => setQuizSubTab('ai-graded')}
               className={`flex-1 flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
                 quizSubTab === 'ai-graded'
-                  ? theme === 'light' ? 'bg-white text-purple-700 shadow-md' : 'bg-purple-500/20 text-white border border-purple-400/30'
+                  ? theme === 'light' ? `bg-white ${styles.accent} shadow-md` : `${styles.accentBg} text-white border ${styles.accentBorder}`
                   : theme === 'light' ? 'text-gray-500 hover:text-gray-700 hover:bg-white/50' : 'text-gray-400 hover:text-white hover:bg-white/5'
               }`}
             >
@@ -229,7 +229,7 @@ export default function ModuleQuiz({
       {quizSubTab === 'multiple-choice' && (
         isFetchingQuiz ? (
           <div className="flex flex-col justify-center items-center py-16 gap-4">
-            <Loader2 className={`w-10 h-10 animate-spin ${theme === 'light' ? 'text-indigo-600' : 'text-indigo-400'}`} />
+            <Loader2 className={`w-10 h-10 animate-spin ${styles.accent}`} />
             <p className={`${styles.textSecondary}`}>Loading your previous results...</p>
           </div>
         ) : (
@@ -246,8 +246,8 @@ export default function ModuleQuiz({
 
                 <div className={`w-full ${theme === 'light' ? 'bg-gray-200' : 'bg-white/10'} rounded-full h-2 mb-6`}>
                   <div
-                    className={`h-2 rounded-full transition-all duration-300`}
-                    style={{ width: `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%`, backgroundColor: '#6366f1' }}
+                    className={`h-2 rounded-full transition-all duration-300 bg-gradient-to-r ${styles.progressBg} ${styles.gradientTo}`}
+                    style={{ width: `${((currentQuestionIndex + 1) / quizQuestions.length) * 100}%` }}
                   />
                 </div>
 
@@ -274,7 +274,7 @@ export default function ModuleQuiz({
                       <label
                         key={option}
                         className={`flex items-center p-3 rounded-lg cursor-pointer transition-all ${quizAnswers[quizQuestions[currentQuestionIndex].id] === option
-                          ? theme === 'light' ? 'bg-indigo-100 border-2 border-indigo-500' : 'bg-indigo-500/30 border-2 border-indigo-400'
+                          ? `${styles.accentBg} border-2 ${styles.accentBorder}`
                           : theme === 'light' ? 'bg-white border-2 border-gray-200 hover:bg-gray-50' : 'bg-white/5 border-2 border-white/10 hover:bg-white/10'
                         }`}
                       >
@@ -308,7 +308,7 @@ export default function ModuleQuiz({
                   {currentQuestionIndex < quizQuestions.length - 1 ? (
                     <button
                       onClick={goToNextQuestion}
-                      className={`px-4 md:px-6 py-3 bg-indigo-600 hover:bg-indigo-700 shadow-lg text-white rounded-lg flex items-center gap-2`}
+                      className={`px-4 md:px-6 py-3 bg-gradient-to-r ${styles.progressBg} ${styles.gradientTo} hover:opacity-90 shadow-lg text-white rounded-lg flex items-center gap-2`}
                     >
                       Next <ArrowLeft className="w-3 h-3 md:w-4 md:h-4 rotate-180" />
                     </button>
@@ -327,7 +327,7 @@ export default function ModuleQuiz({
               <div className="space-y-6 md:space-y-8">
                 <div className="flex items-center justify-between mb-2">
                   <h4 className={`text-xl font-semibold ${styles.text} flex items-center gap-3 ${styles.transition}`}>
-                    <FileText className={`w-6 h-6 ${theme === 'light' ? 'text-indigo-600' : 'text-indigo-400'}`} />
+                    <FileText className={`w-6 h-6 ${styles.accent}`} />
                     Multiple Choice Questions
                   </h4>
                   <button
@@ -344,8 +344,8 @@ export default function ModuleQuiz({
                 </div>
 
                 <div className={`rounded-2xl p-6 text-center ${theme === 'light'
-                  ? 'bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-200'
-                  : 'bg-gradient-to-br from-purple-500/15 to-indigo-500/15 border border-purple-400/20'
+                  ? `${styles.accentBg} border ${styles.accentBorder}`
+                  : `${styles.accentBg} border ${styles.accentBorder}`
                 } ${styles.transition}`}>
 
                   <div className="flex items-center justify-center gap-3 mb-3">
@@ -449,8 +449,8 @@ export default function ModuleQuiz({
 
               {gradingResults && (
                 <div className={`rounded-2xl p-6 text-center ${theme === 'light'
-                  ? 'bg-gradient-to-br from-purple-50 to-indigo-50 border border-purple-200'
-                  : 'bg-gradient-to-br from-purple-500/15 to-indigo-500/15 border border-purple-400/20'
+                  ? `${styles.accentBg} border ${styles.accentBorder}`
+                  : `${styles.accentBg} border ${styles.accentBorder}`
                 } ${styles.transition}`}>
                   <div className="flex items-center justify-center gap-3 mb-3">
                     <Sparkles className={`w-8 h-8 ${theme === 'light' ? 'text-purple-600' : 'text-purple-400'}`} />
@@ -596,8 +596,8 @@ export default function ModuleQuiz({
                     disabled={gradingInProgress || !user?.id || Object.values(aiQuizAnswers).filter(a => a && a.trim()).length === 0}
                     className={`px-8 py-3 rounded-xl font-semibold text-white transition-all duration-200 flex items-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed ${
                       theme === 'light'
-                        ? 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 shadow-lg hover:shadow-xl'
-                        : 'bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-600 hover:to-indigo-600 shadow-lg hover:shadow-purple-500/25'
+                        ? `bg-gradient-to-r ${styles.progressBg} ${styles.gradientTo} hover:opacity-90 shadow-lg hover:shadow-xl`
+                        : `bg-gradient-to-r ${styles.progressBg} ${styles.gradientTo} hover:opacity-90 shadow-lg`
                     }`}
                   >
                     {gradingInProgress ? (

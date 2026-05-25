@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import ModuleComponent from './components/ModuleComponent';
 import { supabase } from "./supabaseClient"; // Added Supabase import
+import { getShaThemeColors } from './theme/sha';
 
 // Import your constants
 import {
@@ -87,8 +88,27 @@ export default function ModulePage({ theme = 'dark', user }) {
     const fetchModuleData = async () => {
       setLoading(true);
       try {
-        const fallbackData = MODULES_MAP[parseInt(moduleId)];
+        const moduleNumber = parseInt(moduleId, 10);
+        const fallbackData = MODULES_MAP[moduleNumber];
         if (fallbackData) {
+          if (moduleNumber > 1 && user?.id) {
+            const { data: previousProgress, error: progressError } = await supabase
+              .from('user_module_progress')
+              .select('progress_percentage')
+              .eq('user_id', user.id)
+              .eq('module_id', String(moduleNumber - 1))
+              .limit(1)
+              .maybeSingle();
+
+            if (progressError) throw progressError;
+
+            if ((previousProgress?.progress_percentage || 0) !== 100) {
+              toast.info(`Complete Module ${moduleNumber - 1} before opening Module ${moduleNumber}.`);
+              navigate('/modules', { replace: true });
+              return;
+            }
+          }
+
           setModuleData(fallbackData);
         } else {
           toast.error('Module not found.');
@@ -101,15 +121,17 @@ export default function ModulePage({ theme = 'dark', user }) {
     };
 
     fetchModuleData();
-  }, [moduleId]);
+  }, [moduleId, navigate, user?.id]);
+
+  const colors = getShaThemeColors(theme);
 
   // 2. Handle Loading State
   if (loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${theme === 'light' ? 'bg-gray-50' : 'bg-[#060A1E]'}`}>
+      <div className="min-h-screen flex items-center justify-center transition-colors duration-300" style={{ background: colors.bg }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mx-auto mb-4"></div>
-          <p className={`${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>Loading module...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sha-blue mx-auto mb-4"></div>
+          <p style={{ color: colors.textSecondary }}>Loading module...</p>
         </div>
       </div>
     );
@@ -118,7 +140,7 @@ export default function ModulePage({ theme = 'dark', user }) {
   // 3. Handle 404 / Not Found State
   if (!moduleData) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${theme === 'light' ? 'bg-gray-50' : 'bg-[#060A1E]'}`}>
+      <div className="min-h-screen flex items-center justify-center transition-colors duration-300" style={{ background: colors.bg }}>
         <div className={`text-center p-8 rounded-lg border ${theme === 'light' ? 'bg-white shadow-lg border-gray-200' : 'bg-black/40 backdrop-blur-md shadow-xl border-white/10'}`}>
           <h1 className={`text-2xl font-bold mb-4 ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}>
             Module Not Found

@@ -10,6 +10,7 @@ import {
   GraduationCap
 } from "lucide-react";
 import toolsImage from "/src/assets/tools.jpg";
+import { getShaThemeColors } from "./theme/sha";
 
 export const toolCategories = [
   {
@@ -19,19 +20,19 @@ export const toolCategories = [
         name: 'LRC Model', 
         url: 'https://kenbright-lrc-model.share.connect.posit.cloud/',
         icon: Calculator,
-        theme: 'purple'
+        theme: 'blue'
       },
       { 
         name: 'Risk Adjustment', 
         url: 'https://kenbright-risk-adjustment-and-loss-triangles-model.share.connect.posit.cloud',
         icon: TrendingUp,
-        theme: 'purple'
+        theme: 'blue'
       },
       {
         name: 'IFRS 17 Exam',
         url: 'https://ifrs-17-exam-sha.vercel.app/dashboard',
         icon: GraduationCap,
-        theme: 'purple'
+        theme: 'blue'
       },
       { 
         name: 'PRMF Calculator', 
@@ -57,59 +58,51 @@ export default function ToolsPage({ theme = 'dark' }) {
   }, []);
 
   const isDark = theme === 'dark';
+  const shaTheme = getShaThemeColors(theme);
+  const rgba = (hex, alpha) => {
+    const h = hex.replace("#", "");
+    const r = parseInt(h.slice(0, 2), 16);
+    const g = parseInt(h.slice(2, 4), 16);
+    const b = parseInt(h.slice(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
 
-  // Theme-specific color schemes
+  // SHA Actuarial Hub color scheme
   const colors = {
     dark: {
-      background: 'linear-gradient(to bottom right, #0f172a, #020617)',
-      text: '#ffffff',
-      title: 'linear-gradient(135deg, #00E5FF, #0091EA)',
-      subtitle: '#94a3b8',
+      background: shaTheme.pageGradient,
+      text: shaTheme.text,
+      title: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.green})`,
+      subtitle: shaTheme.textSecondary,
       blue: {
-        cardBg: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(6, 182, 212, 0.1))',
-        cardBorder: 'rgba(96, 165, 250, 0.3)',
-        iconBg: 'linear-gradient(to bottom right, #3b82f6, #06b6d4)',
-        iconShadow: 'rgba(59, 130, 246, 0.3)',
-        iconColor: '#60a5fa',
-        cardShadow: 'rgba(59, 130, 246, 0.2)'
-      },
-      purple: {
-        cardBg: 'linear-gradient(to bottom right, rgba(139, 92, 246, 0.1), rgba(217, 70, 239, 0.1))',
-        cardBorder: 'rgba(167, 139, 250, 0.3)',
-        iconBg: 'linear-gradient(to bottom right, #8b5cf6, #d946ef)',
-        iconShadow: 'rgba(139, 92, 246, 0.3)',
-        iconColor: '#a78bfa',
-        cardShadow: 'rgba(139, 92, 246, 0.2)'
+        cardBg: `linear-gradient(135deg, ${rgba(shaTheme.darkBlue, 0.82)}, ${rgba(shaTheme.blue, 0.16)})`,
+        cardBorder: rgba(shaTheme.blue, 0.42),
+        iconBg: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.cyan})`,
+        iconShadow: rgba(shaTheme.blue, 0.32),
+        iconColor: shaTheme.cyan,
+        cardShadow: rgba(shaTheme.blue, 0.2)
       },
       glows: [
-        { color: '#00E5FF', opacity: 0.15, size: '300px', position: { top: '20%', left: '10%' } },
-        { color: '#0066FF', opacity: 0.15, size: '400px', position: { bottom: '15%', right: '10%' } },
+        { color: shaTheme.blue, opacity: 0.12, size: '320px', position: { top: '20%', left: '10%' } },
+        { color: shaTheme.green, opacity: 0.1, size: '400px', position: { bottom: '15%', right: '10%' } },
       ]
     },
     light: {
-      background: 'linear-gradient(to bottom right, #f8fafc, #e2e8f0)',
-      text: '#0f172a',
-      title: 'linear-gradient(135deg, #0066FF, #7C4DFF)',
-      subtitle: '#475569',
+      background: shaTheme.pageGradient,
+      text: shaTheme.text,
+      title: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.green})`,
+      subtitle: shaTheme.textSecondary,
       blue: {
-        cardBg: 'linear-gradient(to bottom right, rgba(37, 99, 235, 0.08), rgba(14, 165, 233, 0.08))',
-        cardBorder: 'rgba(37, 99, 235, 0.25)',
-        iconBg: 'linear-gradient(to bottom right, #2563eb, #0ea5e9)',
-        iconShadow: 'rgba(37, 99, 235, 0.25)',
-        iconColor: '#2563eb',
-        cardShadow: 'rgba(37, 99, 235, 0.15)'
-      },
-      purple: {
-        cardBg: 'linear-gradient(to bottom right, rgba(124, 58, 237, 0.08), rgba(192, 38, 211, 0.08))',
-        cardBorder: 'rgba(124, 58, 237, 0.25)',
-        iconBg: 'linear-gradient(to bottom right, #7c3aed, #c026d3)',
-        iconShadow: 'rgba(124, 58, 237, 0.25)',
-        iconColor: '#7c3aed',
-        cardShadow: 'rgba(124, 58, 237, 0.15)'
+        cardBg: `linear-gradient(135deg, ${rgba(shaTheme.darkBlue, 0.18)}, ${rgba(shaTheme.blue, 0.12)})`,
+        cardBorder: rgba(shaTheme.blue, 0.32),
+        iconBg: `linear-gradient(135deg, ${shaTheme.blue}, ${shaTheme.cyan})`,
+        iconShadow: rgba(shaTheme.blue, 0.24),
+        iconColor: shaTheme.blue,
+        cardShadow: rgba(shaTheme.blue, 0.13)
       },
       glows: [
-        { color: '#0066FF', opacity: 0.04, size: '300px', position: { top: '20%', left: '10%' } },
-        { color: '#7C4DFF', opacity: 0.04, size: '400px', position: { bottom: '15%', right: '10%' } },
+        { color: shaTheme.blue, opacity: 0.05, size: '320px', position: { top: '20%', left: '10%' } },
+        { color: shaTheme.green, opacity: 0.06, size: '400px', position: { bottom: '15%', right: '10%' } },
       ]
     }
   };
@@ -158,7 +151,7 @@ export default function ToolsPage({ theme = 'dark' }) {
         </div>
 
         {/* Full-Width Background Blended Image (Adjusted height and fade) */}
-        <div className="absolute top-0 inset-x-0 h-[300px] md:h-[366px] overflow-hidden pointer-events-none z-0" data-aos="fade-in" data-aos-duration="1500">
+        <div className="absolute top-0 inset-x-0 h-[250px] md:h-[300px] overflow-hidden pointer-events-none z-0" data-aos="fade-in" data-aos-duration="1500">
           <img 
             src={toolsImage} 
             alt="Actuarial Tools Background" 
@@ -172,7 +165,7 @@ export default function ToolsPage({ theme = 'dark' }) {
         </div>
 
         {/* Main Foreground Content (Adjusted padding to prevent overlap) */}
-        <div className="relative z-10 pt-[320px] md:pt-[400px] px-6 md:px-10 pb-20 max-w-7xl mx-auto min-h-full">
+        <div className="relative z-10 pt-[250px] md:pt-[300px] px-6 md:px-10 pb-20 max-w-7xl mx-auto min-h-full">
           
           {/* Header & Search */}
           <div id="tools-header" className="text-center mb-16">
@@ -186,7 +179,7 @@ export default function ToolsPage({ theme = 'dark' }) {
               </h1>
               <p 
                 className="text-lg md:text-xl mb-10 font-medium"
-                style={{ color: isDark ? '#e2e8f0' : '#1e293b' }}
+              style={{ color: currentColors.subtitle }}
               >
                 Access our suite of actuarial models and calculators
               </p>
@@ -194,16 +187,16 @@ export default function ToolsPage({ theme = 'dark' }) {
 
             {/* In-Page Search Bar */}
             <div className="relative w-full max-w-2xl mx-auto">
-              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <Search className="absolute left-6 top-1/2 transform -translate-y-1/2 w-5 h-5" style={{ color: currentColors.subtitle }} />
               <input
                 type="text"
                 placeholder="Search actuarial tools..."
                 className="w-full border rounded-full py-4 pl-14 pr-6 focus:outline-none transition-all shadow-xl text-lg backdrop-blur-md"
                 style={{
-                  background: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.7)',
-                  borderColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)',
+                  background: shaTheme.inputBg,
+                  borderColor: shaTheme.inputBorder,
                   color: currentColors.text,
-                  boxShadow: isDark ? '0 10px 30px rgba(0,0,0,0.3)' : '0 10px 30px rgba(0,0,0,0.08)'
+                  boxShadow: isDark ? `0 10px 30px ${rgba(shaTheme.blue, 0.16)}` : `0 10px 30px ${rgba(shaTheme.blue, 0.08)}`
                 }}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -227,7 +220,7 @@ export default function ToolsPage({ theme = 'dark' }) {
                     {/* Category Header */}
                     <div className="flex items-center gap-3 mb-6 pl-2">
                       <div className="w-1.5 h-8 rounded-full" style={{ background: currentColors.blue.iconBg }}></div>
-                      <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: isDark ? '#f8fafc' : '#0f172a' }}>
+                      <h2 className="text-2xl md:text-3xl font-bold tracking-tight" style={{ color: currentColors.text }}>
                         {category.title}
                       </h2>
                     </div>
@@ -235,7 +228,7 @@ export default function ToolsPage({ theme = 'dark' }) {
                     {/* Category Tools Grid */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                       {filteredTools.map((tool, index) => {
-                        const themeColors = currentColors[tool.theme];
+                        const themeColors = currentColors.blue;
                         const Icon = tool.icon;
                         
                         return (
@@ -286,7 +279,7 @@ export default function ToolsPage({ theme = 'dark' }) {
             </div>
           ) : (
             <div className="max-w-3xl mx-auto py-16 text-center rounded-2xl border border-dashed backdrop-blur-md" 
-                 style={{ borderColor: isDark ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)', background: isDark ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.02)' }}>
+                 style={{ borderColor: shaTheme.cardBorder, background: isDark ? rgba(shaTheme.blue, 0.06) : rgba(shaTheme.blue, 0.03) }}>
               <p className="text-xl" style={{ color: currentColors.subtitle }}>No tools found matching "{searchTerm}"</p>
               <button onClick={() => setSearchTerm("")} className="mt-4 font-semibold transition-colors hover:underline" style={{ color: currentColors.blue.iconColor }}>
                 Clear search

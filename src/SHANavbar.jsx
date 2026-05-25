@@ -89,8 +89,19 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   ];
 
   const externalLinks = {
+    // TODO: ADD LINKS
     analytics: "",
     fraudRiskMatrix: "",
+    pricing: {
+      pricingTools: "",
+      prmfTool: "",
+    }
+  };
+
+  const analyticsItem = {
+    label: "Analytics",
+    url: externalLinks.analytics,
+    icon: <TrendingUp className="w-5 h-5" />,
   };
 
   const trainingItems = [
@@ -118,13 +129,11 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     { label: "Learn17", url: "https://learn17.com/", icon: <BookOpen className="w-4 h-4" /> },
     { label: "IFRS 17 Insurance Contracts", url: "/pdfs/ifrs-17-insurance-contracts.pdf", icon: <FileText className="w-4 h-4" />, download: true },
     { label: "IFRS 17 Illustrative Examples", url: "/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf", icon: <FileText className="w-4 h-4" />, download: true },
-    { label: "SHA IFRS 17 Policy Papers", url: "/ifrs17-policy-papers", icon: <BookOpen className="w-4 h-4" />, internal: true },
   ];
 
   const pricingItems = [
-    { label: "Pricing Tool", path: "/tools", internal: true, icon: <Calculator className="w-4 h-4" /> },
-    { label: "PRMF tool", url: "https://prmf-calculator.vercel.app/", icon: <Calculator className="w-4 h-4" /> },
-    { label: "Analytics", url: externalLinks.analytics, icon: <TrendingUp className="w-4 h-4" /> },
+    { label: "Pricing Tool", url: externalLinks.pricing.pricingTools, icon: <Calculator className="w-4 h-4" /> },
+    { label: "PRMF tool", url: externalLinks.pricing.prmfTool, icon: <Calculator className="w-4 h-4" /> },
   ];
 
   const riskItems = [
@@ -134,6 +143,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   const resourceItems = [
     { label: "Tools", path: "/tools", icon: <Calculator className="w-4 h-4" /> },
     { label: "Training Links", path: "/training-links", icon: <BookOpen className="w-4 h-4" /> },
+    { label: "SHA IFRS 17 Policy Papers", path: "/ifrs17-policy-papers", icon: <FileText className="w-4 h-4" /> },
     { label: "Qualification Pathway", url: "/pdfs/qualification-handbook-2025-2026.pdf", icon: <BookOpen className="w-4 h-4" /> },
   ];
 
@@ -166,7 +176,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     })),
     ...pricingItems.map(i => ({ title: i.label, link: i.internal ? i.path : i.url, type: "Pricing", icon: i.icon })),
     ...resourceItems.map(i => ({ title: i.label, link: i.path || i.url, type: "Resource", icon: i.icon })),
-    { title: "Analytics", link: externalLinks.analytics, type: "Pricing", icon: <TrendingUp className="w-4 h-4" /> },
+    { title: "Analytics", link: analyticsItem.url, type: "Analytics", icon: <TrendingUp className="w-4 h-4" /> },
     ...riskItems.map(i => ({ title: i.label, link: i.url, type: "Risk", icon: i.icon })),
     { title: "Dashboard", link: "/SHADashboard", type: "Page", icon: <Home className="w-4 h-4" /> },
     { title: "Tools Dashboard", link: "/tools", type: "Page", icon: <Calculator className="w-4 h-4" /> },
@@ -370,14 +380,14 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
         }}
       >
         <div className="w-full px-4 lg:px-6">
-          <div className="relative flex items-center justify-between h-24">
+          <div className="relative flex items-center justify-between gap-3 h-24">
             {/* Logo */}
             <div className="flex items-center gap-3 shrink-0 z-10">
               {renderShaLogo()}
             </div>
 
             {/* Center Navigation - Desktop */}
-            <div className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center gap-1 z-10">
+            <div className="hidden xl:flex flex-1 min-w-0 items-center justify-center gap-1 px-3 z-10">
               {navItems.map((item) => (
                 <Link
                   key={item.path}
@@ -392,6 +402,27 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                   <span className="text-sm font-medium whitespace-nowrap">{item.label}</span>
                 </Link>
               ))}
+
+              {analyticsItem.url ? (
+                <a
+                  href={analyticsItem.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg transition-all duration-300 hover:scale-105"
+                  style={{ color: colors.text }}
+                >
+                  {analyticsItem.icon}
+                  <span className="text-sm font-medium whitespace-nowrap">{analyticsItem.label}</span>
+                </a>
+              ) : (
+                <div
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-lg select-none"
+                  style={{ color: colors.textSecondary, opacity: 0.6 }}
+                >
+                  {analyticsItem.icon}
+                  <span className="text-sm font-medium whitespace-nowrap">{analyticsItem.label}</span>
+                </div>
+              )}
 
               <div className="relative training-dropdown">
                 <button
@@ -624,7 +655,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                   <ChevronDown className={`w-4 h-4 transition-transform ${showResourcesMenu ? 'rotate-180' : ''}`} />
                 </button>
                 {showResourcesMenu && (
-                  <div className="absolute top-full left-0 mt-2 w-56 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
+                  <div className="absolute top-full left-0 mt-2 w-max min-w-56 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
                     {resourceItems.map((item, idx) => {
                       const href = item.path || item.url;
                       const isExternal = /^https?:\/\//i.test(href);
@@ -664,7 +695,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
             </div>
 
             {/* Right Section - Desktop */}
-            <div className="hidden lg:flex items-center gap-4 shrink-0 z-10">
+            <div className="hidden xl:flex items-center gap-4 shrink-0 z-10">
               {/* Search Button */}
               <button
                 onClick={() => setShowSearchModal(true)}
@@ -718,7 +749,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
             </div>
 
             {/* Mobile Actions */}
-            <div className="flex lg:hidden items-center gap-3">
+            <div className="flex xl:hidden items-center gap-3">
               <button onClick={() => setShowSearchModal(true)} className="p-2 rounded-lg" style={{ background: `${colors.primary}15`, color: colors.primary }}>
                 <Search className="w-5 h-5" />
               </button>
@@ -730,10 +761,19 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
 
           {/* Mobile Menu - Logged In */}
           {showMobileMenu && (
-            <div className="mobile-menu-container lg:hidden pb-4">
+            <div className="mobile-menu-container xl:hidden pb-4">
               <div className="pt-4 border-t border-white/10">
                 <div className="flex flex-col gap-1 px-2">
                   <Link to={homePath} onClick={() => setShowMobileMenu(false)} className="px-4 py-3 rounded-lg flex gap-3 text-sm whitespace-nowrap" style={{ color: colors.text }}><Home className="w-5 h-5"/> Home</Link>
+
+                  <div className="rounded-lg">
+                    {renderExternalMenuItem({
+                      label: analyticsItem.label,
+                      url: analyticsItem.url,
+                      icon: analyticsItem.icon,
+                      className: "rounded-lg",
+                    })}
+                  </div>
 
                   <button
                     type="button"
@@ -795,9 +835,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                           {g.label}
                         </a>
                       ))}
-                      <Link to="/ifrs17-policy-papers" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
-                        SHA IFRS 17 Policy Papers
-                      </Link>
                     </div>
                   )}
 
@@ -820,15 +857,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                       <a href="https://prmf-calculator.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         PRMF tool
                       </a>
-                      <div className="rounded-lg">
-                        {renderExternalMenuItem({
-                          label: "Analytics",
-                          url: externalLinks.analytics,
-                          icon: <TrendingUp className="w-4 h-4" />,
-                          className: "rounded-lg",
-                          style: { paddingLeft: 12, paddingRight: 12 },
-                        })}
-                      </div>
                     </div>
                   )}
 
@@ -877,6 +905,9 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                       </Link>
                       <Link to="/training-links" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         Training Links
+                      </Link>
+                      <Link to="/ifrs17-policy-papers" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        SHA IFRS 17 Policy Papers
                       </Link>
                       <a href="/pdfs/qualification-handbook-2025-2026.pdf" download className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         Qualification Pathway

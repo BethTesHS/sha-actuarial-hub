@@ -71,6 +71,7 @@ export default function Modules({ theme = 'dark', user }) {
   const colors = { dark: toModuleColors("dark"), light: toModuleColors("light") };
 
   const currentColors = theme === 'dark' ? colors.dark : colors.light;
+  const getModuleColor = (moduleNumber) => (moduleNumber % 2 === 0 ? currentColors.green : currentColors.blue);
 
   const specialBanner = {
     id: "IFRS 17",
@@ -86,7 +87,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 1,
       name: "GI Data Clean Up",
-      color: "#9333EA", // Purple-600 to match Module 1 theme
+      color: getModuleColor(1),
       status: "accessible",
       description: "Learn data validation, cleaning, and standardization techniques for actuarial datasets.",
       image: dataCleanupImg,
@@ -95,7 +96,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 2,
       name: "Pricing Fundamentals",
-      color: "#2563EB", // Blue-600 to match Module 2 theme
+      color: getModuleColor(2),
       status: "accessible",
       description: "Master the core principles of insurance pricing and risk assessment.",
       image: pricingFundamentalsImg,
@@ -104,7 +105,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 3,
       name: "Liability for Remaining Coverage (LRC)",
-      color: "#8BC53F",
+      color: getModuleColor(3),
       status: "accessible",
       description: "Understand LRC calculations and their importance in insurance valuations.",
       image: lrcImg,
@@ -113,7 +114,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 4,
       name: "General Insurance Valuations (Liability for Incurred Claims)",
-      color: "#F97316", // Orange-600 to match Module 4 theme
+      color: getModuleColor(4),
       status: "accessible",
       description: "Advanced techniques for general insurance liability valuations.",
       image: giValuationsImg,
@@ -122,7 +123,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 5,
       name: "Capital Adequacy Analysis",
-      color: "#0D9488", // Teal-600 to match Module 5 theme
+      color: getModuleColor(5),
       status: "accessible",
       description: "Learn capital adequacy requirements and solvency analysis methods.",
       image: capitalAdequacyImg,
@@ -131,7 +132,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 6,
       name: "Financial Performance Analysis (Ratio Analysis)",
-      color: "#9333EA", // Purple-600 to match Module 6 theme
+      color: getModuleColor(6),
       status: "accessible",
       description: "Master financial ratio analysis and balance sheet evaluation techniques.",
       image: finPerformanceImg,
@@ -140,7 +141,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 7,
       name: "Premium Certificates",
-      color: "#2563EB", // Blue-600 to match Module 7 theme
+      color: getModuleColor(7),
       status: "accessible",
       description: "Learn premium certificate preparation and validation processes.",
       image: premCertificatesImg,
@@ -149,7 +150,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 8,
       name: "Reinsurance Certificates",
-      color: "#8BC53F",
+      color: getModuleColor(8),
       status: "accessible",
       description: "Understand reinsurance certificate creation and management.",
       image: reinCertificatesImg,
@@ -158,7 +159,7 @@ export default function Modules({ theme = 'dark', user }) {
     {
       id: 9,
       name: "Financial Condition Report (FCR)",
-      color: "#F97316", // Orange-600 to match Module 9 theme
+      color: getModuleColor(9),
       status: "accessible",
       description: "Master financial condition reporting standards and requirements.",
       image: finConditionImg,

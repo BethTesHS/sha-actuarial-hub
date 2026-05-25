@@ -127,8 +127,8 @@ export default function SHADashboard({ user: userProp, theme = "dark" }) {
                             <div className="text-white text-sm font-medium">© {new Date().getFullYear()} SHA Training Platform</div>
                         </div>
                         <div className="flex items-center gap-3">
-                            <span className="text-white text-lg font-medium">Powered by</span>
-                            <img src={kenbrightLogo} alt="Kenbright Logo" className="h-16 w-auto" />
+                            <span className="text-white text-lg font-medium">Powered by <span className="font-bold text-xl">Kenbright AI</span></span>
+                            {/* <img src={kenbrightLogo} alt="Kenbright Logo" className="h-16 w-auto" /> */}
                         </div>
                     </div>
                 </div>

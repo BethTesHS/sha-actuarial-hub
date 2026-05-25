@@ -2,7 +2,7 @@ export const module4Data = {
   id: 4,
   title: "Valuation, Discounting and Risk Margin Analysis",
   shortDescription: "Learn how to perform general insurance reserve valuations using both traditional actuarial methods and IFRS 17 principles. This module builds practical skills in estimating outstanding claims, applying discounting and risk margin techniques, analysing reserve adequacy, and interpreting valuation results.",
-  themeColor: "orange",
+  themeColor: "green",
   objectives: {
     text: [
       "The objective of this module is to equip participants with the knowledge and practical skills required to perform general insurance reserve valuations in line with both traditional actuarial practices and IFRS 17 requirements. ",

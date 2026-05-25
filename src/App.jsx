@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useState, useEffect } from "react";
 import { supabase } from "./supabaseClient";
+import { getShaThemeColors } from "./theme/sha";
 
 // Contexts
 import { TutorialProvider } from "./contexts/TutorialContext";
@@ -11,12 +12,11 @@ import { TutorialProvider } from "./contexts/TutorialContext";
 import MyProgress from "./MyProgress";
 import QASReports from "./QasReports";
 import TrainingLinks from "./TrainingLinks";
-import SHATrainingLinks from "./SHATrainingLinks";
 import ToolsPage from "./ToolsPage";
 import FileSavingFormat from "./FileSavingFormat";
 import SHAModules from "./SHAModules";
 import ModulePage from "./ModulePage";
-import SHALandingpage from "./SHALandingpage";
+import HomePage from "./HomePage";
 import SHADashboard from "./SHADashboard";
 import PrivacyPolicyPage from "./components/PrivacyPolicyPage";
 import TermsOfServicePage from "./components/TermsOfServicePage";
@@ -83,7 +83,7 @@ function AppShell({ user, onLogout, onAuthSuccess, onUserUpdate, onSuperAdminLog
   }
 
   return (
-    <div className="min-h-screen bg-var(--bg-primary) text-var(--text-primary) transition-colors duration-300">
+    <div className="min-h-screen bg-[var(--bg-primary)] text-[var(--text-primary)] transition-colors duration-300">
       {!hideChrome && <ThemeToggle theme={theme} toggleTheme={toggleTheme} />}
       {!hideChrome && <SHANavbar user={user} onLogout={onLogout} theme={theme} />}
       {showSuperAdminChrome && (
@@ -154,12 +154,7 @@ function AppShell({ user, onLogout, onAuthSuccess, onUserUpdate, onSuperAdminLog
         <Route path="/reset-password" element={<ResetPassword theme={theme} />} />
 
         {/* Public Pages */}
-        <Route
-          path="/"
-          element={
-            <SHALandingpage />
-          }
-        />
+        <Route path="/" element={<HomePage theme={theme} user={user} />} />
         <Route
           path="/SHADashboard"
           element={
@@ -278,13 +273,13 @@ function AppShell({ user, onLogout, onAuthSuccess, onUserUpdate, onSuperAdminLog
         <Route
           path="/training-links"
           element={
-            user ? (isVerified ? <SHATrainingLinks theme={theme} /> : <Navigate to={verificationStatus === "denied" ? "/access-denied" : "/awaiting-verification"} replace />) : <Navigate to="/SHAAuth" replace />
+            user ? (isVerified ? <TrainingLinks theme={theme} /> : <Navigate to={verificationStatus === "denied" ? "/access-denied" : "/awaiting-verification"} replace />) : <Navigate to="/SHAAuth" replace />
           }
         />
         <Route
           path="/SHA-training-links"
           element={
-            user ? (isVerified ? <SHATrainingLinks theme={theme} /> : <Navigate to={verificationStatus === "denied" ? "/access-denied" : "/awaiting-verification"} replace />) : <Navigate to="/SHAAuth" replace />
+            user ? (isVerified ? <TrainingLinks theme={theme} /> : <Navigate to={verificationStatus === "denied" ? "/access-denied" : "/awaiting-verification"} replace />) : <Navigate to="/SHAAuth" replace />
           }
         />
         <Route
@@ -313,7 +308,22 @@ function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [verifyingProfile, setVerifyingProfile] = useState(false);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('theme') || 'dark';
+    }
+    return 'dark';
+  });
+
+  useEffect(() => {
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    if (saved === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
 
   useEffect(() => {
     const RECOVERY_FLAG_KEY = 'kb_password_recovery_in_progress';
@@ -615,24 +625,31 @@ function App() {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
-    
-    // Update custom data attribute
+
+    document.documentElement.classList.add('theme-transitioning');
     document.documentElement.setAttribute('data-theme', newTheme);
-    // Add or remove Tailwind's dark class
     if (newTheme === 'dark') {
       document.documentElement.classList.add('dark');
     } else {
       document.documentElement.classList.remove('dark');
     }
+    window.setTimeout(() => {
+      document.documentElement.classList.remove('theme-transitioning');
+    }, 300);
   };
+
+  const themeColors = getShaThemeColors(theme);
 
   if (loading || verifyingProfile) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ background: '#001529' }}>
+      <div
+        className="min-h-screen flex items-center justify-center transition-colors duration-300"
+        style={{ background: themeColors.bg, color: themeColors.text }}
+      >
         <div className="text-center">
           <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-white text-2xl mx-auto mb-4 animate-pulse"
-            style={{ background: 'linear-gradient(135deg, #0066B3, #8BC53F)' }}>SHA</div>
-          <div className="text-white text-lg">Loading...</div>
+            style={{ background: `linear-gradient(135deg, ${themeColors.blue}, ${themeColors.green})` }}>SHA</div>
+          <div className="text-lg" style={{ color: themeColors.textSecondary }}>Loading...</div>
         </div>
       </div>
     );

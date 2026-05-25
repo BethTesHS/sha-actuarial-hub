@@ -2,7 +2,7 @@ export const module9Data = {
   id: 9,
   title: "Financial Condition Report (FCR)",
   shortDescription: "Master the preparation and analysis of Financial Condition Reports. Learn to assess financial strength, solvency, asset-liability management, reinsurance arrangements, and provide strategic recommendations to boards and regulators.",
-  themeColor: "orange",
+  themeColor: "blue",
   objectives: {
     text: [
       "This module aims to equip learners with the knowledge and practical skills required to understand, support, and contribute to the preparation of a Financial Condition Report (FCR). By the end of the module, participants will be able to explain the regulatory purpose and importance of the FCR, interpret its key components, and apply actuarial techniques to support financial analysis, reserving, solvency assessment, asset-liability management, reinsurance assessment, and risk evaluation.",

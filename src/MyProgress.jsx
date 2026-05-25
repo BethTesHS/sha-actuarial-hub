@@ -317,7 +317,7 @@ export default function MyProgress({ theme = 'dark', user }) {
   const filteredActivities = getFilteredModules();
 
   return (
-    <div className="min-h-screen pt-16 transition-colors duration-300" style={{ background: currentColors.bg }}>
+    <div className="min-h-screen pt-20 transition-colors duration-300" style={{ background: currentColors.bg }}>
       {/* SVG Gradient Definitions */}
       <svg width="0" height="0" style={{ position: 'absolute' }}>
         <defs>
@@ -421,6 +421,48 @@ export default function MyProgress({ theme = 'dark', user }) {
           </div>
         </div>
       </div> */}
+
+      {/* Progress Header Bar — matches Training Modules (SHAModules) */}
+      <div
+        className="relative border-b backdrop-blur-xl"
+        style={{
+          background: 'linear-gradient(to right, rgba(0, 61, 107, 1), rgba(0, 51, 89, 1))',
+          borderColor: 'rgba(255, 255, 255, 0.1)',
+        }}
+      >
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-6 pt-8">
+          <div className="text-center">
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight pb-2"
+              style={{
+                background: `linear-gradient(135deg, ${currentColors.blue} 0%, ${currentColors.green} 100%)`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+                filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))',
+                letterSpacing: '-0.02em',
+              }}
+            >
+              My Progress
+            </h1>
+            <p
+              className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto font-light"
+              style={{ letterSpacing: '0.01em', lineHeight: '1.6' }}
+            >
+              Track your learning journey, module completion, and performance across the platform.
+            </p>
+          </div>
+        </div>
+
+        <div
+          className="absolute top-0 left-0 w-24 h-24 rounded-full blur-2xl"
+          style={{ backgroundColor: `${currentColors.green}20` }}
+        />
+        <div
+          className="absolute bottom-0 right-0 w-32 h-32 rounded-full blur-2xl"
+          style={{ backgroundColor: `${currentColors.blue}10` }}
+        />
+      </div>
 
       {/* DASHBOARD CONTENT */}
       <div className="max-w-7xl mx-auto px-4 lg:px-8 py-8 space-y-8">

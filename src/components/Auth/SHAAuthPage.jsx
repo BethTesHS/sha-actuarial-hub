@@ -237,8 +237,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
 
           {/* Powered By */}
           <div className="mt-16 pt-8 border-t border-white/10">
-            <p className="text-gray-500 text-sm">Powered by</p>
-            <p className="text-white font-bold text-xl mt-1">KENBRIGHT</p>
+            <p className="text-gray-500 text-sm">Powered by <span className="text-white font-bold text-base">Kenbright AI</span></p>
           </div>
         </div>
       </div>

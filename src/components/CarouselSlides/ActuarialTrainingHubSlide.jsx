@@ -3,7 +3,7 @@ import './ActuarialTrainingHubSlide.css';
 
 const ActuarialTrainingHubSlide = ({ isActive, user, handleNavigation }) => {
   const handlePrimaryAction = () => {
-    const path = user ? '/modules' : '/auth?mode=signup';
+    const path = user ? '/modules' : '/SHAAuth?mode=signup';
     handleNavigation(path);
   };
 

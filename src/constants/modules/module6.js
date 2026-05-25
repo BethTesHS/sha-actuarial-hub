@@ -2,7 +2,7 @@ export const module6Data = {
   id: 6,
   title: "Financial Profitability Ratios",
   shortDescription: "Master financial performance analysis using IFRS 4 and IFRS 17 financials. Learn to calculate and interpret key profitability ratios, analyze financial statements, and prepare accurate performance reports for strategic decision-making.",
-  themeColor: "purple",
+  themeColor: "green",
   objectives: {
     text: [
       "This module aims to equip learners with the knowledge and practical skills necessary to understand, review, and prepare financial performance analysis using IFRS 4 and IFRS 17 financials. By the end of the module, participants will be able to interpret key financial statements, calculate and analyze performance ratios, and ensure accuracy and consistency in reporting. This will support effective performance monitoring, strengthen decision-making, and enhance compliance with both internal reporting standards and regulatory requirements.",

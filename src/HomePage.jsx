@@ -14,36 +14,25 @@ import ActuarialToolsSlide from "./components/CarouselSlides/ActuarialToolsSlide
 import QualificationPathwaysSlide from "./components/CarouselSlides/QualificationPathwaysSlide";
 import Learn17Slide from "./components/CarouselSlides/Learn17Slide";
 import Footer from "./components/footer";
+import { getShaThemeColors } from "./theme/sha";
 
-const colors = {
-  dark: {
-    cyan: "#00E5FF",
-    purple: "#7C4DFF",
-    blue: "#3B82F6",
-    green: "#10B981",
-    orange: "#F97316",
-    pink: "#E91E63",
-    bg: "#0A0F1E",
-    card: "#1A1F2E",
-    text: "#FFFFFF",
-    textSecondary: "#9CA3AF",
-    gray: "#c2c2c2",
-    red: "#ff3b3b"
-  },
-  light: {
-    cyan: "#00E5FF",
-    purple: "#7C4DFF",
-    blue: "#3B82F6",
-    green: "#10B981",
-    orange: "#F97316",
-    pink: "#E91E63",
-    bg: "#E1E7EE",
-    card: "#F8FAFC",
-    text: "#0F172A",
-    textSecondary: "#475569",
-    gray: "#616161",
-    red: "#ff0000"
-  }
+const buildHomeColors = (theme) => {
+  const c = getShaThemeColors(theme);
+  return {
+    cyan: c.cyan,
+    purple: c.purple,
+    blue: c.blue,
+    green: c.green,
+    orange: c.orange,
+    pink: c.orange,
+    bg: c.bg,
+    card: c.card,
+    text: c.text,
+    textSecondary: c.textSecondary,
+    gray: c.muted,
+    red: c.danger,
+    darkBlue: c.darkBlue,
+  };
 };
 
 const carouselSlides = [
@@ -82,7 +71,8 @@ export default function HomePage({ theme = 'dark', user }) {
   const autoScrollIntervalRef = useRef(null);
   const restartAutoScrollTimeoutRef = useRef(null);
 
-  const currentColors = theme === 'dark' ? colors.dark : colors.light;
+  const currentColors = buildHomeColors(theme);
+  const ctaTextOnAccent = theme === 'dark' ? currentColors.darkBlue : '#FFFFFF';
 
   // Function to start auto-scrolling
   const startAutoScrolling = () => {
@@ -188,28 +178,8 @@ export default function HomePage({ theme = 'dark', user }) {
     if (user) {
       navigate('/my-progress');
     } else {
-      navigate('/auth?mode=login');
+      navigate('/SHAAuth');
     }
-  };
-
-  const getGradient = (slideIndex) => {
-    const gradients = {
-      dark: [
-        `linear-gradient(135deg, ${colors.dark.blue} 0%, ${colors.dark.cyan} 50%, ${colors.dark.purple} 100%)`,
-        `linear-gradient(135deg, ${colors.dark.purple} 0%, #9D4EDD 50%, ${colors.dark.blue} 100%)`,
-        `linear-gradient(135deg, ${colors.dark.green} 0%, #48C774 50%, ${colors.dark.blue} 100%)`,
-        `linear-gradient(135deg, ${colors.dark.orange} 0%, #FF8C42 50%, ${colors.dark.purple} 100%)`,
-        `linear-gradient(135deg, ${colors.dark.pink} 0%, ${colors.dark.purple} 50%, ${colors.dark.blue} 100%)`
-      ],
-      light: [
-        `linear-gradient(135deg, ${colors.light.blue} 0%, ${colors.light.cyan} 50%, ${colors.light.purple} 100%)`,
-        `linear-gradient(135deg, ${colors.light.purple} 0%, #9D4EDD 50%, ${colors.light.blue} 100%)`,
-        `linear-gradient(135deg, ${colors.light.green} 0%, #48C774 50%, ${colors.light.blue} 100%)`,
-        `linear-gradient(135deg, ${colors.light.orange} 0%, #FF8C42 50%, ${colors.light.purple} 100%)`,
-        `linear-gradient(135deg, ${colors.light.pink} 0%, ${colors.light.purple} 50%, ${colors.light.blue} 100%)`
-      ]
-    };
-    return gradients[theme][slideIndex];
   };
 
   return (
@@ -316,7 +286,7 @@ export default function HomePage({ theme = 'dark', user }) {
               style={{ 
                 background: `linear-gradient(135deg, ${currentColors.cyan}, ${currentColors.purple})`, 
                 boxShadow: `0 10px 40px ${currentColors.cyan}40`,
-                color: theme === 'dark' ? '#1A1F2E' : 'white'
+                color: ctaTextOnAccent
               }}>
               <Star className="w-6 h-6" />
               {user ? "Go to My Progress" : "Get Started Free - No Credit Card Required"}
@@ -420,23 +390,23 @@ export default function HomePage({ theme = 'dark', user }) {
                 style={{ 
                   background: currentColors.cyan, 
                   boxShadow: `0 10px 40px ${currentColors.cyan}50`,
-                  color: theme === 'dark' ? '#1A1F2E' : 'white'
+                  color: ctaTextOnAccent
                 }}>
                 <TrendingUp className="w-6 h-6" />
                 Go to My Progress
               </button>
             ) : (
               <>
-                <button onClick={() => navigate('/auth?mode=signup')} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
+                <button onClick={() => navigate('/SHAAuth?mode=signup')} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
                   style={{ 
                     background: currentColors.cyan, 
                     boxShadow: `0 10px 40px ${currentColors.cyan}50`,
-                    color: theme === 'dark' ? '#1A1F2E' : 'white'
+                    color: ctaTextOnAccent
                   }}>
                   <Rocket className="w-6 h-6" />
                   Create Free Account
                 </button>
-                <button onClick={() => navigate('/auth?mode=login')} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
+                <button onClick={() => navigate('/SHAAuth')} className="px-10 py-5 rounded-2xl font-bold text-lg transition-all hover:scale-105 inline-flex items-center justify-center gap-3"
                   style={{ 
                     background: theme === 'dark' ? 'rgba(255,255,255,0.1)' : 'rgba(255,255,255,0.8)', 
                     border: `2px solid ${theme === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,0,0,0.1)'}`,

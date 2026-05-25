@@ -2,7 +2,7 @@ export const module2Data = {
   id: 2,
   title: "Pricing Fundamentals",
   shortDescription: "Master the core concepts of frequency and severity for insurance pricing and risk assessment. Learn to quantify risk using exposure measures, calculate premiums, and connect technical analysis with commercial pricing decisions.",
-  themeColor: "blue",
+  themeColor: "green",
 
   objectives: {
     text: [

@@ -1,7 +1,9 @@
 // src/Modules.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Lock, BookOpen, Award, Play, Star, Home } from "lucide-react";
+import { Lock, BookOpen, Award, Play, Star, CheckCircle } from "lucide-react";
+import { getShaThemeColors } from "./theme/sha";
+import { supabase } from "./supabaseClient";
 
 // Import images from assets folder
 import dataCleanupImg from "./assets/data-cleanup.jpg";
@@ -17,11 +19,60 @@ import ifrs17Img from "./assets/ifrs-17.jpg";
 import shaLogo from "./assets/SHA_logo.png";
 import kenbrightLogo from "./assets/kenbright-logo-white.png";
 
-export default function SHAModules() {
+export default function SHAModules({ theme = "dark", user }) {
+    const [moduleProgress, setModuleProgress] = useState({});
+
+    // Match KAFS: read saved module progress directly from Supabase.
+    useEffect(() => {
+        const fetchProgress = async () => {
+            if (!user?.id) {
+                setModuleProgress({});
+                return;
+            }
+
+            try {
+                const { data, error } = await supabase
+                    .from('user_module_progress')
+                    .select('module_id, progress_percentage')
+                    .eq('user_id', user.id);
+
+                if (error) {
+                    console.error("Supabase query error:", error);
+                    throw error;
+                }
+
+                const progressMap = {};
+                (data || []).forEach((item) => {
+                    progressMap[String(item.module_id)] = item.progress_percentage || 0;
+                });
+                setModuleProgress(progressMap);
+            } catch (err) {
+                console.error("Error fetching module progress:", err);
+            }
+        };
+
+        fetchProgress();
+    }, [user?.id]);
+
     // SHA Brand Colors
     const shaBlue = "#0066B3";
     const shaGreen = "#8BC53F";
-    const shaDarkBlue = "#003D6B";
+    const isDark = theme === "dark";
+    const colors = getShaThemeColors(theme);
+    const cardContentBg = isDark
+        ? "linear-gradient(to bottom, rgba(0, 61, 107, 0.95), rgba(0, 51, 89, 0.9))"
+        : "linear-gradient(to bottom, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.94))";
+    const cardTitleColor = colors.text;
+    const cardTextColor = colors.textSecondary;
+    const cardMutedColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(15,23,42,0.65)";
+    const cardFaintColor = isDark ? "rgba(255,255,255,0.3)" : "rgba(15,23,42,0.42)";
+    const trackBg = isDark ? "rgba(255,255,255,0.1)" : "rgba(15,23,42,0.1)";
+    const getModuleColor = (moduleNumber) => (moduleNumber % 2 === 0 ? shaGreen : shaBlue);
+    const getModuleProgress = (moduleId) => moduleProgress[String(moduleId)] || 0;
+    const isModuleUnlocked = (moduleId) => {
+        if (moduleId === 1) return true;
+        return getModuleProgress(moduleId - 1) === 100;
+    };
 
     const specialBanner = {
         id: "ifrs17",
@@ -37,7 +88,7 @@ export default function SHAModules() {
         {
             id: 1,
             name: "Data Clean Up",
-            color: shaBlue,
+            color: getModuleColor(1),
             status: "accessible",
             description: "Learn data validation, cleaning, and standardization techniques for actuarial datasets.",
             image: dataCleanupImg,
@@ -46,7 +97,7 @@ export default function SHAModules() {
         {
             id: 2,
             name: "Pricing Fundamentals",
-            color: shaGreen,
+            color: getModuleColor(2),
             status: "locked",
             description: "Master the core principles of insurance pricing and risk assessment.",
             image: pricingFundamentalsImg,
@@ -55,7 +106,7 @@ export default function SHAModules() {
         {
             id: 3,
             name: "Liability for Remaining Coverage (LRC)",
-            color: shaBlue,
+            color: getModuleColor(3),
             status: "locked",
             description: "Understand LRC calculations and their importance in insurance valuations.",
             image: lrcImg,
@@ -64,7 +115,7 @@ export default function SHAModules() {
         {
             id: 4,
             name: "General Insurance Valuations (Liability for Incurred Claims)",
-            color: shaGreen,
+            color: getModuleColor(4),
             status: "locked",
             description: "Advanced techniques for general insurance liability valuations.",
             image: giValuationsImg,
@@ -73,7 +124,7 @@ export default function SHAModules() {
         {
             id: 5,
             name: "Capital Adequacy Analysis",
-            color: shaBlue,
+            color: getModuleColor(5),
             status: "locked",
             description: "Learn capital adequacy requirements and solvency analysis methods.",
             image: capitalAdequacyImg,
@@ -82,7 +133,7 @@ export default function SHAModules() {
         {
             id: 6,
             name: "Financial Performance Analysis (Ratio Analysis)",
-            color: shaGreen,
+            color: getModuleColor(6),
             status: "locked",
             description: "Master financial ratio analysis and balance sheet evaluation techniques.",
             image: finPerformanceImg,
@@ -91,7 +142,7 @@ export default function SHAModules() {
         {
             id: 7,
             name: "Premium Certificates",
-            color: shaBlue,
+            color: getModuleColor(7),
             status: "locked",
             description: "Learn premium certificate preparation and validation processes.",
             image: premCertificatesImg,
@@ -100,7 +151,7 @@ export default function SHAModules() {
         {
             id: 8,
             name: "Reinsurance Certificates",
-            color: shaGreen,
+            color: getModuleColor(8),
             status: "locked",
             description: "Understand reinsurance certificate creation and management.",
             image: reinCertificatesImg,
@@ -109,7 +160,7 @@ export default function SHAModules() {
         {
             id: 9,
             name: "Financial Condition Reporting",
-            color: shaBlue,
+            color: getModuleColor(9),
             status: "locked",
             description: "Master financial condition reporting standards and requirements.",
             image: finConditionImg,
@@ -118,13 +169,17 @@ export default function SHAModules() {
     ];
 
     const ModuleCard = ({ module, isSpecial = false }) => {
+        const progress = isSpecial ? 0 : getModuleProgress(module.id);
+        const isUnlocked = isSpecial || isModuleUnlocked(module.id);
         const baseClasses = "relative rounded-3xl overflow-hidden transition-all duration-500 backdrop-blur-md border-2 hover:scale-105 hover:shadow-2xl flex flex-col w-full";
 
         if (isSpecial) {
             const style = {
-                background: `linear-gradient(135deg, ${module.color}20 0%, ${module.color}10 100%)`,
-                boxShadow: `0 0 30px ${module.color}40`,
-                borderColor: `${module.color}60`,
+                background: isDark
+                    ? `linear-gradient(135deg, ${module.color}20 0%, ${module.color}10 100%)`
+                    : `linear-gradient(135deg, ${module.color}18 0%, ${module.color}08 100%)`,
+                boxShadow: isDark ? `0 0 30px ${module.color}40` : `0 10px 30px ${module.color}20`,
+                borderColor: isDark ? `${module.color}60` : `${module.color}35`,
             };
 
             return (
@@ -150,23 +205,21 @@ export default function SHAModules() {
                             </div>
                         </div>
 
-                        <div className="h-1/2 flex flex-col justify-between p-3 lg:p-4" style={{
-                            background: 'linear-gradient(to bottom, rgba(0, 61, 107, 0.95), rgba(0, 51, 89, 0.9))'
-                        }}>
+                        <div className="h-1/2 flex flex-col justify-between p-3 lg:p-4" style={{ background: cardContentBg }}>
                             <div>
                                 <div className="flex items-center gap-2 mb-1 lg:mb-2">
                                     <Award className="w-3 h-3 lg:w-4 lg:h-4 transition-colors" style={{ color: shaGreen }} />
-                                    <h3 className="text-xs lg:text-sm font-bold text-white line-clamp-1 group-hover:opacity-80 transition-opacity">
+                                    <h3 className="text-xs lg:text-sm font-bold line-clamp-1 group-hover:opacity-80 transition-opacity" style={{ color: cardTitleColor }}>
                                         {module.name}
                                     </h3>
                                 </div>
-                                <p className="text-gray-200 text-xs line-clamp-2 lg:line-clamp-3">
+                                <p className="text-xs line-clamp-2 lg:line-clamp-3" style={{ color: cardTextColor }}>
                                     {module.description}
                                 </p>
                             </div>
 
                             <div className="mt-2">
-                                <div className="w-full bg-white/10 rounded-full h-1.5 mb-2 overflow-hidden">
+                                <div className="w-full rounded-full h-1.5 mb-2 overflow-hidden" style={{ background: trackBg }}>
                                     <div className="h-1.5 w-full" style={{ backgroundColor: shaGreen }} />
                                 </div>
                                 <div className="flex justify-between items-center">
@@ -183,11 +236,13 @@ export default function SHAModules() {
             );
         }
 
-        if (module.status === "accessible") {
+        if (isUnlocked) {
             const style = {
-                background: `linear-gradient(135deg, ${module.color}15 0%, ${module.color}05 100%)`,
-                boxShadow: `0 0 25px ${module.color}33`,
-                borderColor: `${module.color}40`,
+                background: isDark
+                    ? `linear-gradient(135deg, ${module.color}15 0%, ${module.color}05 100%)`
+                    : `linear-gradient(135deg, ${module.color}10 0%, ${module.color}04 100%)`,
+                boxShadow: isDark ? `0 0 25px ${module.color}33` : `0 10px 25px ${module.color}18`,
+                borderColor: isDark ? `${module.color}40` : `${module.color}30`,
             };
 
             return (
@@ -199,7 +254,7 @@ export default function SHAModules() {
                                 alt={module.name}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                             />
-                            <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
+                            <div className={`absolute inset-0 transition-colors ${isDark ? "bg-black/20 group-hover:bg-black/10" : "bg-black/10 group-hover:bg-black/5"}`} />
                             <div className="absolute top-3 right-3">
                                 <span className="px-2 py-1 text-xs rounded-full border"
                                     style={{
@@ -207,36 +262,44 @@ export default function SHAModules() {
                                         color: shaGreen,
                                         borderColor: `${shaGreen}30`
                                     }}>
-                                    Accessible
+                                    {progress === 100 ? 'Completed' : 'Accessible'}
                                 </span>
                             </div>
                         </div>
 
-                        <div className="h-1/2 flex flex-col justify-between p-3 lg:p-4" style={{
-                            background: 'linear-gradient(to bottom, rgba(0, 61, 107, 0.95), rgba(0, 51, 89, 0.9))'
-                        }}>
+                        <div className="h-1/2 flex flex-col justify-between p-3 lg:p-4" style={{ background: cardContentBg }}>
                             <div>
                                 <div className="flex items-center gap-2 mb-1 lg:mb-2">
-                                    <BookOpen className="w-3 h-3 lg:w-4 lg:h-4 text-white/70 transition-colors"
-                                        style={{ '--hover-color': shaBlue }} />
-                                    <h3 className="text-xs lg:text-sm font-bold text-white line-clamp-1 group-hover:opacity-80 transition-opacity">
+                                    <BookOpen className="w-3 h-3 lg:w-4 lg:h-4 transition-colors"
+                                        style={{ color: cardMutedColor, '--hover-color': shaBlue }} />
+                                    <h3 className="text-xs lg:text-sm font-bold line-clamp-1 group-hover:opacity-80 transition-opacity" style={{ color: cardTitleColor }}>
                                         {module.name}
                                     </h3>
                                 </div>
-                                <p className="text-gray-200 text-xs line-clamp-2 lg:line-clamp-3">
+                                <p className="text-xs line-clamp-2 lg:line-clamp-3" style={{ color: cardTextColor }}>
                                     {module.description}
                                 </p>
                             </div>
 
                             <div className="mt-2">
-                                <div className="w-full bg-white/10 rounded-full h-1.5 mb-2 overflow-hidden">
-                                    <div className="h-1.5 w-1/4" style={{ backgroundColor: module.color }} />
+                                <div className="w-full rounded-full h-1.5 mb-2 overflow-hidden" style={{ background: trackBg }}>
+                                    <div
+                                        className="h-1.5 transition-all duration-1000"
+                                        style={{
+                                            width: `${progress}%`,
+                                            backgroundColor: progress === 100 ? shaGreen : module.color
+                                        }}
+                                    />
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className="text-sm lg:text-lg font-bold text-white/30">{module.number}</span>
-                                    <div className="flex items-center gap-1 text-white/70 group-hover:text-white transition-colors">
-                                        <span className="text-xs">Start</span>
-                                        <Play className="w-3 h-3" />
+                                    <span className="text-sm lg:text-lg font-bold" style={{ color: cardFaintColor }}>{module.number}</span>
+                                    <div
+                                        className="flex items-center gap-1 transition-colors"
+                                        style={{ color: progress === 100 ? shaGreen : cardMutedColor }}
+                                    >
+                                        {progress > 0 && progress < 100 && <span className="text-xs font-bold">{progress}%</span>}
+                                        <span className="text-xs">{progress === 100 ? 'Done' : progress > 0 ? 'Resume' : 'Start'}</span>
+                                        {progress === 100 ? <CheckCircle className="w-3 h-3" /> : <Play className="w-3 h-3" />}
                                     </div>
                                 </div>
                             </div>
@@ -246,9 +309,11 @@ export default function SHAModules() {
             );
         } else {
             const style = {
-                background: `linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)`,
-                border: "2px solid rgba(239, 68, 68, 0.3)",
-                boxShadow: `0 0 20px rgba(239, 68, 68, 0.1)`,
+                background: isDark
+                    ? "linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%)"
+                    : "linear-gradient(135deg, rgba(255,255,255,0.94) 0%, rgba(248,250,252,0.9) 100%)",
+                border: isDark ? "2px solid rgba(239, 68, 68, 0.3)" : "2px solid rgba(239, 68, 68, 0.2)",
+                boxShadow: isDark ? "0 0 20px rgba(239, 68, 68, 0.1)" : "0 10px 25px rgba(15, 23, 42, 0.08)",
             };
 
             return (
@@ -260,36 +325,38 @@ export default function SHAModules() {
                                 alt={module.name}
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-red-500/5" />
+                            <div className="absolute inset-0" style={{ background: isDark ? "rgba(239, 68, 68, 0.05)" : "rgba(239, 68, 68, 0.03)" }} />
                             <div className="absolute top-3 right-3">
-                                <span className="px-2 py-1 text-xs bg-red-500/20 text-red-400 rounded-full border border-red-500/30">
+                                <span className="px-2 py-1 text-xs rounded-full border" style={{
+                                    backgroundColor: isDark ? "rgba(239, 68, 68, 0.2)" : "rgba(239, 68, 68, 0.12)",
+                                    color: isDark ? "#F87171" : "#DC2626",
+                                    borderColor: isDark ? "rgba(239, 68, 68, 0.3)" : "rgba(239, 68, 68, 0.24)"
+                                }}>
                                     Locked
                                 </span>
                             </div>
                         </div>
 
-                        <div className="h-1/2 flex flex-col justify-between p-3 lg:p-4" style={{
-                            background: 'linear-gradient(to bottom, rgba(0, 61, 107, 0.95), rgba(0, 51, 89, 0.9))'
-                        }}>
+                        <div className="h-1/2 flex flex-col justify-between p-3 lg:p-4" style={{ background: cardContentBg }}>
                             <div>
                                 <div className="flex items-center gap-2 mb-1 lg:mb-2">
-                                    <Lock className="w-3 h-3 lg:w-4 lg:h-4 text-red-400" />
-                                    <h3 className="text-xs lg:text-sm font-bold text-white/70 line-clamp-1">
+                                    <Lock className="w-3 h-3 lg:w-4 lg:h-4" style={{ color: isDark ? "#F87171" : "#DC2626" }} />
+                                    <h3 className="text-xs lg:text-sm font-bold line-clamp-1" style={{ color: cardMutedColor }}>
                                         {module.name}
                                     </h3>
                                 </div>
-                                <p className="text-gray-400 text-xs line-clamp-2 lg:line-clamp-3">
+                                <p className="text-xs line-clamp-2 lg:line-clamp-3" style={{ color: cardTextColor }}>
                                     {module.description}
                                 </p>
                             </div>
 
                             <div className="mt-2">
-                                <div className="w-full bg-white/5 rounded-full h-1.5 mb-2 overflow-hidden">
-                                    <div className="bg-red-400/30 h-1.5 w-0" />
+                                <div className="w-full rounded-full h-1.5 mb-2 overflow-hidden" style={{ background: isDark ? "rgba(255,255,255,0.05)" : "rgba(15,23,42,0.07)" }}>
+                                    <div className="h-1.5 w-0" style={{ background: isDark ? "rgba(248, 113, 113, 0.3)" : "rgba(220, 38, 38, 0.3)" }} />
                                 </div>
                                 <div className="flex justify-between items-center">
-                                    <span className="text-sm lg:text-lg font-bold text-white/20">{module.number}</span>
-                                    <Lock className="w-3 h-3 lg:w-4 lg:h-4 text-red-400" />
+                                    <span className="text-sm lg:text-lg font-bold" style={{ color: isDark ? "rgba(255,255,255,0.2)" : "rgba(15,23,42,0.35)" }}>{module.number}</span>
+                                    <Lock className="w-3 h-3 lg:w-4 lg:h-4" style={{ color: isDark ? "#F87171" : "#DC2626" }} />
                                 </div>
                             </div>
                         </div>
@@ -301,62 +368,37 @@ export default function SHAModules() {
 
     return (
         <div
-            className="min-h-screen relative text-white overflow-x-hidden"
+            className="min-h-screen relative overflow-x-hidden transition-colors duration-300"
             style={{
-                background: `
-          radial-gradient(1000px at 80% 20%, ${shaBlue}15, transparent 70%),
-          radial-gradient(800px at 20% 80%, ${shaGreen}15, transparent 70%),
-          linear-gradient(180deg, #001529 0%, #002847 100%)
-        `,
+                background: colors.pageGradient,
+                color: colors.text,
             }}
         >
             {/* Header Bar with SHA Logo on left and Back button on right */}
-            <div className="relative border-b backdrop-blur-xl" style={{
-                background: 'linear-gradient(to right, rgba(0, 61, 107, 1), rgba(0, 51, 89, 1))',
-                borderColor: 'rgba(255, 255, 255, 0.1)'
+            <div className="relative border-b backdrop-blur-xl transition-colors duration-300" style={{
+                background: isDark
+                    ? "linear-gradient(to right, rgba(0, 61, 107, 1), rgba(0, 51, 89, 1))"
+                    : "linear-gradient(to right, rgba(255, 255, 255, 0.94), rgba(248, 250, 252, 0.9))",
+                borderColor: isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(15, 23, 42, 0.1)"
             }}>
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-                    <div className="flex justify-between items-center">
-                        {/* SHA Logo on the left */}
-                        <div className="flex items-center">
-                            <img
-                                src={shaLogo}
-                                alt="SHA Logo"
-                                className="h-9 sm:h-11 w-auto"
-                            />
-                        </div>
-
-                        {/* Right side with ONLY Back to Dashboard button */}
-                        <div className="flex items-center">
-                            <Link to="/SHADashboard"
-                                className="flex items-center gap-2 px-6 py-2.5 rounded-lg font-medium text-white transition-all duration-200 hover:bg-white/10 border-2"
-                                style={{
-                                    borderColor: shaGreen,
-                                    backgroundColor: 'rgba(139, 197, 63, 0.1)'
-                                }}>
-                                <Home className="w-5 h-5" style={{ color: shaGreen }} />
-                                <span className="text-sm">Dashboard</span>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
 
                 {/* Title and Description - Centered content */}
-                <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-6 pt-2">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6 pb-6 pt-14">
                     <div className="text-center">
-                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight pb-1"
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 tracking-tight pb-2"
                             style={{
                                 background: `linear-gradient(135deg, ${shaBlue} 0%, ${shaGreen} 100%)`,
                                 WebkitBackgroundClip: 'text',
                                 WebkitTextFillColor: 'transparent',
                                 backgroundClip: 'text',
-                                filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))',
+                                filter: isDark ? 'drop-shadow(0 2px 8px rgba(0,0,0,0.3))' : 'drop-shadow(0 2px 8px rgba(0,102,179,0.12))',
                                 letterSpacing: '-0.02em'
                             }}>
                             Training Modules
                         </h1>
 
-                        <p className="text-gray-300 text-sm sm:text-base leading-relaxed max-w-3xl mx-auto font-light" style={{
+                        <p className="text-sm sm:text-base leading-relaxed max-w-3xl mx-auto font-light" style={{
+                            color: colors.textSecondary,
                             letterSpacing: '0.01em',
                             lineHeight: '1.6'
                         }}>
@@ -403,10 +445,10 @@ export default function SHAModules() {
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <span className="text-white text-lg font-medium">Powered by</span>
-                            <div className="flex flex-col items-center">
+                            <span className="text-white text-lg font-medium">Powered by <span className="font-bold text-xl">Kenbright AI</span></span>
+                            {/* <div className="flex flex-col items-center">
                                 <img src={kenbrightLogo} alt="Kenbright Logo" className="h-16 w-auto" />
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

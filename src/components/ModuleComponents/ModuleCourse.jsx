@@ -16,19 +16,19 @@ export default function ModuleCourse({ courseContent, theme, styles, setViewingP
       </p>
 
       {hasMultipleResources && (
-        <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 dark:border-gray-700 pb-2">
+        <div className={`flex flex-wrap gap-2 mb-6 border-b ${styles.border} pb-2`}>
           {courseContent.resources.map((resource, idx) => (
             <button
               key={idx}
               onClick={() => setActiveTab(idx)}
               className={`px-4 py-2 text-sm font-medium rounded-t-lg transition-colors duration-200 ${
                 activeTab === idx
-                  ? theme === 'light' 
-                    ? 'bg-blue-100 text-blue-700 border-b-2 border-blue-700' 
-                    : 'bg-purple-900/40 text-purple-300 border-b-2 border-purple-400'
+                  ? theme === 'light'
+                    ? `${styles.accentBg} ${styles.accent} border-b-2 border-current font-semibold`
+                    : `${styles.accentBg} ${styles.accent} border-b-2 border-current font-semibold`
                   : theme === 'light'
-                    ? 'text-gray-600 hover:bg-gray-100'
-                    : 'text-gray-400 hover:bg-gray-800'
+                    ? 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                    : `${styles.textTertiary} hover:bg-white/10 hover:text-white`
               }`}
             >
               {resource.title}
@@ -38,11 +38,11 @@ export default function ModuleCourse({ courseContent, theme, styles, setViewingP
       )}
 
       {activeResource && (
-        <div className="mb-8 overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700">
-          <div className={`${styles.accentBg} p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-gray-200 dark:border-gray-700`}>
+        <div className={`mb-8 overflow-hidden rounded-2xl border ${styles.border}`}>
+          <div className={`${styles.accentBg} p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b ${styles.border}`}>
             <div className="flex items-center space-x-3 md:space-x-4 w-full">
-              <div className={`p-3 ${theme === 'light' ? 'bg-blue-200' : 'bg-purple-500/40'} rounded-xl shrink-0`}>
-                <FileText className={`w-5 h-5 ${theme === 'light' ? 'text-blue-700' : 'text-purple-300'}`} />
+              <div className={`p-3 ${styles.accentBg} rounded-xl shrink-0`}>
+                <FileText className={`w-5 h-5 ${styles.accent}`} />
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className={`text-base md:text-lg font-semibold ${styles.text} truncate`}>{activeResource.title}</h4>
