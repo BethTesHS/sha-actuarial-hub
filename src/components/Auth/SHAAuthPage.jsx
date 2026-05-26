@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "../../supabaseClient";
 import { shaColors as colors } from "../../theme/sha";
+import { TRAINING_MODULES } from "../../constants/moduleCatalog";
 import {
   Mail,
   Lock,
@@ -18,19 +19,63 @@ import {
   GraduationCap
 } from "lucide-react";
 
+function useCountUp(end, duration = 2000, shouldStart = true) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!shouldStart) return;
+
+    let startTime;
+    let animationFrame;
+
+    const animate = (currentTime) => {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      setCount(Math.floor(progress * end));
+
+      if (progress < 1) animationFrame = requestAnimationFrame(animate);
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationFrame);
+  }, [end, duration, shouldStart]);
+
+  return count;
+}
+
 export default function SHAAuthPage({ onAuthSuccess }) {
   const [searchParams] = useSearchParams();
   const [isLogin, setIsLogin] = useState(searchParams.get("mode") !== "signup");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [targetUserCount, setTargetUserCount] = useState(1500);
   const navigate = useNavigate();
+  const totalTrainingModules = TRAINING_MODULES.length;
+  const userCount = useCountUp(targetUserCount);
+  const moduleCount = useCountUp(totalTrainingModules);
+  const successRate = useCountUp(98);
 
   // Clear any existing session when auth page loads
   useEffect(() => {
     // Optional: Clear session storage but keep localStorage for other purposes
     sessionStorage.removeItem('showWelcome');
     sessionStorage.removeItem('welcomeName');
+  }, []);
+
+  useEffect(() => {
+    const fetchUserCount = async () => {
+      try {
+        const { data, error } = await supabase.rpc('get_user_count');
+
+        if (error) throw error;
+        if (data !== null) setTargetUserCount(data);
+      } catch (error) {
+        console.error("Error fetching user count:", error);
+      }
+    };
+
+    fetchUserCount();
   }, []);
 
   const [formData, setFormData] = useState({
@@ -138,18 +183,18 @@ export default function SHAAuthPage({ onAuthSuccess }) {
   };
 
   const features = [
-    { icon: <GraduationCap className="w-5 h-5" />, text: "Access 18 actuarial training modules" },
+    { icon: <GraduationCap className="w-5 h-5" />, text: `Access ${totalTrainingModules} actuarial training modules` },
     { icon: <Shield className="w-5 h-5" />, text: "IFRS 17 compliance training" },
     { icon: <Building2 className="w-5 h-5" />, text: "Industry-recognized certification" },
     { icon: <CheckCircle className="w-5 h-5" />, text: "Track your learning progress" }
   ];
 
   return (
-    <div className="min-h-screen flex" style={{
+    <div className="min-h-screen flex flex-col xl:flex-row overflow-x-hidden" style={{
       background: `linear-gradient(135deg, ${colors.darkBlue} 0%, #001529 50%, #000a15 100%)`
     }}>
       {/* Left Side - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden">
+      <div className="hidden xl:flex xl:w-[48%] 2xl:w-1/2 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0">
           <div className="absolute top-20 left-20 w-72 h-72 rounded-full blur-3xl opacity-30"
@@ -170,28 +215,28 @@ export default function SHAAuthPage({ onAuthSuccess }) {
         />
 
         {/* Content */}
-        <div className="relative z-10 flex flex-col justify-center px-12 xl:px-20">
+        <div className="relative z-10 flex min-h-screen flex-col justify-center px-10 py-10 2xl:px-20">
           {/* Logo */}
-          <div className="mb-12">
+          <div className="mb-8 2xl:mb-12">
             <div className="flex items-center gap-4">
               <div className="relative">
                 <div className="absolute -inset-2 rounded-2xl blur-lg opacity-60"
                   style={{ background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})` }} />
-                <div className="relative w-20 h-20 rounded-2xl flex items-center justify-center font-black text-white text-3xl shadow-2xl"
+                <div className="relative w-16 h-16 2xl:w-20 2xl:h-20 rounded-2xl flex items-center justify-center font-black text-white text-2xl 2xl:text-3xl shadow-2xl"
                   style={{ background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})` }}>
                   SHA
                 </div>
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-white">Actuarial Hub</h2>
-                <p className="text-gray-400 text-lg">Professional Training Platform</p>
+                <h2 className="text-2xl 2xl:text-3xl font-bold text-white">Actuarial Hub</h2>
+                <p className="text-gray-400 text-base 2xl:text-lg">Professional Training Platform</p>
               </div>
             </div>
           </div>
 
           {/* Welcome Text */}
-          <div className="mb-12">
-            <h1 className="text-4xl xl:text-5xl font-black text-white mb-6 leading-tight">
+          <div className="mb-8 2xl:mb-12">
+            <h1 className="text-4xl 2xl:text-5xl font-black text-white mb-5 2xl:mb-6 leading-tight">
               Transform Your
               <span className="block mt-2" style={{
                 background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})`,
@@ -201,54 +246,54 @@ export default function SHAAuthPage({ onAuthSuccess }) {
                 Actuarial Career
               </span>
             </h1>
-            <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
+            <p className="text-lg 2xl:text-xl text-gray-300 leading-relaxed max-w-lg">
               Join hundreds of actuarial professionals mastering IFRS 17 and advancing their expertise with our comprehensive training platform.
             </p>
           </div>
 
           {/* Features */}
-          <div className="space-y-5">
+          <div className="space-y-4 2xl:space-y-5">
             {features.map((feature, i) => (
               <div key={i} className="flex items-center gap-4 group">
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
+                <div className="w-11 h-11 2xl:w-12 2xl:h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
                   style={{ background: `${colors.green}25`, color: colors.green }}>
                   {feature.icon}
                 </div>
-                <span className="text-gray-300 text-lg">{feature.text}</span>
+                <span className="text-gray-300 text-base 2xl:text-lg">{feature.text}</span>
               </div>
             ))}
           </div>
 
           {/* Stats */}
-          <div className="mt-16 flex gap-12">
+          <div className="mt-10 2xl:mt-16 flex flex-wrap gap-8 2xl:gap-12">
             <div className="text-center">
-              <div className="text-4xl font-black" style={{ color: colors.green }}>500+</div>
+              <div className="text-3xl 2xl:text-4xl font-black" style={{ color: colors.green }}>{userCount}+</div>
               <div className="text-gray-400 mt-1">Active Learners</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-black" style={{ color: colors.cyan }}>17+</div>
+              <div className="text-3xl 2xl:text-4xl font-black" style={{ color: colors.cyan }}>{moduleCount}</div>
               <div className="text-gray-400 mt-1">Modules</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-black" style={{ color: colors.blue }}>98%</div>
+              <div className="text-3xl 2xl:text-4xl font-black" style={{ color: colors.blue }}>{successRate}%</div>
               <div className="text-gray-400 mt-1">Success Rate</div>
             </div>
           </div>
 
           {/* Powered By */}
-          <div className="mt-16 pt-8 border-t border-white/10">
+          <div className="mt-10 2xl:mt-16 pt-6 2xl:pt-8 border-t border-white/10">
             <p className="text-gray-500 text-sm">Powered by <span className="text-white font-bold text-base">Kenbright AI</span></p>
           </div>
         </div>
       </div>
 
       {/* Right Side - Auth Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 lg:p-12">
-        <div className="w-full max-w-md">
+      <div className="w-full xl:w-[52%] 2xl:w-1/2 min-h-screen flex items-start sm:items-center justify-center overflow-y-auto px-4 py-5 sm:px-6 sm:py-8 lg:px-10 xl:px-12">
+        <div className="w-full max-w-md sm:max-w-lg xl:max-w-md">
           {/* Mobile Logo */}
-          <div className="lg:hidden text-center mb-8">
+          <div className="xl:hidden text-center mb-5 sm:mb-8">
             <div className="inline-flex items-center gap-3">
-              <div className="w-14 h-14 rounded-xl flex items-center justify-center font-black text-white text-xl shadow-xl"
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center font-black text-white text-lg sm:text-xl shadow-xl"
                 style={{ background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})` }}>
                 SHA
               </div>
@@ -260,7 +305,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
           </div>
 
           {/* Form Card */}
-          <div className="rounded-3xl p-8 backdrop-blur-xl border-2"
+          <div className="rounded-2xl sm:rounded-3xl p-5 sm:p-7 lg:p-8 backdrop-blur-xl border-2"
             style={{
               background: 'rgba(255, 255, 255, 0.03)',
               borderColor: 'rgba(255, 255, 255, 0.1)',
@@ -268,11 +313,11 @@ export default function SHAAuthPage({ onAuthSuccess }) {
             }}>
 
             {/* Toggle Buttons */}
-            <div className="flex rounded-2xl p-1.5 mb-8" style={{ background: 'rgba(255,255,255,0.08)' }}>
+            <div className="flex rounded-2xl p-1.5 mb-6 sm:mb-8" style={{ background: 'rgba(255,255,255,0.08)' }}>
               <button
                 type="button"
                 onClick={() => { setIsLogin(true); setError(""); }}
-                className={`flex-1 py-3.5 rounded-xl font-semibold text-lg transition-all duration-300 ${isLogin ? 'text-white shadow-xl' : 'text-gray-400 hover:text-white'
+                className={`flex-1 py-3 sm:py-3.5 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 ${isLogin ? 'text-white shadow-xl' : 'text-gray-400 hover:text-white'
                   }`}
                 style={isLogin ? {
                   background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})`,
@@ -284,7 +329,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
               <button
                 type="button"
                 onClick={() => { setIsLogin(false); setError(""); }}
-                className={`flex-1 py-3.5 rounded-xl font-semibold text-lg transition-all duration-300 ${!isLogin ? 'text-white shadow-xl' : 'text-gray-400 hover:text-white'
+                className={`flex-1 py-3 sm:py-3.5 rounded-xl font-semibold text-base sm:text-lg transition-all duration-300 ${!isLogin ? 'text-white shadow-xl' : 'text-gray-400 hover:text-white'
                   }`}
                 style={!isLogin ? {
                   background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})`,
@@ -296,18 +341,18 @@ export default function SHAAuthPage({ onAuthSuccess }) {
             </div>
 
             {/* Header */}
-            <div className="text-center mb-8">
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full mb-4"
+            <div className="text-center mb-6 sm:mb-8">
+              <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full mb-4"
                 style={{ background: `${colors.green}15`, border: `1px solid ${colors.green}30` }}>
                 <Sparkles className="w-4 h-4" style={{ color: colors.green }} />
                 <span className="text-sm font-semibold" style={{ color: colors.green }}>
                   {isLogin ? 'Welcome Back!' : 'Get Started Free'}
                 </span>
               </div>
-              <h2 className="text-2xl font-bold text-white mb-2">
+              <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
                 {isLogin ? 'Sign in to your account' : 'Create your account'}
               </h2>
-              <p className="text-gray-400">
+              <p className="text-sm sm:text-base text-gray-400">
                 {isLogin
                   ? 'Continue your actuarial learning journey'
                   : 'Start your actuarial training today'}
@@ -324,7 +369,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
             )}
 
             {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
               {/* Name Field (Sign Up only) */}
               {!isLogin && (
                 <div>
@@ -337,7 +382,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your full name"
-                      className="w-full pl-12 pr-4 py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300 focus:ring-2"
+                      className="w-full pl-12 pr-4 py-3.5 sm:py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300 focus:ring-2"
                       style={{
                         background: 'rgba(255,255,255,0.06)',
                         border: '1px solid rgba(255,255,255,0.12)',
@@ -358,7 +403,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="Enter your email"
-                    className="w-full pl-12 pr-4 py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
+                    className="w-full pl-12 pr-4 py-3.5 sm:py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
                     style={{
                       background: 'rgba(255,255,255,0.06)',
                       border: '1px solid rgba(255,255,255,0.12)'
@@ -379,7 +424,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
                       value={formData.company}
                       onChange={handleChange}
                       placeholder="Enter your company name"
-                      className="w-full pl-12 pr-4 py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
+                      className="w-full pl-12 pr-4 py-3.5 sm:py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
                       style={{
                         background: 'rgba(255,255,255,0.06)',
                         border: '1px solid rgba(255,255,255,0.12)'
@@ -400,7 +445,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
                     value={formData.password}
                     onChange={handleChange}
                     placeholder={isLogin ? "Enter your password" : "Create a password (min 6 chars)"}
-                    className="w-full pl-12 pr-12 py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
+                    className="w-full pl-12 pr-12 py-3.5 sm:py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
                     style={{
                       background: 'rgba(255,255,255,0.06)',
                       border: '1px solid rgba(255,255,255,0.12)'
@@ -428,7 +473,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
                       value={formData.confirmPassword}
                       onChange={handleChange}
                       placeholder="Confirm your password"
-                      className="w-full pl-12 pr-4 py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
+                      className="w-full pl-12 pr-4 py-3.5 sm:py-4 rounded-xl text-white placeholder-gray-500 outline-none transition-all duration-300"
                       style={{
                         background: 'rgba(255,255,255,0.06)',
                         border: '1px solid rgba(255,255,255,0.12)'
@@ -440,7 +485,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
 
               {/* Forgot Password (Login only) */}
               {isLogin && (
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input type="checkbox" className="w-4 h-4 rounded accent-green-500" />
                     <span className="text-gray-400 text-sm">Remember me</span>
@@ -456,7 +501,7 @@ export default function SHAAuthPage({ onAuthSuccess }) {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-4 rounded-xl font-bold text-white text-lg flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 mt-8"
+                className="w-full py-3.5 sm:py-4 rounded-xl font-bold text-white text-base sm:text-lg flex items-center justify-center gap-3 transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 mt-6 sm:mt-8"
                 style={{
                   background: `linear-gradient(135deg, ${colors.blue}, ${colors.green})`,
                   boxShadow: `0 10px 40px ${colors.blue}40`
@@ -477,15 +522,14 @@ export default function SHAAuthPage({ onAuthSuccess }) {
               </button>
             </form>
 
-            {/* Divider */}
-            <div className="flex items-center gap-4 my-8">
+            {/* <div className="flex items-center gap-4 my-6 sm:my-8">
               <div className="flex-1 h-px bg-white/10"></div>
               <span className="text-gray-500 text-sm">or</span>
               <div className="flex-1 h-px bg-white/10"></div>
-            </div>
+            </div> */}
 
             {/* Footer */}
-            <div className="text-center">
+            {/* <div className="text-center">
               <p className="text-gray-400">
                 {isLogin ? "Don't have an account?" : "Already have an account?"}
                 <button
@@ -497,11 +541,11 @@ export default function SHAAuthPage({ onAuthSuccess }) {
                   {isLogin ? 'Sign up free' : 'Sign in'}
                 </button>
               </p>
-            </div>
+            </div> */}
           </div>
 
           {/* Bottom Text */}
-          <p className="mt-8 text-center text-gray-500 text-sm">
+          <p className="mt-5 sm:mt-8 text-center text-gray-500 text-xs sm:text-sm leading-relaxed">
             By continuing, you agree to SHA's{' '}
             <a href="#" className="underline hover:text-gray-400">Terms of Service</a>
             {' '}and{' '}

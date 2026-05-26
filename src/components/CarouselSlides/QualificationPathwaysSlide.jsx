@@ -1,9 +1,9 @@
 import React from 'react';
 import './QualificationPathwaysSlide.css';
 
-const QualificationPathwaysSlide = ({ isActive, user, handleNavigation }) => {
+const QualificationPathwaysSlide = ({ isActive, user, handleNavigation, onDownloadQualificationPathway }) => {
   const handlePrimaryAction = () => {
-    window.open('/pdfs/qualification-handbook-2025-2026.pdf', '_blank');
+    onDownloadQualificationPathway?.();
   };
 
   const handleSecondaryAction = () => {

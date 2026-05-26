@@ -91,24 +91,6 @@ export default function ModulePage({ theme = 'dark', user }) {
         const moduleNumber = parseInt(moduleId, 10);
         const fallbackData = MODULES_MAP[moduleNumber];
         if (fallbackData) {
-          if (moduleNumber > 1 && user?.id) {
-            const { data: previousProgress, error: progressError } = await supabase
-              .from('user_module_progress')
-              .select('progress_percentage')
-              .eq('user_id', user.id)
-              .eq('module_id', String(moduleNumber - 1))
-              .limit(1)
-              .maybeSingle();
-
-            if (progressError) throw progressError;
-
-            if ((previousProgress?.progress_percentage || 0) !== 100) {
-              toast.info(`Complete Module ${moduleNumber - 1} before opening Module ${moduleNumber}.`);
-              navigate('/modules', { replace: true });
-              return;
-            }
-          }
-
           setModuleData(fallbackData);
         } else {
           toast.error('Module not found.');
@@ -121,7 +103,7 @@ export default function ModulePage({ theme = 'dark', user }) {
     };
 
     fetchModuleData();
-  }, [moduleId, navigate, user?.id]);
+  }, [moduleId]);
 
   const colors = getShaThemeColors(theme);
 

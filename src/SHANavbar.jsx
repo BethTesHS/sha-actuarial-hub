@@ -94,7 +94,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     fraudRiskMatrix: "",
     pricing: {
       pricingTools: "",
-      prmfTool: "",
+      prmfTool: "https://sha-prmf-calculator.vercel.app",
     }
   };
 
@@ -854,7 +854,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                       <Link to="/tools" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         Pricing Tool
                       </Link>
-                      <a href="https://prmf-calculator.vercel.app/" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                      <a href="https://sha-prmf-calculator.vercel.app" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         PRMF tool
                       </a>
                     </div>

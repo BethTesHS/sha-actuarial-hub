@@ -36,7 +36,7 @@ export const toolCategories = [
       },
       { 
         name: 'PRMF Calculator', 
-        url: 'https://prmf-calculator.vercel.app/',
+        url: 'https://sha-prmf-calculator.vercel.app',
         icon: Calculator,
         theme: 'blue'
       }

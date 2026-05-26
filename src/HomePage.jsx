@@ -15,6 +15,7 @@ import QualificationPathwaysSlide from "./components/CarouselSlides/Qualificatio
 import Learn17Slide from "./components/CarouselSlides/Learn17Slide";
 import Footer from "./components/footer";
 import { getShaThemeColors } from "./theme/sha";
+import { TRAINING_MODULES } from "./constants/moduleCatalog";
 
 const buildHomeColors = (theme) => {
   const c = getShaThemeColors(theme);
@@ -43,6 +44,8 @@ const carouselSlides = [
   { component: IFRS17GameSlide, id: 'ifrs-17-game' },
 ];
 
+const QUALIFICATION_PATHWAY_FILE = "/pdfs/qualification-handbook-2025-2026.pdf";
+
 function useCountUp(end, duration = 2000, shouldStart) {
   const [count, setCount] = useState(0);
   useEffect(() => {
@@ -70,6 +73,7 @@ export default function HomePage({ theme = 'dark', user }) {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const autoScrollIntervalRef = useRef(null);
   const restartAutoScrollTimeoutRef = useRef(null);
+  const totalTrainingModules = TRAINING_MODULES.length;
 
   const currentColors = buildHomeColors(theme);
   const ctaTextOnAccent = theme === 'dark' ? currentColors.darkBlue : '#FFFFFF';
@@ -127,7 +131,7 @@ export default function HomePage({ theme = 'dark', user }) {
   }, []);
 
   const userCount = useCountUp(targetUserCount, 2000, statsVisible);
-  const moduleCount = useCountUp(17, 2000, statsVisible);
+  const moduleCount = useCountUp(totalTrainingModules, 2000, statsVisible);
   const toolCount = useCountUp(totalToolsCount, 2000, statsVisible);
   const successRate = useCountUp(95, 2000, statsVisible);
 
@@ -182,6 +186,20 @@ export default function HomePage({ theme = 'dark', user }) {
     }
   };
 
+  const downloadQualificationPathway = () => {
+    if (!user) {
+      navigate('/SHAAuth');
+      return;
+    }
+
+    const link = document.createElement('a');
+    link.href = QUALIFICATION_PATHWAY_FILE;
+    link.download = '';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="min-h-screen overflow-hidden transition-colors duration-300 pt-20" style={{ background: currentColors.bg }}>
       {/* HERO CAROUSEL */}
@@ -201,6 +219,8 @@ export default function HomePage({ theme = 'dark', user }) {
                   user={user}
                   handleNavigation={handleNavigation}
                   totalToolsCount={totalToolsCount}
+                  totalTrainingModules={totalTrainingModules}
+                  onDownloadQualificationPathway={downloadQualificationPathway}
                 />
               </div>
             );
@@ -244,14 +264,14 @@ export default function HomePage({ theme = 'dark', user }) {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: <GraduationCap className="w-8 h-8" />, title: "Actuarial Training Hub", desc: "17+ comprehensive modules covering everything from data cleanup to IAS 19 valuation", features: ["Structured learning paths", "Real-world case studies", "Progress tracking"], color: currentColors.cyan, link: "/modules" },
+              { icon: <GraduationCap className="w-8 h-8" />, title: "Actuarial Training Hub", desc: `${totalTrainingModules} comprehensive modules covering everything from data cleanup to valuation`, features: ["Structured learning paths", "Real-world case studies", "Progress tracking"], color: currentColors.cyan, link: "/modules" },
               { icon: <BookOpen className="w-8 h-8" />, title: "IFRS 17 Training Hub", desc: "Dedicated platform for mastering the new insurance accounting standard", features: ["25+ detailed lessons", "Interactive examples", "Certification prep"], color: currentColors.purple, link: "https://learn17.com/" },
               { icon: <Calculator className="w-8 h-8" />, title: "Valuation Tools", desc: "Professional-grade models for risk adjustment, LRC, and liability calculations", features: [`${totalToolsCount} actuarial tools`, "Excel integration", "Instant calculations"], color: currentColors.green, link: "/tools" },
-              { icon: <Award className="w-8 h-8" />, title: "Qualification Pathways", desc: "Complete roadmap for actuarial professional exams and certifications", features: ["15+ exam guides", "Study resources", "Career planning"], color: currentColors.orange, link: "/modules" },
+              { icon: <Award className="w-8 h-8" />, title: "Qualification Pathways", desc: "Complete roadmap for actuarial professional exams and certifications", features: ["15+ exam guides", "Study resources", "Career planning"], color: currentColors.orange, action: downloadQualificationPathway },
               { icon: <Gamepad2 className="w-8 h-8" />, title: "IFRS 17 Game", desc: "Gamified learning experience with competitive leaderboards", features: ["100+ quiz questions", "Global rankings", "Achievement badges"], color: currentColors.pink, link: "https://www.ifrs17game.com/" },
               { icon: <Compass className="w-8 h-8" />, title: "Integrated Experience", desc: "Seamless navigation between all platforms with unified progress tracking", features: ["Single dashboard", "Cross-platform sync", "Unified analytics"], color: currentColors.blue, link: "/my-progress" }
             ].map((platform, i) => (
-              <div key={i} onClick={() => handleNavigation(platform.link)} className="group p-6 rounded-2xl border-2 transition-all duration-500 hover:scale-105 cursor-pointer"
+              <div key={i} onClick={() => platform.action ? platform.action() : handleNavigation(platform.link)} className="group p-6 rounded-2xl border-2 transition-all duration-500 hover:scale-105 cursor-pointer"
                 style={{ 
                   background: theme === 'dark' ? `linear-gradient(135deg, ${platform.color}10, ${platform.color}05)` : currentColors.card,
                   borderColor: `${platform.color}30`, 
@@ -357,7 +377,7 @@ export default function HomePage({ theme = 'dark', user }) {
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {[
               { icon: <Users className="w-8 h-8" />, value: userCount, suffix: "+", label: "Active Users", color: currentColors.cyan },
-              { icon: <GraduationCap className="w-8 h-8" />, value: moduleCount, suffix: "+", label: "Training Modules", color: currentColors.purple },
+              { icon: <GraduationCap className="w-8 h-8" />, value: moduleCount, suffix: "", label: "Training Modules", color: currentColors.purple },
               { icon: <Calculator className="w-8 h-8" />, value: toolCount, suffix: "", label: "Valuation Tools", color: currentColors.green },
               { icon: <Trophy className="w-8 h-8" />, value: successRate, suffix: "%", label: "Success Rate", color: currentColors.orange }
             ].map((stat, i) => (

@@ -395,25 +395,24 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
       setProgressPercentage(0);
       return;
     }
-    // Prevent calculation/saving until progress-counted background fetches are complete
-    if (isFetchingQuiz || isFetchingAiQuiz || isFetchingAssignment) return;
+    const hasQuizTask = !moduleData?.disableQuiz;
+    const hasAssignmentTask = moduleData?.assignments && !moduleData?.disableAssignments;
 
-    let completed = 0;
-    let totalTasks = 2;
+    // Prevent calculation/saving until progress-counted background fetches are complete.
+    // AI quiz is no longer part of the product, so it must never affect progress.
+    if ((hasQuizTask && isFetchingQuiz) || (hasAssignmentTask && isFetchingAssignment)) return;
 
+    const progressTasks = [];
     const isMCQuizDone = showQuizResults || (quizAnswers && Object.keys(quizAnswers).length > 0);
-    const isAIQuizDone = gradingResults || (aiQuizAnswers && Object.keys(aiQuizAnswers).length > 0);
     const isAssignmentDone = assignmentStatus || submitSuccess || (savedSubmissionFiles && savedSubmissionFiles.length > 0);
-    
-    if (isMCQuizDone) completed++;
-    if (isAIQuizDone) completed++;
 
-    if (moduleData?.assignments) {
-      totalTasks = 3;
-      if (isAssignmentDone) completed++;
-    }
+    if (hasQuizTask) progressTasks.push(isMCQuizDone);
+    if (hasAssignmentTask) progressTasks.push(isAssignmentDone);
 
-    const calculatedProgress = Math.round((completed / totalTasks) * 100);
+    const completed = progressTasks.filter(Boolean).length;
+    const calculatedProgress = progressTasks.length
+      ? Math.round((completed / progressTasks.length) * 100)
+      : 0;
     setProgressPercentage(calculatedProgress);
 
     // Save to Database
@@ -442,8 +441,8 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
     saveProgressToDB();
 
   }, [
-    isFetchingQuiz, isFetchingAiQuiz, isFetchingAssignment, 
-    showQuizResults, quizAnswers, gradingResults, aiQuizAnswers, 
+    isFetchingQuiz, isFetchingAssignment,
+    showQuizResults, quizAnswers,
     assignmentStatus, submitSuccess, savedSubmissionFiles, 
     moduleData, user?.id
   ]);
@@ -622,15 +621,13 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
               
               {/* Progress Breakdown Indicators */}
               <div className="flex gap-4 mt-3 text-xs">
-                <div className="flex items-center gap-1.5">
-                  <div className={`w-2 h-2 rounded-full ${(showQuizResults || Object.keys(quizAnswers).length > 0) ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                  <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>MC Quiz</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <div className={`w-2 h-2 rounded-full ${(gradingResults || Object.keys(aiQuizAnswers).length > 0) ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                  <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>AI Quiz</span>
-                </div>
-                {moduleData?.assignments && (
+                {!moduleData?.disableQuiz && (
+                  <div className="flex items-center gap-1.5">
+                    <div className={`w-2 h-2 rounded-full ${(showQuizResults || Object.keys(quizAnswers).length > 0) ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                    <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>MC Quiz</span>
+                  </div>
+                )}
+                {moduleData?.assignments && !moduleData?.disableAssignments && (
                   <div className="flex items-center gap-1.5">
                     <div className={`w-2 h-2 rounded-full ${(assignmentStatus || submitSuccess || savedSubmissionFiles?.length > 0) ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                     <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>Assignment</span>

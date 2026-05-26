@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import { getShaThemeColors } from '../theme/sha'
+import shaLogo from "../assets/SHA_Logo2.png";
 
 const FacebookIcon = ({ className }) => (
   <svg
@@ -157,26 +158,8 @@ export default function Footer({ theme: themeProp }) {
       <div className="mx-auto max-w-7xl">
         <div className="mb-12 grid gap-12 md:grid-cols-4">
           <div className="md:col-span-2">
-            <div className="mb-4 flex items-center gap-3">
-              <div
-                className="flex h-12 w-12 items-center justify-center rounded-xl text-xl font-black text-white"
-                style={{
-                  background: `linear-gradient(135deg, ${currentColors.cyan}, ${currentColors.purple})`,
-                }}
-              >
-                KB
-              </div>
-              <div>
-                <div
-                  className="text-lg font-bold"
-                  style={{ color: currentColors.text }}
-                >
-                  Kenbright Actuarial Hub
-                </div>
-                <div className="text-sm" style={{ color: currentColors.textSecondary }}>
-                  Empowering Actuarial Excellence
-                </div>
-              </div>
+            <div className="relative flex items-center justify-center w-32 h-32 -m-4 transition-transform duration-300 group-hover:scale-105">
+              <img src={shaLogo} alt="SHA Logo" className="w-full h-full object-contain" />
             </div>
             <p
               className="mb-6 text-sm leading-relaxed"
@@ -186,7 +169,7 @@ export default function Footer({ theme: themeProp }) {
               exam preparation, and gamified learning.
             </p>
 
-            <div className="flex items-center gap-4">
+            {/* <div className="flex items-center gap-4">
               {[
                 {
                   icon: <FacebookIcon className="h-5 w-5" />,
@@ -228,7 +211,7 @@ export default function Footer({ theme: themeProp }) {
                   {social.icon}
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
           <div>
             <h3 className="mb-4 font-bold" style={{ color: currentColors.text }}>
@@ -292,23 +275,39 @@ export default function Footer({ theme: themeProp }) {
             }`,
           }}
         >
-          <div className="text-sm" style={{ color: currentColors.textSecondary }}>
-            © {new Date().getFullYear()} Kenbright Actuarial Hub. All rights
-            reserved.
-          </div>
-          <div
-            className="flex items-center gap-6 text-sm"
-            style={{ color: currentColors.textSecondary }}
-          >
-            <button type="button" onClick={() => handleNavigation('/privacy-policy')} className="transition hover:opacity-70">
-              Privacy Policy
-            </button>
-            <button type="button" onClick={() => handleNavigation('/terms-of-service')} className="transition hover:opacity-70">
-              Terms of Service
-            </button>
-            <button type="button" onClick={() => handleNavigation('/cookie-policy')} className="transition hover:opacity-70">
-              Cookie Policy
-            </button>
+          <div className="w-full">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                {/* <div className="text-sm" style={{ color: currentColors.textSecondary }}>
+                  © {new Date().getFullYear()} SHA Actuarial Hub. All rights
+                  reserved.
+                </div> */}
+                <div className="flex items-center gap-4">
+                  <div className="text-white text-md font-medium">
+                      © {new Date().getFullYear()} SHA Actuarial Hub. All rights
+                  </div>
+                </div>
+                <div className="flex items-center gap-4">
+                  <span className="text-white text-md font-medium">Powered by <span className="font-bold text-xl">Kenbright AI</span></span>
+                  {/* <div className="flex flex-col items-center">
+                      <img src={kenbrightLogo} alt="Kenbright Logo" className="h-16 w-auto" />
+                  </div> */}
+              </div>
+          
+              <div
+                className="flex items-center gap-6 text-sm"
+                style={{ color: currentColors.textSecondary }}
+              >
+                <button type="button" onClick={() => handleNavigation('/privacy-policy')} className="transition hover:opacity-70">
+                  Privacy Policy
+                </button>
+                <button type="button" onClick={() => handleNavigation('/terms-of-service')} className="transition hover:opacity-70">
+                  Terms of Service
+                </button>
+                <button type="button" onClick={() => handleNavigation('/cookie-policy')} className="transition hover:opacity-70">
+                  Cookie Policy
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

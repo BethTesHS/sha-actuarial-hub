@@ -1,7 +1,7 @@
 import React from "react";
 import "./ActuarialTrainingHubSlide.css";
 
-const ActuarialTrainingHubSlide = ({ isActive, user, handleNavigation }) => {
+const ActuarialTrainingHubSlide = ({ isActive, user, handleNavigation, totalTrainingModules }) => {
   const handlePrimaryAction = () => {
     handleNavigation?.(user ? "/SHADashboard" : "/SHAAuth?mode=signup");
   };
@@ -20,7 +20,7 @@ const ActuarialTrainingHubSlide = ({ isActive, user, handleNavigation }) => {
                 <path d="M12 3l1.9 4.7L19 9l-4.1 1.3L12 15l-1.9-4.7L6 9l4.1-1.3z" />
               </svg>
             </span>
-            17+ Modules Available
+            {totalTrainingModules} Modules Available
           </div>
 
           <h1 className="sha-headline">
@@ -28,7 +28,7 @@ const ActuarialTrainingHubSlide = ({ isActive, user, handleNavigation }) => {
           </h1>
 
           <p className="sha-subtitle">
-            Comprehensive training and tooling for health-insurance and actuarial professionals - built around the Social Health Authority's real-world workflows.
+            Comprehensive training and tools for health-insurance and actuarial professionals - built around the Social Health Authority's real-world workflows.
           </p>
 
           <div className="sha-cta-row">
@@ -43,11 +43,11 @@ const ActuarialTrainingHubSlide = ({ isActive, user, handleNavigation }) => {
 
           <div className="sha-stats">
             <div className="sha-stat">
-              <div className="sha-stat-num">17<span className="sha-stat-unit">+ modules</span></div>
+              <div className="sha-stat-num">{totalTrainingModules}<span className="sha-stat-unit"> modules</span></div>
               <div className="sha-stat-label">Structured path</div>
             </div>
             <div className="sha-stat">
-              <div className="sha-stat-num">120<span className="sha-stat-unit">hrs</span></div>
+              <div className="sha-stat-num">80<span className="sha-stat-unit">hrs</span></div>
               <div className="sha-stat-label">Of content</div>
             </div>
             <div className="sha-stat">
@@ -89,7 +89,7 @@ const ActuarialTrainingHubSlide = ({ isActive, user, handleNavigation }) => {
 
               <div className="sha-tiles">
                 <div className="sha-tile">
-                  <div className="sha-tile-num">17+</div>
+                  <div className="sha-tile-num">{totalTrainingModules}</div>
                   <div className="sha-tile-label">Modules</div>
                 </div>
                 <div className="sha-tile">
