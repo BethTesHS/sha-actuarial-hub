@@ -1,6 +1,6 @@
 export const module4Data = {
   id: 4,
-  title: "Valuation, Discounting and Risk Margin Analysis",
+  title: "General Insurance Valuations",
   shortDescription: "Learn how to perform general insurance reserve valuations using both traditional actuarial methods and IFRS 17 principles. This module builds practical skills in estimating outstanding claims, applying discounting and risk margin techniques, analysing reserve adequacy, and interpreting valuation results.",
   themeColor: "green",
   objectives: {
@@ -32,44 +32,6 @@ export const module4Data = {
         url: "/Training Modules/Module 4_General Insurance Valuation/Course Content/KAFS_Internal Technical Procedures_Guidelines on Valuation for General Insurance Business_2025.pdf",
         filename: "public/Training Modules/Module 4_General Insurance Valuation/Course Content/KAFS_Internal Technical Procedures_Guidelines on Valuation for General Insurance Business_2025.pdf",
         icon: "📄"
-      }
-    ],
-    videoResources: [
-      {
-        title: "1. Uploading Data",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Training Video/1 - Uploading Data.mp4",
-        filename: "1 - Uploading Data.mp4",
-        icon: "🎥"
-      },
-      {
-        title: "2. Claim Plots",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Training Video/2 - Claim Plots.mp4",
-        filename: "2 - Claim Plots.mp4",
-        icon: "🎥"
-      },
-      {
-        title: "3.1. Extending Model Part 1",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Training Video/3.1 - Extending Model Part 1.mp4",
-        filename: "3.1 - Extending Model Part 1.mp4",
-        icon: "🎥"
-      },
-      {
-        title: "3.2. Extending Model Part 2 - rev",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Training Video/3.2 - Extending Model Part 2_rev.mp4",
-        filename: "3.2 - Extending Model Part 2_rev.mp4",
-        icon: "🎥"
-      },
-      {
-        title: "4. Risk Margins via R",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Training Video/4 - Risk Margins via R.mp4",
-        filename: "4 - Risk Margins via R.mp4",
-        icon: "🎥"
-      },
-      {
-        title: "5. Discounting Training",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Training Video/5 - Discounting Training.mp4",
-        filename: "5 - Discounting Training.mp4",
-        icon: "🎥"
       }
     ],
   },

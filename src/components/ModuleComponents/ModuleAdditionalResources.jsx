@@ -7,16 +7,33 @@ export default function ModuleAdditionalResources({ additionalResources, theme, 
   if (!additionalResources || additionalResources.length === 0) return null;
 
   const handleViewFile = (resource) => {
+    const resolvedUrl = filesService.getFileUrl(resource.url);
+    const isExternalLink =
+      resource.type === 'Link' ||
+      resource.url?.startsWith('http://') ||
+      resource.url?.startsWith('https://');
+    const isInternalRoute =
+      resource.url?.startsWith('/') &&
+      !resource.url?.startsWith('/Training Modules') &&
+      !resource.url?.toLowerCase().endsWith('.pdf');
+
+    if (isExternalLink) {
+      window.open(resolvedUrl, '_blank', 'noopener,noreferrer');
+      return;
+    }
+
+    if (isInternalRoute) {
+      window.location.href = resolvedUrl;
+      return;
+    }
+
     if (setViewingPdf) {
-      // The resource URL might contain a placeholder like {moduleName}.
-      // We'll create a temporary resource object with the URL resolved by filesService.
-      const resourceUrl = {
+      setViewingPdf({
         ...resource,
-        url: filesService.getFileUrl(resource.url)
-      };
-      setViewingPdf(resourceUrl);
+        url: resolvedUrl,
+      });
     } else {
-      window.open(filesService.getFileUrl(resource.url), '_blank');
+      window.open(resolvedUrl, '_blank');
     }
   };
 

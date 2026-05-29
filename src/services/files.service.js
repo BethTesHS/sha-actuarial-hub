@@ -10,6 +10,14 @@ const filesService = {
    */
   getFileUrl: (filePath) => {
     if (!filePath) return "";
+
+    if (filePath.startsWith('http://') || filePath.startsWith('https://')) {
+      return filePath;
+    }
+
+    if (filePath.startsWith('/') && !filePath.startsWith('/Training Modules')) {
+      return filePath;
+    }
     
     // 1. Remove leading slash if it exists
     let cleanPath = filePath.startsWith('/') ? filePath.slice(1) : filePath;

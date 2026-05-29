@@ -1,10 +1,11 @@
 import apiClient from './api';
 import {
-  module1Data, module2Data, module3Data, module4Data, module5Data,
+  module0Data, module1Data, module2Data, module3Data, module4Data, module5Data,
   module6Data, module7Data, module8Data, module9Data,
 } from '../constants/modules';
 
 const MODULES_MAP = {
+  0: module0Data,
   1: module1Data, 2: module2Data, 3: module3Data, 4: module4Data, 5: module5Data,
   6: module6Data, 7: module7Data, 8: module8Data, 9: module9Data,
 };

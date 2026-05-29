@@ -161,11 +161,7 @@
 }
 
 .ifr-headline-accent {
-  background: linear-gradient(135deg, var(--ifr-pink-soft) 0%, var(--ifr-magenta) 60%, var(--ifr-gold-bright) 100%);
-  -webkit-background-clip: text;
-          background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 18px rgba(232, 121, 249, 0.35));
+  color: var(--ifr-white);
 }
 
 .ifr-subtitle {

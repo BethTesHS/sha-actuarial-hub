@@ -1,8 +1,8 @@
 export const module5Data = {
   id: 5,
-  title: "Capital Adequacy Analysis",
+  title: "Solvency Analysis",
   shortDescription: "Master capital adequacy assessment as mandated by the Insurance Regulatory Authority (IRA) in Kenya. Learn to calculate Available Capital, Required Capital, and Capital Adequacy Ratio for both life and general insurance companies.",
-  themeColor: "blue",
+  themeColor: "green",
   objectives: {
     text: [
       "This module equips learners with a practical understanding of capital adequacy as mandated by the Insurance Regulatory Authority (IRA) in Kenya. It covers both life and general insurance frameworks, emphasizing how capital adequacy safeguards policyholder interests, supports solvency, and informs strategic decision-making.",

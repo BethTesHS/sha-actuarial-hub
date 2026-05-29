@@ -94,7 +94,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
     fraudRiskMatrix: "",
     pricing: {
       pricingTools: "",
-      prmfTool: "https://sha-prmf-calculator.vercel.app",
+      prmfTool: "",
     }
   };
 
@@ -125,7 +125,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   ];
 
   const ifrs17Items = [
-    { label: "Module 0 (IFRS 17)", url: "/modules/IFRS 17", icon: <BookOpen className="w-4 h-4" />, internal: true },
+    { label: "Module 0 (IFRS 17)", url: "/modules/0", icon: <BookOpen className="w-4 h-4" />, internal: true },
     { label: "Learn17", url: "https://learn17.com/", icon: <BookOpen className="w-4 h-4" /> },
     { label: "IFRS 17 Insurance Contracts", url: "/pdfs/ifrs-17-insurance-contracts.pdf", icon: <FileText className="w-4 h-4" />, download: true },
     { label: "IFRS 17 Illustrative Examples", url: "/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf", icon: <FileText className="w-4 h-4" />, download: true },
@@ -151,16 +151,16 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
 
   // List of all training modules to make them globally searchable
   const trainingModules = [
-    { id: "IFRS 17", name: "IFRS 17 (Foundation)" },
-    { id: 1, name: "GI Data Clean Up" },
+    { id: 0, name: "IFRS 17" },
+    { id: 1, name: "Data Clean Up" },
     { id: 2, name: "Pricing Fundamentals" },
     { id: 3, name: "Liability for Remaining Coverage (LRC)" },
-    { id: 4, name: "General Insurance Valuations (Liability for Incurred Claims)" },
-    { id: 5, name: "Capital Adequacy Analysis" },
-    { id: 6, name: "Financial Performance Analysis (Ratio Analysis)" },
-    { id: 7, name: "Premium Certificates" },
-    { id: 8, name: "Reinsurance Certificates" },
-    { id: 9, name: "Financial Condition Report (FCR)" },
+    { id: 4, name: "General Insurance Valuations" },
+    { id: 5, name: "Solvency Analysis" },
+    { id: 6, name: "Financial Performance Analysis" },
+    { id: 7, name: "Financial Condition Report" },
+    { id: 8, name: "Post Retirement Medical Fund" },
+    { id: 9, name: "ESG" },
   ];
 
   // Combine items for the Global Search
@@ -472,7 +472,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                 {showIfrs17Menu && (
                   <div className="absolute top-full left-0 mt-2 w-72 rounded-xl shadow-2xl z-50" style={{ background: `${colors.darkCard}f5`, border: `1px solid ${colors.primary}30` }}>
                     <Link
-                      to="/modules/IFRS 17"
+                      to="/modules/0"
                       onClick={() => closeAllDropdowns()}
                       className="flex items-center gap-3 px-4 py-3 transition-all text-sm hover:bg-white/5"
                       style={{ color: colors.text, borderBottom: '1px solid rgba(255,255,255,0.05)' }}
@@ -815,7 +815,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                   </button>
                   {showMobileIfrs17 && (
                     <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
-                      <Link to="/modules/IFRS 17" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                      <Link to="/modules/0" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         Module 0 (IFRS 17)
                       </Link>
                       <a href="https://learn17.com/" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
@@ -851,10 +851,10 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                   </button>
                   {showMobilePricing && (
                     <div className="pl-8 pr-2 pb-2 flex flex-col gap-1">
-                      <Link to="/tools" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
-                        Pricing Tool
-                      </Link>
-                      <a href="https://sha-prmf-calculator.vercel.app" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                      <a href="" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                        Pricing tool
+                      </a>
+                      <a href="" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         PRMF tool
                       </a>
                     </div>

@@ -1,4 +1,5 @@
 import {
+  module0Data,
   module1Data,
   module2Data,
   module3Data,
@@ -11,6 +12,7 @@ import {
 } from "./modules";
 
 export const MODULE_DATA_BY_ID = {
+  0: module0Data,
   1: module1Data,
   2: module2Data,
   3: module3Data,

@@ -1,303 +1,344 @@
-export const module7Data = {
+﻿export const module7Data = {
   id: 7,
-  title: "Premium Certification",
-  shortDescription: "Master actuarial premium certification for general insurance business. Learn to assess pricing adequacy, compute loss & expense ratios, evaluate average premium rates, test regulatory compliance, and issue actuarial certification opinions for IRA approval.",
+  title: "Financial Condition Report",
+  shortDescription: "Master the preparation and analysis of Financial Condition Reports. Learn to assess financial strength, solvency, asset-liability management, reinsurance arrangements, and provide strategic recommendations to boards and regulators.",
   themeColor: "blue",
-  
   objectives: {
     text: [
-      "This module equips learners with practical skills in performing Actuarial Premium Certification for general insurance business. Participants will learn how to assess pricing adequacy, compute loss & expense ratios, evaluate average premium rates, test regulatory compliance, and issue an actuarial certification opinion for approval by IRA.",
-    ]
+      "This module aims to equip learners with the knowledge and practical skills required to understand, support, and contribute to the preparation of a Financial Condition Report (FCR). By the end of the module, participants will be able to explain the regulatory purpose and importance of the FCR, interpret its key components, and apply actuarial techniques to support financial analysis, reserving, solvency assessment, asset-liability management, reinsurance assessment, and risk evaluation.",
+      "This will strengthen their ability to contribute effectively to the preparation of the FCR, translate technical findings into recommendations that inform strategic decisions by the Board and senior management, and ensure the company meets actuarial professional standards and regulatory obligations."
+    ],
   },
 
   learningOutcomes: {
     text: "By the end of this module, participants will be able to:",
     points: [
-      "Understand the purpose and regulatory basis of premium certification under the Insurance Act.",
-      "Explain how premium adequacy links to solvency, loss experience and capital sustainability.",
-      "Validate premium and loss data for accuracy, completeness and reconciliation integrity.",
-      "Calculate core actuarial certification metrics including",
-      "Determine whether proposed premium rates are sufficient using adequacy formulas.",
-      "Apply premium review methodology to real insurer datasets.",
-      "Produce an actuarial certification report and recommendation suitable for IRA submission.",
-
+      "Explain the concepts of frequency and severity and their role in measuring insurance risk.",
+      "Calculate and interpret exposures for use in insurance analysis either in (days, months, or years).",
+      "Differentiate between risk premium and office premium and describe how each contributes to premium calculation.",
+      "Apply frequency and severity measures to estimate expected claims and derive risk premiums.",
+      "Assess the relationship between exposures, premiums, and loss ratios to evaluate insurance performance.",
     ],
   },
 
   courseContent: {
-    description: "This module is guided by comprehensive technical documents. They contain all the instructions, worked examples, and exercises you need to master Premium Certification Analysis. Download and use them as your primary references throughout the module.",
+    description: "This module is guided by comprehensive technical documents. They contain all the instructions, worked examples, and exercises you need to master Financial Condition Report Preparation. Download and use them as your primary references throughout the module.",
     resources: [
       {
-        title: "KAFS - Internal Technical Procedures - Premium Certification - 2025",
-        url: "/Training Modules/Module 7_Premium Certificate/Course Content/KAFS_Internal Technical Procedures_Premium Certification_2025.pdf",
-        filename: "KAFS_Internal Technical Procedures_Premium Certification_2025.pdf",
-        icon: "📄"
+        title: "KAFS ITP Financial Condition Report (FCR)",
+        url: "/Training Modules/Module 9_FCR/Course Content/KAFS ITP Financial_Condition_Report_2025.pdf",
+        filename: "KAFS ITP Financial_Condition_Report_2025.pdf",
+        icon: "≡ƒôä"
       }
-    ],
+    ]
   },
 
   assignments: {
     dataFiles: [
       {
-        title: "ABC Company - Data Shared",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 7_Premium Certificate/Data/ABC Company_Data Shared.xlsx",
-        filename: "ABC Company_Data Shared.xlsx",
-        icon: "📊",
-        // icon: "📈",
-        // icon: "📋",
+        title: "2025 Budget Data",
+        description: "Excel ΓÇó Sample dataset",
+        url: "/Training Modules/Module 9_FCR/Data/2025 Budget.xlsx",
+        filename: "2025 Budget.xlsx",
+        // icon: "≡ƒôè",
+        // icon: "≡ƒôê",
+        icon: "≡ƒôï",
+      },
+      {
+        title: "Final Audited Financial Statements FY 2024",
+        description: "Word ΓÇó Sample dataset",
+        url: "/Training Modules/Module 9_FCR/Data/PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
+        filename: "PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
+        // icon: "≡ƒôè",
+        icon: "≡ƒôê",
+        // icon: "≡ƒôï",
       },
     ],
     workingFiles: [
       {
-        title: "ABC -Premium Certification - 2025",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 7_Premium Certificate/Working Files/ABC- Premium Certification 2025.xlsx",
-        filename: "ABC- Premium Certification 2025.xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      }
+        title: "Pioneer General - FCR 2023 Working File V2",
+        description: "Excel ΓÇó Template",
+        url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General - FCR 2023 Working File V2.xlsx",
+        filename: "Pioneer General - FCR 2023 Working File V2.xlsx",
+        icon: "≡ƒ¢á∩╕Å",
+        // icon: "ΓÜÖ∩╕Å",
+      },
+      {
+        title: "Pioneer General FCR 2023 - Final Report",
+        description: "Word ΓÇó Template",
+        url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General FCR 2023 - Final Report (290424).docx",
+        filename: "Pioneer General FCR 2023 - Final Report.docx",
+        // icon: "≡ƒ¢á∩╕Å",
+        icon: "ΓÜÖ∩╕Å",
+      },
     ],
     resultFiles: [
       {
-        title: "ABC- Premium Certification 2025 - Results",
-        url: "/Training Modules/Module 7_Premium Certificate/Results Files/ABC- Premium Certification 2025_Results.xlsx",
-        filename: "ABC- Premium Certification 2025_Results.xlsx",
+        title: "Pioneer General FCR 2024 - Final Report",
+        url: "/Training Modules/Module 9_FCR/Results Files/Pioneer General FCR 2024 - Final Report (250325).pdf",
+        filename: "Pioneer General FCR 2024 - Final Report.pdf",
       }
     ]
   },
 
+additionalResources: [
+  {
+    title: "Draft Risk Based Capital Adequacy",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Draft_Risk_Based_Capital_Adequacy1.pdf",
+    filename: "Draft_Risk_Based_Capital_Adequacy.pdf",
+  },
+  {
+    title: "Guideline on Insurance Risk",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on Insurance Risk.pdf",
+    filename: "Guideline on Insurance Risk.pdf",
+  },
+  {
+    title: "Guideline on Reinsurance Arrangements",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on Reinsurance Arrangements.pdf",
+    filename: "Guideline on Reinsurance Arrangements.pdf",
+  },
+  {
+    title: "Guideline on Risk Management and Internal Controls",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on Risk Management and Internal Controls.pdf",
+    filename: "Guideline on Risk Management and Internal Controls.pdf",
+  },
+  {
+    title: "Guideline on the Actuarial Function",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on the Actuarial Function.pdf",
+    filename: "Guideline on the Actuarial Function.pdf",
+  },
+  {
+    title: "Guidelines on Actuarial Function Issued in February 2013",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Guidelines on Actuarial Function Issued in February 2013.pdf",
+    filename: "Guidelines on Actuarial Function Issued in February 2013.pdf",
+  },
+  {
+    title: "Guidelines on Insurance Products",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Guidelines on Insurance Products.pdf",
+    filename: "Guidelines on Insurance Products.pdf",
+  },
+  {
+    title: "Guidelines on Claims Management",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Guidelines1 on Claims Management.pdf",
+    filename: "Guidelines on Claims Management.pdf",
+  },
+  {
+    title: "Suitability of Persons",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/Suitability of Persons.pdf",
+    filename: "Suitability of Persons.pdf",
+  },
+  {
+    title: "The Insurance (Investments Management) Guidelines.",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/The Insurance (Investments Management) Guidelines..pdf",
+    filename: "The Insurance (Investments Management) Guidelines..pdf",
+  },
+  {
+    title: "The Insurance Act",
+    type: "PDF",
+    url: "/Training Modules/Module 9_FCR/Additional Resources/The Insurance Act.pdf",
+    filename: "The Insurance Act.pdf",
+  },
+],
+
   // aiQuizQuestions: [
   //   {
   //     id: "aq1",
-  //     question: "What is the primary purpose of conducting a Premium Certification in general insurance, and why is data reconciliation between the premium register and management accounts a critical first step?",
-  //     hint: "Consider the regulatory requirements for IRA approval and how data integrity directly impacts the reliability of loss and expense ratio calculations."
+  //     question: "Explain the primary purpose of the Financial Condition Report (FCR) and the significance of the statutory actuary's opinion within it.",
+  //     hint: "Consider how the FCR evaluates the insurer's current and future financial soundness, and why a formal statement confirming the actuarial valuation approach is critical for regulators and the Board."
   //   },
   //   {
   //     id: "aq2",
-  //     question: "Explain the components of the combined ratio. If an insurer's combined ratio is consistently above 110%, what does this indicate about their pricing, and what recommendations should an actuary make?",
-  //     hint: "The combined ratio includes both the loss ratio and expense ratio. A ratio consistently over 100% indicates underwriting strain and unsustainable pricing."
+  //     question: "Discuss the role of Asset-Liability Management (ALM) analysis within the FCR. Why is it important to ensure that investment assets mature in line with liability cashflows?",
+  //     hint: "Think about liquidity risk, interest rate risk, and the insurer's ability to consistently meet its long-term future obligations to policyholders as they fall due."
   //   },
   //   {
   //     id: "aq3",
-  //     question: "Detail the formula for calculating the minimum adequate premium. Why is it necessary to incorporate a margin alongside the pure premium and expenses?",
-  //     hint: "Recall the formula: (Pure Premium + Expenses) / (1 – Margin). Think about how recovering costs plus a margin ensures long-term capital sustainability."
+  //     question: "How should an actuary evaluate an insurer's reinsurance arrangements when preparing an FCR?",
+  //     hint: "Focus on whether the reinsurance program genuinely reduces risk, provides adequate risk transfer, and improves net solvency, especially under adverse scenarios or capital stress."
   //   },
   //   {
   //     id: "aq4",
-  //     question: "Under what specific circumstances would an actuary issue a 'Conditional Approval' (Approve with Conditions) for proposed premium rates rather than an outright approval or refusal?",
-  //     hint: "Consider scenarios where rates are near the adequacy threshold, but emerging risks or deteriorating trends necessitate close monitoring."
+  //     question: "What constitutes a 'material risk' in the context of an FCR, and why is the rigorous documentation of justifiable actuarial assumptions so important?",
+  //     hint: "Consider the potential financial impact of a risk on the insurer's solvency margin, and how transparent methods and assumptions promote auditability and stakeholder understanding."
   //   },
   //   {
   //     id: "aq5",
-  //     question: "How does claims inflation affect the loss ratio, and what specific risk management actions (such as adjusting policy structures) can an insurer take to mitigate rapid increases in claim severity?",
-  //     hint: "Inflation primarily increases the average cost per claim (severity). Think about how implementing or increasing deductibles controls high severity exposures."
-  //   },
-  //   {
-  //     id: "aq6",
-  //     question: "Why is the analysis of the average premium rate essential during the certification process, and how does it help an actuary detect pricing drift over time?",
-  //     hint: "Evaluate how comparing the actual charged rates against the theoretical adequate rates year-over-year helps identify if a portfolio is silently becoming underpriced."
+  //     question: "Why must the actuary review the insurer's realistic business plan within the FCR, and what specific findings might trigger a formal actuarial recommendation?",
+  //     hint: "Think about assessing whether projected premium growth is supported by adequate capital, and how persistent divergences between assumed and actual experience require corrective strategic actions."
   //   }
   // ],
 
+  
 
   // ---------- Quiz Questions ----------
   
   quizQuestions: [
+    // Section 1: FCR Purpose
     {
       id: 1,
-      // section: "Certification Fundamentals",
-      question: "Which of the following BEST describes the purpose of premium certification?",
+      // section: "FCR Purpose",
+      question: "The primary purpose of a Financial Condition Report (FCR) is to:",
       options: [
-        "A. To increase insurer profits",
-        "B. To prove that pricing matches competitors",
-        "C. To confirm adequacy and compliance of premium rates",
-        "D. To support broker commissions"
+        "a) Assess the insurer's current and future financial soundness.",
+        "b) Provide audited financial statements to shareholders.",
+        "c) Describe marketing strategies for premium growth.",
+        "d) Summarize the company's investment returns."
       ],
-      correctAnswer: "C. To confirm adequacy and compliance of premium rates",
-      explanation: "Ensures premiums are financially adequate, compliant and sustainable."
+      correctAnswer: "a) Assess the insurer's current and future financial soundness.",
+      explanation: "An FCR focuses on evaluating solvency, risks, and the insurer's ability to meet obligations under current and future conditions."
     },
     {
       id: 2,
-      // section: "Data Validation",
-      question: "Which dataset MUST reconcile before any certification can proceed?",
+      // section: "Actuary's Opinion",
+      question: "Which of the following best describes the 'actuary's opinion' within the FCR?",
       options: [
-        "A. Reinsurance treaties vs underwriting guidelines",
-        "B. Premium registers vs management accounts",
-        "C. Sales projections vs investment returns",
-        "D. Payroll expenses vs claim reserves"
+        "a) A summary of the insurer's profitability trends.",
+        "b) A mandatory statement confirming the actuarial valuation approach and key conclusions.",
+        "c) A forecast of market share for the next three years.",
+        "d) A description of operational policies."
       ],
-      correctAnswer: "B. Premium registers vs management accounts",
-      explanation: "Premium register must match management accounts for data integrity."
+      correctAnswer: "b) A mandatory statement confirming the actuarial valuation approach and key conclusions.",
+      explanation: "Regulations require the signing actuary to provide a clear opinion on liabilities, risks, and methods used in the FCR."
     },
     {
       id: 3,
-      // section: "Combined Ratio Analysis",
-      question: "A combined ratio consistently above 110% indicates:",
+      // section: "Actuarial Assumptions",
+      question: "In preparing an FCR, the actuary must ensure that assumptions used are:",
       options: [
-        "A. Strong profitability",
-        "B. Borderline pricing",
-        "C. Underpricing and emerging loss strain",
-        "D. Good reserve strength"
+        "a) Determined solely by management.",
+        "b) More optimistic than previous years.",
+        "c) Reasonable, justifiable, and aligned with regulatory requirements.",
+        "d) Based only on international benchmarks."
       ],
-      correctAnswer: "C. Underpricing and emerging loss strain",
-      explanation: "Claims + expenses > 110% of premiums = unsustainable pricing."
+      correctAnswer: "c) Reasonable, justifiable, and aligned with regulatory requirements.",
+      explanation: "Assumptions must be supportable, relevant to the insurer's experience, and meet guideline requirements."
     },
     {
       id: 4,
-      // section: "Loss Ratio Calculation",
-      question: "Loss Ratio = Incurred Claims / Earned Premium. If claims = 85M and premium = 100M, LR =",
+      // section: "Regulatory Guidelines",
+      question: "Which statement best explains the role of regulatory guidelines in FCR preparation?",
       options: [
-        "A. 75%",
-        "B. 85%",
-        "C. 115%",
-        "D. 100%"
+        "a) They act as optional reference materials.",
+        "b) They define the minimum content, format, and standards required in the report.",
+        "c) They replace the actuary's professional judgment.",
+        "d) They provide industry marketing templates."
       ],
-      correctAnswer: "B. 85%",
-      explanation: "85 divided by 100 = 85% loss ratio."
+      correctAnswer: "b) They define the minimum content, format, and standards required in the report.",
+      explanation: "FCR guidelines specify required sections, actuarial duties, and reporting standards."
     },
     {
       id: 5,
-      // section: "Certification Approval Conditions",
-      question: "Which condition prevents certification?",
+      // section: "Solvency Discussion",
+      question: "When discussing solvency, the FCR should highlight:",
       options: [
-        "A. Combined ratio < 95%",
-        "B. CAR > 100%",
-        "C. Expense ratio at 28%",
-        "D. Commission rate exceeds IRA limit"
+        "a) Only past capital positions.",
+        "b) Only IFRS accounting profits.",
+        "c) Competitor solvency requirements.",
+        "d) The current solvency margin and projected future solvency."
       ],
-      correctAnswer: "D. Commission rate exceeds IRA limit",
-      explanation: "Commission breaches regulatory limits = automatic certification fail"
+      correctAnswer: "d) The current solvency margin and projected future solvency.",
+      explanation: "FCRs must include both current solvency status and forward-looking solvency forecasts."
     },
     {
       id: 6,
-      // section: "Premium Adequacy",
-      question: "Minimum adequate premium is calculated as:",
+      // section: "Material Risk Disclosure",
+      question: "A material risk in the FCR must be disclosed when:",
       options: [
-        "A. Claims + Commissions + Expenses",
-        "B. Pure Premium / Expense Ratio",
-        "C. (Pure Premium + Expenses) / (1 – Margin)",
-        "D. GWP – Loss Ratio"
+        "a) It has negligible impact on capital.",
+        "b) It is unlikely to happen.",
+        "c) It could significantly affect the insurer's financial condition.",
+        "d) The risk has already been fully mitigated."
       ],
-      correctAnswer: "C. (Pure Premium + Expenses) / (1 – Margin)",
-      explanation: "Ensures pure premium + cost + profit recovered fully"
+      correctAnswer: "c) It could significantly affect the insurer's financial condition.",
+      explanation: "Materiality is based on potential financial impact, not likelihood alone."
     },
     {
       id: 7,
-      // section: "Rate Adjustment Triggers",
-      question: "Strongest indicator for rate increase?",
+      // section: "Documentation",
+      question: "The FCR requirement for documentation of methodologies ensures that:",
       options: [
-        "A. Stable frequency + declining severity",
-        "B. Loss ratio rises 18% YoY",
-        "C. Premium growth >20%",
-        "D. Expense ratio <20%"
+        "a) The actuary can avoid explaining complex models.",
+        "b) The insurer can outsource the work without supervision.",
+        "c) Only the regulator can interpret the results.",
+        "d) Stakeholders understand assumptions, data, and actuarial techniques used."
       ],
-      correctAnswer: "B. Loss ratio rises 18% YoY",
-      explanation: "Rapid deterioration implies underpricing risk."
+      correctAnswer: "d) Stakeholders understand assumptions, data, and actuarial techniques used.",
+      explanation: "Clear documentation promotes transparency and auditability of actuarial methods."
     },
     {
       id: 8,
-      // section: "Certification Refusal",
-      question: "Certification should not proceed when:",
+      // section: "Insurance Liability Risk",
+      question: "Which risk is most commonly analyzed in the insurance liability section of an FCR?",
       options: [
-        "A. CR = 97%",
-        "B. Avg rate 2% above adequacy",
-        "C. Pricing 12% below adequacy",
-        "D. LR = 60%"
+        "a) Foreign exchange risk.",
+        "b) Underwriting and claims risk.",
+        "c) Reputation risk.",
+        "d) Outsourcing risk."
       ],
-      correctAnswer: "C. Pricing 12% below adequacy",
-      explanation: "Underpricing >10% requires adjustment before approval."
+      correctAnswer: "b) Underwriting and claims risk.",
+      explanation: "Liability valuation is directly influenced by claim frequency, severity, lapse, and other underwriting risks."
     },
     {
       id: 9,
-      // section: "Conditional Approval",
-      question: "'Approve with Conditions' means:",
+      // section: "Asset-Liability Management",
+      question: "In an FCR, the assessment of assetΓÇôliability management (ALM) primarily focuses on:",
       options: [
-        "A. Fully adequate",
-        "B. Must increase pricing immediately",
-        "C. Adequate but requires monitoring",
-        "D. IRA approval irrelevant"
+        "a) Ensuring investment assets mature in line with liability cashflows.",
+        "b) Comparing asset returns with competitors.",
+        "c) Maximizing short-term investment income.",
+        "d) Reducing operational expenses through automation."
       ],
-      correctAnswer: "C. Adequate but requires monitoring",
-      explanation: "Suitable when near adequacy threshold with emerging risk."
+      correctAnswer: "a) Ensuring investment assets mature in line with liability cashflows.",
+      explanation: "ALM analysis in the FCR examines whether the timing, amount, and nature of assets appropriately back liability obligations."
     },
     {
       id: 10,
-      // section: "Inflation Impacts",
-      question: "Most sensitive to claims inflation?",
+      // section: "Reinsurance Assessment",
+      question: "When evaluating reinsurance arrangements in the FCR, the actuary should focus most on:",
       options: [
-        "A. Expense Ratio",
-        "B. Loss Ratio",
-        "C. Commission Ratio",
-        "D. CAR"
+        "a) Whether reinsurers offer loyalty discounts.",
+        "b) The reinsurer's marketing activities.",
+        "c) How reinsurance affects net solvency and capital strain under adverse scenarios.",
+        "d) Historical commission rates alone."
       ],
-      correctAnswer: "B. Loss Ratio",
-      explanation: "Claims inflation increases severity and loss ratio primarily."
+      correctAnswer: "c) How reinsurance affects net solvency and capital strain under adverse scenarios.",
+      explanation: "The FCR must assess whether reinsurance genuinely reduces risk and improves solvency under both base and stressed conditions."
     },
     {
       id: 11,
-      // section: "Capital Assessment",
-      question: "CAR Fall 150% → 110% suggests:",
+      // section: "FCR Recommendations",
+      question: "Which situation would most likely trigger an explicit recommendation in the FCR?",
       options: [
-        "A. Strong profits",
-        "B. Low growth",
-        "C. Capital strain from losses",
-        "D. Commission savings"
+        "a) A minor year-on-year fluctuation in claim ratios.",
+        "b) A consistent divergence between actual experience and booked assumptions.",
+        "c) A change in the insurer's corporate branding.",
+        "d) A routine board committee restructure."
       ],
-      correctAnswer: "C. Capital strain from losses",
-      explanation: "Decline signals underwriting deterioration affecting solvency"
+      correctAnswer: "b) A consistent divergence between actual experience and booked assumptions.",
+      explanation: "Persistent assumption-experience mismatches may signal emerging risks or require model refinements, warranting formal recommendations."
     },
     {
       id: 12,
-      // section: "Risk Management",
-      question: "If severity increases, appropriate action is:",
+      // section: "Business Plan Review",
+      question: "In reviewing the insurer's business plan within the FCR, the actuary is primarily concerned with:",
       options: [
-        "A. Reduce premiums",
-        "B. Increase deductibles",
-        "C. Remove reinsurance",
-        "D. Cut commission only"
+        "a) Whether projected growth is supported by adequate capital and risk controls.",
+        "b) Whether the Board prefers aggressive expansion.",
+        "c) The company's branding and marketing strategy.",
+        "d) The number of new distribution channels planned."
       ],
-      correctAnswer: "B. Increase deductibles",
-      explanation: "Deductibles control high severity exposure."
-    },
-    {
-      id: 13,
-      // section: "Reporting Requirements",
-      question: "Mandatory content in certificate?",
-      options: [
-        "A. Broker feedback",
-        "B. Pricing adequacy opinion",
-        "C. Competitor benchmarking only",
-        "D. Marketing summary"
-      ],
-      correctAnswer: "B. Pricing adequacy opinion",
-      explanation: "Certificate must contain adequacy conclusion and recommendation."
-    },
-    {
-      id: 14,
-      // section: "Data Integrity",
-      question: "Dataset acceptable only after:",
-      options: [
-        "A. Gaps ignored",
-        "B. Validation log signed",
-        "C. Market assumption only",
-        "D. CAR >100%"
-      ],
-      correctAnswer: "B. Validation log signed",
-      explanation: "Signed validation confirms data integrity."
-    },
-    {
-      id: 15,
-      // section: "Rate Analysis",
-      question: "Purpose of average premium rate analysis?",
-      options: [
-        "A. Track revenue",
-        "B. Detect pricing drift & underpricing",
-        "C. Measure distribution profit only",
-        "D. Validate investment returns"
-      ],
-      correctAnswer: "B. Detect pricing drift & underpricing",
-      explanation: "Used to compare adequacy across years"
+      correctAnswer: "a) Whether projected growth is supported by adequate capital and risk controls.",
+      explanation: "The actuary assesses whether the business plan is realistic relative to the insurer's solvency position and risk appetite."
     }
   ]
 };

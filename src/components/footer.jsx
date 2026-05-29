@@ -162,7 +162,7 @@ export default function Footer({ theme: themeProp }) {
               <img src={shaLogo} alt="SHA Logo" className="w-full h-full object-contain" />
             </div>
             <p
-              className="mb-6 text-sm leading-relaxed"
+              className="mb-6 max-w-xs text-sm leading-relaxed text-balance sm:max-w-sm"
               style={{ color: currentColors.textSecondary }}
             >
               Your comprehensive platform for actuarial training, valuation tools,

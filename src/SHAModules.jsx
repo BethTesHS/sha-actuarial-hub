@@ -12,9 +12,9 @@ import lrcImg from "./assets/lrc.jpg";
 import giValuationsImg from "./assets/gi-valuations.jpg";
 import capitalAdequacyImg from "./assets/capital-adequacy.jpg";
 import finPerformanceImg from "./assets/financial-performance.jpg";
-import premCertificatesImg from "./assets/premium-certificates.jpg";
-import reinCertificatesImg from "./assets/reinsuarance-certificates.jpg";
 import finConditionImg from "./assets/financial-condition.jpg";
+import postRetirementImg from "./assets/post-retirement.jpg";
+import esgImg from "./assets/esg.jpg";
 import ifrs17Img from "./assets/ifrs-17.jpg";
 import shaLogo from "./assets/SHA_logo.png";
 import kenbrightLogo from "./assets/kenbright-logo-white.png";
@@ -67,11 +67,11 @@ export default function SHAModules({ theme = "dark", user }) {
     const cardMutedColor = isDark ? "rgba(255,255,255,0.7)" : "rgba(15,23,42,0.65)";
     const cardFaintColor = isDark ? "rgba(255,255,255,0.3)" : "rgba(15,23,42,0.42)";
     const trackBg = isDark ? "rgba(255,255,255,0.1)" : "rgba(15,23,42,0.1)";
-    const getModuleColor = (moduleNumber) => (moduleNumber % 2 === 0 ? shaGreen : shaBlue);
+    const getModuleColor = (moduleNumber) => (moduleNumber % 2 === 0 ? shaGreen : shaGreen);
     const getModuleProgress = (moduleId) => moduleProgress[String(moduleId)] || 0;
 
     const specialBanner = {
-        id: "ifrs17",
+        id: 0,
         name: "IFRS 17",
         color: shaGreen,
         status: "accessible",
@@ -119,16 +119,16 @@ export default function SHAModules({ theme = "dark", user }) {
         },
         {
             id: 5,
-            name: "Capital Adequacy Analysis",
+            name: "Solvency Analysis",
             color: getModuleColor(5),
             status: "accessible",
-            description: "Learn capital adequacy requirements and solvency analysis methods.",
+            description: "Learn solvency requirements and capital adequacy analysis methods.",
             image: capitalAdequacyImg,
             number: "05"
         },
         {
             id: 6,
-            name: "Financial Performance Analysis (Ratio Analysis)",
+            name: "Financial Performance Analysis",
             color: getModuleColor(6),
             status: "accessible",
             description: "Master financial ratio analysis and balance sheet evaluation techniques.",
@@ -137,29 +137,29 @@ export default function SHAModules({ theme = "dark", user }) {
         },
         {
             id: 7,
-            name: "Premium Certificates",
+            name: "Financial Condition Report",
             color: getModuleColor(7),
             status: "accessible",
-            description: "Learn premium certificate preparation and validation processes.",
-            image: premCertificatesImg,
+            description: "Master financial condition reporting standards and requirements.",
+            image: finConditionImg,
             number: "07"
         },
         {
             id: 8,
-            name: "Reinsurance Certificates",
+            name: "Post Retirement Medical Fund",
             color: getModuleColor(8),
             status: "accessible",
-            description: "Understand reinsurance certificate creation and management.",
-            image: reinCertificatesImg,
+            description: "Valuation and management of Post Retirement Medical Benefit liabilities.",
+            image: postRetirementImg,
             number: "08"
         },
         {
             id: 9,
-            name: "Financial Condition Reporting",
+            name: "ESG",
             color: getModuleColor(9),
             status: "accessible",
-            description: "Master financial condition reporting standards and requirements.",
-            image: finConditionImg,
+            description: "Environment, Social and Governance principles, reporting frameworks, and best practices.",
+            image: esgImg,
             number: "09"
         }
     ];
@@ -178,7 +178,7 @@ export default function SHAModules({ theme = "dark", user }) {
             };
 
             return (
-                <div className={`${baseClasses} h-64 lg:h-72 xl:h-80`} style={style}>
+                <Link to="/modules/0" className={`${baseClasses} h-64 lg:h-72 xl:h-80 block`} style={style}>
                     <div className="h-full flex flex-col group cursor-pointer">
                         <div className="h-1/2 relative overflow-hidden">
                             <img
@@ -227,7 +227,7 @@ export default function SHAModules({ theme = "dark", user }) {
                             </div>
                         </div>
                     </div>
-                </div>
+                </Link>
             );
         }
 

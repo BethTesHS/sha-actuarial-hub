@@ -10,14 +10,14 @@ import lrcImg from "./assets/lrc.jpg";
 import giValuationsImg from "./assets/gi-valuations.jpg";
 import capitalAdequacyImg from "./assets/capital-adequacy.jpg";
 import finPerformanceImg from "./assets/financial-performance.jpg";
-import premCertificatesImg from "./assets/premium-certificates.jpg";
-import reinCertificatesImg from "./assets/reinsuarance-certificates.jpg";
 import finConditionImg from "./assets/financial-condition.jpg";
+import postRetirementImg from "./assets/post-retirement.jpg";
+import esgImg from "./assets/esg.jpg";
 import ifrs17Img from "./assets/ifrs-17.jpg";
 
 export default function Training() {
   const specialBanner = {
-    id: "ifrs17",
+    id: 0,
     name: "IFRS 17",
     color: "#FF6B35",
     status: "accessible",
@@ -65,7 +65,7 @@ export default function Training() {
     },
     {
       id: 5,
-      name: "Capital Adequacy Analysis",
+      name: "Solvency Analysis",
       color: "#00E5FF",
       status: "locked",
       description: "Learn capital adequacy requirements and solvency analysis methods.",
@@ -74,7 +74,7 @@ export default function Training() {
     },
     {
       id: 6,
-      name: "Financial Performance Analysis (Ratio Analysis)",
+      name: "Financial Performance Analysis",
       color: "#7C4DFF",
       status: "locked",
       description: "Master financial ratio analysis and balance sheet evaluation techniques.",
@@ -83,29 +83,29 @@ export default function Training() {
     },
     {
       id: 7,
-      name: "Premium Certificates",
+      name: "Financial Condition Report",
       color: "#00E5FF",
       status: "locked",
-      description: "Learn premium certificate preparation and validation processes.",
-      image: premCertificatesImg,
+      description: "Master financial condition reporting standards and requirements.",
+      image: finConditionImg,
       number: "07"
     },
     {
       id: 8,
-      name: "Reinsurance Certificates",
+      name: "Post Retirement Medical Fund",
       color: "#7C4DFF",
       status: "locked",
-      description: "Understand reinsurance certificate creation and management.",
-      image: reinCertificatesImg, 
+      description: "Valuation and management of Post Retirement Medical Benefit liabilities.",
+      image: postRetirementImg,
       number: "08"
     },
     {
       id: 9,
-      name: "Financial Condition Reporting",
+      name: "ESG",
       color: "#00E5FF",
       status: "locked",
-      description: "Master financial condition reporting standards and requirements.",
-      image: finConditionImg, 
+      description: "Environment, Social and Governance principles, reporting frameworks, and best practices.",
+      image: esgImg,
       number: "09"
     }
   ];

@@ -33,7 +33,7 @@ export default function IFRS17PolicyPapers({ theme = "dark" }) {
 
             <button
               type="button"
-              onClick={() => navigate("/modules/IFRS 17")}
+              onClick={() => navigate("/modules/0")}
               className="px-6 py-3 rounded-xl font-semibold text-sm flex items-center gap-2 transition-all hover:scale-105"
               style={{ background: `linear-gradient(135deg, ${colors.gradientStart}, ${colors.gradientEnd})`, color: "white" }}
             >

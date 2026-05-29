@@ -34,9 +34,9 @@ import lrcImg from "./assets/lrc.jpg";
 import giValuationsImg from "./assets/gi-valuations.jpg";
 import capitalAdequacyImg from "./assets/capital-adequacy.jpg";
 import finPerformanceImg from "./assets/financial-performance.jpg";
-import premCertificatesImg from "./assets/premium-certificates.jpg";
-import reinCertificatesImg from "./assets/reinsuarance-certificates.jpg";
 import finConditionImg from "./assets/financial-condition.jpg";
+import postRetirementImg from "./assets/post-retirement.jpg";
+import esgImg from "./assets/esg.jpg";
 import ifrs17Img from "./assets/ifrs-17.jpg";
 
 // Carousel Slides for Dashboard
@@ -253,15 +253,15 @@ export default function MyProgress({ theme = 'dark', user }) {
   ];
 
   const allModules = [
-    { id: 1, name: "GI Data Clean Up", color: currentColors.purple, image: dataCleanupImg },
+    { id: 1, name: "Data Clean Up", color: currentColors.purple, image: dataCleanupImg },
     { id: 2, name: "Pricing Fundamentals", color: currentColors.blue, image: pricingFundamentalsImg },
     { id: 3, name: "Liability for Remaining Coverage (LRC)", color: currentColors.cyan, image: lrcImg },
     { id: 4, name: "General Insurance Valuations", color: currentColors.green, image: giValuationsImg },
-    { id: 5, name: "Capital Adequacy Analysis", color: currentColors.orange, image: capitalAdequacyImg },
+    { id: 5, name: "Solvency Analysis", color: currentColors.orange, image: capitalAdequacyImg },
     { id: 6, name: "Financial Performance Analysis", color: currentColors.pink, image: finPerformanceImg },
-    { id: 7, name: "Premium Certificates", color: currentColors.purple, image: premCertificatesImg },
-    { id: 8, name: "Reinsurance Certificates", color: currentColors.blue, image: reinCertificatesImg },
-    { id: 9, name: "Financial Condition Report (FCR)", color: currentColors.cyan, image: finConditionImg },
+    { id: 7, name: "Financial Condition Report", color: currentColors.cyan, image: finConditionImg },
+    { id: 8, name: "Post Retirement Medical Fund", color: currentColors.purple, image: postRetirementImg },
+    { id: 9, name: "ESG", color: currentColors.green, image: esgImg },
   ];
 
   // Helper for formatting time elapsed

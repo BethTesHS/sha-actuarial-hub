@@ -8,13 +8,22 @@ import { getShaThemeColors } from './theme/sha';
 
 // Import your constants
 import {
-  module1Data, module2Data, module3Data, module4Data, module5Data,
+  module0Data, module1Data, module2Data, module3Data, module4Data, module5Data,
   module6Data, module7Data, module8Data, module9Data,
 } from './constants/modules';
 
 const MODULES_MAP = {
+  0: module0Data,
   1: module1Data, 2: module2Data, 3: module3Data, 4: module4Data, 5: module5Data,
   6: module6Data, 7: module7Data, 8: module8Data, 9: module9Data,
+};
+
+const resolveModuleNumber = (moduleId) => {
+  if (moduleId === 'IFRS 17' || moduleId === 'ifrs17' || moduleId === 'IFRS-17') {
+    return 0;
+  }
+  const parsed = parseInt(moduleId, 10);
+  return Number.isNaN(parsed) ? null : parsed;
 };
 
 export default function ModulePage({ theme = 'dark', user }) {
@@ -30,7 +39,7 @@ export default function ModulePage({ theme = 'dark', user }) {
 
   useEffect(() => {
     // Module 18 is intentionally frontend-only (no tracking syncs)
-    if (parseInt(moduleId) === 18) return;
+    if (resolveModuleNumber(moduleId) === 0) return;
 
     // Make sure we have a logged-in user
     if (!user?.id) return;
@@ -88,8 +97,8 @@ export default function ModulePage({ theme = 'dark', user }) {
     const fetchModuleData = async () => {
       setLoading(true);
       try {
-        const moduleNumber = parseInt(moduleId, 10);
-        const fallbackData = MODULES_MAP[moduleNumber];
+        const moduleNumber = resolveModuleNumber(moduleId);
+        const fallbackData = moduleNumber !== null ? MODULES_MAP[moduleNumber] : null;
         if (fallbackData) {
           setModuleData(fallbackData);
         } else {

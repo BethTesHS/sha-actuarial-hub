@@ -1,344 +1,521 @@
 export const module9Data = {
   id: 9,
-  title: "Financial Condition Report (FCR)",
-  shortDescription: "Master the preparation and analysis of Financial Condition Reports. Learn to assess financial strength, solvency, asset-liability management, reinsurance arrangements, and provide strategic recommendations to boards and regulators.",
-  themeColor: "blue",
+  title: "ESG",
+  description: "The Environment Social Governance (ESG) module provides an overview of ESG principles, their importance in the business world, and how to integrate ESG considerations into decision-making processes. This module covers key ESG factors, reporting frameworks, and best practices for sustainable business operations.",
+  themeColor: "green",
+  
   objectives: {
     text: [
-      "This module aims to equip learners with the knowledge and practical skills required to understand, support, and contribute to the preparation of a Financial Condition Report (FCR). By the end of the module, participants will be able to explain the regulatory purpose and importance of the FCR, interpret its key components, and apply actuarial techniques to support financial analysis, reserving, solvency assessment, asset-liability management, reinsurance assessment, and risk evaluation.",
-      "This will strengthen their ability to contribute effectively to the preparation of the FCR, translate technical findings into recommendations that inform strategic decisions by the Board and senior management, and ensure the company meets actuarial professional standards and regulatory obligations."
-    ],
+      "The primary objective of this manual is to transition an ESG Analyst from a foundational understanding of ESG to effective day-to-day execution within both Kenbright's internal operations and client-facing advisory engagements. It serves as a practical guide that bridges ESG theory with real-world application, ensuring that the analyst understands not only what ESG is, but how ESG work is performed, delivered, and measured in a professional services environment.",
+    ]
   },
 
   learningOutcomes: {
-    text: "By the end of this module, participants will be able to:",
+    text: "By the end of this manual, the analyst will be equipped to handle the practical, cross-functional, and output-driven responsibilities of the role. Specifically, the analyst will be able to:",
     points: [
-      "Explain the concepts of frequency and severity and their role in measuring insurance risk.",
-      "Calculate and interpret exposures for use in insurance analysis either in (days, months, or years).",
-      "Differentiate between risk premium and office premium and describe how each contributes to premium calculation.",
-      "Apply frequency and severity measures to estimate expected claims and derive risk premiums.",
-      "Assess the relationship between exposures, premiums, and loss ratios to evaluate insurance performance.",
+      "Independently support ESG reporting, risk assessment, stakeholder engagement, and advisory assignments in alignment with global standards such as the Global Reporting Initiative (GRI) and IFRS S1 & S2",
+      "Collect, validate, structure, analyze, and visualize ESG data—including tracking Scope 1 and Scope 2 carbon emissions—to inform risk evaluation, support compliance, and drive strategic decision-making.",
+      "Conduct structured ESG risk and materiality assessments, facilitate stakeholder workshops, and adapt ESG principles effectively across core sectors like asset management, insurance, and professional services.",
     ],
   },
 
   courseContent: {
-    description: "This module is guided by comprehensive technical documents. They contain all the instructions, worked examples, and exercises you need to master Financial Condition Report Preparation. Download and use them as your primary references throughout the module.",
+    description: "This course transitions ESG Analysts from theory to practical execution. Master data management, risk assessment, and compliance reporting to support internal operations and client-facing advisory engagements.",
     resources: [
       {
-        title: "KAFS ITP Financial Condition Report (FCR)",
-        url: "/Training Modules/Module 9_FCR/Course Content/KAFS ITP Financial_Condition_Report_2025.pdf",
-        filename: "KAFS ITP Financial_Condition_Report_2025.pdf",
+        title: "ESG Manual",
+        url: "/Training Modules/Module 17_ESG/Course Content/ESG_Manual.pdf",
+        filename: "ESG_Manual.pdf",
         icon: "📄"
       }
     ]
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "2025 Budget Data",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 9_FCR/Data/2025 Budget.xlsx",
-        filename: "2025 Budget.xlsx",
-        // icon: "📊",
-        // icon: "📈",
-        icon: "📋",
-      },
-      {
-        title: "Final Audited Financial Statements FY 2024",
-        description: "Word • Sample dataset",
-        url: "/Training Modules/Module 9_FCR/Data/PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
-        filename: "PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
-        // icon: "📊",
-        icon: "📈",
-        // icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "Pioneer General - FCR 2023 Working File V2",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General - FCR 2023 Working File V2.xlsx",
-        filename: "Pioneer General - FCR 2023 Working File V2.xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      },
-      {
-        title: "Pioneer General FCR 2023 - Final Report",
-        description: "Word • Template",
-        url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General FCR 2023 - Final Report (290424).docx",
-        filename: "Pioneer General FCR 2023 - Final Report.docx",
-        // icon: "🛠️",
-        icon: "⚙️",
-      },
-    ],
-    resultFiles: [
-      {
-        title: "Pioneer General FCR 2024 - Final Report",
-        url: "/Training Modules/Module 9_FCR/Results Files/Pioneer General FCR 2024 - Final Report (250325).pdf",
-        filename: "Pioneer General FCR 2024 - Final Report.pdf",
-      }
-    ]
-  },
+  additionalResources: [
+    {
+      title: "ESG Guidelines for the Insurance Sector - SIGNED",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/ESG GUIDELINES FOR THE INSURANCE SECTOR-SIGNED.pdf",
+      filename: "ESG GUIDELINES FOR THE INSURANCE SECTOR-SIGNED.pdf",
+    },
+    {
+      title: "IFRS S1 & S2 Level 1 Study Guide",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/IFRS S1& S2 Level 1 Study Guide.pdf",
+      filename: "IFRS S1 & S2 Level 1 Study Guide.pdf",
+      downloadable: false,
+    },
+    {
+      title: "ISSB - 2023 (IFRS S1 General Requirements for Disclosure of Sustainability Related Financial Information)",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/issb-2023-a-ifrs-s1-general-requirements-for-disclosure-of-sustainability-related-financial-information.pdf",
+      filename: "issb-2023-a-ifrs-s1-general-requirements-for-disclosure-of-sustainability-related-financial-information.pdf",
+    },
+    {
+      title: "ISSB - 2025 (IFRS S2 Climate-Related Disclosures)",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/issb-2025-a-ifrs-s2-climate-related-disclosures.pdf",
+      filename: "issb-2025-a-ifrs-s2-climate-related-disclosures.pdf",
+    },
+    {
+      title: "NSE - ESG Disclosures Guidance Manual",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/NSE-ESG-Disclosures-Guidance-Manual.pdf",
+      filename: "NSE-ESG-Disclosures-Guidance-Manual.pdf",
+    },
+    {
+      title: "SASB - Asset Management Standard",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/SASB - Asset Management Standard.pdf",
+      filename: "SASB - Asset Management Standard.pdf",
+    },
+    {
+      title: "SASB - Insurance Standard",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/SASB - Insurance Standard.pdf",
+      filename: "SASB - Insurance Standard.pdf",
+    },
+    {
+      title: "SASB - Professional Services Standard",
+      type: "PDF",
+      url: "/Training Modules/Module 17_ESG/Additional Resources/SASB - Professional Services Standard.pdf",
+      filename: "SASB - Professional Services Standard.pdf",
+    },
+  ],
 
-additionalResources: [
-  {
-    title: "Draft Risk Based Capital Adequacy",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Draft_Risk_Based_Capital_Adequacy1.pdf",
-    filename: "Draft_Risk_Based_Capital_Adequacy.pdf",
-  },
-  {
-    title: "Guideline on Insurance Risk",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on Insurance Risk.pdf",
-    filename: "Guideline on Insurance Risk.pdf",
-  },
-  {
-    title: "Guideline on Reinsurance Arrangements",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on Reinsurance Arrangements.pdf",
-    filename: "Guideline on Reinsurance Arrangements.pdf",
-  },
-  {
-    title: "Guideline on Risk Management and Internal Controls",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on Risk Management and Internal Controls.pdf",
-    filename: "Guideline on Risk Management and Internal Controls.pdf",
-  },
-  {
-    title: "Guideline on the Actuarial Function",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Guideline on the Actuarial Function.pdf",
-    filename: "Guideline on the Actuarial Function.pdf",
-  },
-  {
-    title: "Guidelines on Actuarial Function Issued in February 2013",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Guidelines on Actuarial Function Issued in February 2013.pdf",
-    filename: "Guidelines on Actuarial Function Issued in February 2013.pdf",
-  },
-  {
-    title: "Guidelines on Insurance Products",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Guidelines on Insurance Products.pdf",
-    filename: "Guidelines on Insurance Products.pdf",
-  },
-  {
-    title: "Guidelines on Claims Management",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Guidelines1 on Claims Management.pdf",
-    filename: "Guidelines on Claims Management.pdf",
-  },
-  {
-    title: "Suitability of Persons",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/Suitability of Persons.pdf",
-    filename: "Suitability of Persons.pdf",
-  },
-  {
-    title: "The Insurance (Investments Management) Guidelines.",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/The Insurance (Investments Management) Guidelines..pdf",
-    filename: "The Insurance (Investments Management) Guidelines..pdf",
-  },
-  {
-    title: "The Insurance Act",
-    type: "PDF",
-    url: "/Training Modules/Module 9_FCR/Additional Resources/The Insurance Act.pdf",
-    filename: "The Insurance Act.pdf",
-  },
-],
+  aiQuizQuestions: [
+    {
+      id: "aq1",
+      question: "Explain the difference between impact materiality (GRI) and financial materiality (IFRS S1/S2). How does double materiality bridge the two?",
+      hint: "Consider who the primary audience is for each framework (e.g., broad stakeholders vs. investors) and what kind of impacts they focus on."
+    },
+    {
+      id: "aq2",
+      question: "Describe the process you would follow to collect, validate, and track a company's Scope 1 and Scope 2 greenhouse gas emissions.",
+      hint: "Think about direct versus indirect emissions, data sources (e.g., utility bills, fuel receipts), and how this data informs risk evaluation."
+    },
+    {
+      id: "aq3",
+      question: "IFRS S1 is built on the established structure of the TCFD framework. What are the four core pillars of this framework?",
+      hint: "The pillars cover how an organization is directed, its broader execution plan, how it identifies hazards, and how it tracks progress (Governance, Strategy...)."
+    },
+    {
+      id: "aq4",
+      question: "How do SASB standards tailor ESG disclosures across different sectors, such as Asset Management versus Professional Services?",
+      hint: "Consider how the financially material issues differ between a firm that invests capital versus one that provides human-capital-driven advisory services."
+    },
+    {
+      id: "aq5",
+      question: "In the context of the GRI Standards, why is stakeholder inclusiveness a foundational concept, and how does it affect materiality assessment?",
+      hint: "Reflect on how an organization decides which economic, environmental, and social impacts are significant enough to report based on external expectations."
+    },
+    {
+      id: "aq6",
+      question: "What are the primary climate-related risks and opportunities that organizations must disclose under IFRS S2?",
+      hint: "Think about physical risks (e.g., extreme weather) and transition risks (e.g., policy changes, technological shifts) associated with climate change."
+    }
+  ],
 
-  // aiQuizQuestions: [
-  //   {
-  //     id: "aq1",
-  //     question: "Explain the primary purpose of the Financial Condition Report (FCR) and the significance of the statutory actuary's opinion within it.",
-  //     hint: "Consider how the FCR evaluates the insurer's current and future financial soundness, and why a formal statement confirming the actuarial valuation approach is critical for regulators and the Board."
-  //   },
-  //   {
-  //     id: "aq2",
-  //     question: "Discuss the role of Asset-Liability Management (ALM) analysis within the FCR. Why is it important to ensure that investment assets mature in line with liability cashflows?",
-  //     hint: "Think about liquidity risk, interest rate risk, and the insurer's ability to consistently meet its long-term future obligations to policyholders as they fall due."
-  //   },
-  //   {
-  //     id: "aq3",
-  //     question: "How should an actuary evaluate an insurer's reinsurance arrangements when preparing an FCR?",
-  //     hint: "Focus on whether the reinsurance program genuinely reduces risk, provides adequate risk transfer, and improves net solvency, especially under adverse scenarios or capital stress."
-  //   },
-  //   {
-  //     id: "aq4",
-  //     question: "What constitutes a 'material risk' in the context of an FCR, and why is the rigorous documentation of justifiable actuarial assumptions so important?",
-  //     hint: "Consider the potential financial impact of a risk on the insurer's solvency margin, and how transparent methods and assumptions promote auditability and stakeholder understanding."
-  //   },
-  //   {
-  //     id: "aq5",
-  //     question: "Why must the actuary review the insurer's realistic business plan within the FCR, and what specific findings might trigger a formal actuarial recommendation?",
-  //     hint: "Think about assessing whether projected premium growth is supported by adequate capital, and how persistent divergences between assumed and actual experience require corrective strategic actions."
-  //   }
-  // ],
-
-  
 
   // ---------- Quiz Questions ----------
   
-  quizQuestions: [
-    // Section 1: FCR Purpose
+quizQuestions: [
+    // Section 1: GRI Standards Foundation & Concepts
     {
       id: 1,
-      // section: "FCR Purpose",
-      question: "The primary purpose of a Financial Condition Report (FCR) is to:",
+      // section: "GRI STANDARDS",
+      question: "What is the primary purpose of the GRI Standards?",
       options: [
-        "a) Assess the insurer's current and future financial soundness.",
-        "b) Provide audited financial statements to shareholders.",
-        "c) Describe marketing strategies for premium growth.",
-        "d) Summarize the company's investment returns."
+        "a) Financial reporting",
+        "b) Sustainability impact reporting",
+        "c) Tax reporting",
+        "d) Risk auditing"
       ],
-      correctAnswer: "a) Assess the insurer's current and future financial soundness.",
-      explanation: "An FCR focuses on evaluating solvency, risks, and the insurer's ability to meet obligations under current and future conditions."
+      correctAnswer: "b) Sustainability impact reporting",
+      explanation: "According to the GRI Standards section, the primary purpose is sustainability impact reporting."
     },
     {
       id: 2,
-      // section: "Actuary's Opinion",
-      question: "Which of the following best describes the 'actuary's opinion' within the FCR?",
+      // section: "GRI STANDARDS",
+      question: "Which GRI standard provides the foundation for reporting principles?",
       options: [
-        "a) A summary of the insurer's profitability trends.",
-        "b) A mandatory statement confirming the actuarial valuation approach and key conclusions.",
-        "c) A forecast of market share for the next three years.",
-        "d) A description of operational policies."
+        "a) GRI 1",
+        "b) GRI 2",
+        "c) GRI 3",
+        "d) GRI 101"
       ],
-      correctAnswer: "b) A mandatory statement confirming the actuarial valuation approach and key conclusions.",
-      explanation: "Regulations require the signing actuary to provide a clear opinion on liabilities, risks, and methods used in the FCR."
+      correctAnswer: "a) GRI 1",
+      explanation: "GRI 1 provides the foundation for reporting principles."
     },
     {
       id: 3,
-      // section: "Actuarial Assumptions",
-      question: "In preparing an FCR, the actuary must ensure that assumptions used are:",
+      // section: "GRI STANDARDS",
+      question: "Which concept requires organizations to report their most significant economic, environmental, and social impacts?",
       options: [
-        "a) Determined solely by management.",
-        "b) More optimistic than previous years.",
-        "c) Reasonable, justifiable, and aligned with regulatory requirements.",
-        "d) Based only on international benchmarks."
+        "a) Materiality",
+        "b) Relevance",
+        "c) Consistency",
+        "d) Completeness"
       ],
-      correctAnswer: "c) Reasonable, justifiable, and aligned with regulatory requirements.",
-      explanation: "Assumptions must be supportable, relevant to the insurer's experience, and meet guideline requirements."
+      correctAnswer: "a) Materiality",
+      explanation: "Materiality is the concept requiring organizations to report their most significant impacts."
     },
     {
       id: 4,
-      // section: "Regulatory Guidelines",
-      question: "Which statement best explains the role of regulatory guidelines in FCR preparation?",
+      // section: "GRI STANDARDS",
+      question: "Which GRI disclosure standard focuses on organizational profile and governance?",
       options: [
-        "a) They act as optional reference materials.",
-        "b) They define the minimum content, format, and standards required in the report.",
-        "c) They replace the actuary's professional judgment.",
-        "d) They provide industry marketing templates."
+        "a) GRI 2",
+        "b) GRI 201",
+        "c) GRI 305",
+        "d) GRI 403"
       ],
-      correctAnswer: "b) They define the minimum content, format, and standards required in the report.",
-      explanation: "FCR guidelines specify required sections, actuarial duties, and reporting standards."
+      correctAnswer: "a) GRI 2",
+      explanation: "GRI 2 is the standard that focuses on organizational profile and governance."
     },
     {
       id: 5,
-      // section: "Solvency Discussion",
-      question: "When discussing solvency, the FCR should highlight:",
+      // section: "GRI STANDARDS",
+      question: "What does GRI refer to as impact materiality?",
       options: [
-        "a) Only past capital positions.",
-        "b) Only IFRS accounting profits.",
-        "c) Competitor solvency requirements.",
-        "d) The current solvency margin and projected future solvency."
+        "a) Issues affecting company profits",
+        "b) Issues affecting financial valuation",
+        "c) Organization's impacts on economy, environment, and society",
+        "d) Issues affecting taxes"
       ],
-      correctAnswer: "d) The current solvency margin and projected future solvency.",
-      explanation: "FCRs must include both current solvency status and forward-looking solvency forecasts."
+      correctAnswer: "c) Organization's impacts on economy, environment, and society",
+      explanation: "Impact materiality refers to the organization's impacts on the economy, environment, and society."
     },
     {
       id: 6,
-      // section: "Material Risk Disclosure",
-      question: "A material risk in the FCR must be disclosed when:",
+      // section: "GRI STANDARDS",
+      question: "Which principle requires reporting both positive and negative impacts?",
       options: [
-        "a) It has negligible impact on capital.",
-        "b) It is unlikely to happen.",
-        "c) It could significantly affect the insurer's financial condition.",
-        "d) The risk has already been fully mitigated."
+        "a) Balance",
+        "b) Accuracy",
+        "c) Comparability",
+        "d) Timeliness"
       ],
-      correctAnswer: "c) It could significantly affect the insurer's financial condition.",
-      explanation: "Materiality is based on potential financial impact, not likelihood alone."
+      correctAnswer: "a) Balance",
+      explanation: "The balance principle ensures both positive and negative impacts are reported."
     },
+
+    // Section 2: GRI Topic Specific Standards & Scopes
     {
       id: 7,
-      // section: "Documentation",
-      question: "The FCR requirement for documentation of methodologies ensures that:",
+      // section: "GRI STANDARDS",
+      question: "Which GRI topic standard addresses greenhouse gas emissions?",
       options: [
-        "a) The actuary can avoid explaining complex models.",
-        "b) The insurer can outsource the work without supervision.",
-        "c) Only the regulator can interpret the results.",
-        "d) Stakeholders understand assumptions, data, and actuarial techniques used."
+        "a) GRI 302",
+        "b) GRI 305",
+        "c) GRI 307",
+        "d) GRI 401"
       ],
-      correctAnswer: "d) Stakeholders understand assumptions, data, and actuarial techniques used.",
-      explanation: "Clear documentation promotes transparency and auditability of actuarial methods."
+      correctAnswer: "b) GRI 305",
+      explanation: "GRI 305 specifically addresses greenhouse gas emissions."
     },
     {
       id: 8,
-      // section: "Insurance Liability Risk",
-      question: "Which risk is most commonly analyzed in the insurance liability section of an FCR?",
+      // section: "GRI STANDARDS",
+      question: "What does GRI 3 primarily require organizations to disclose?",
       options: [
-        "a) Foreign exchange risk.",
-        "b) Underwriting and claims risk.",
-        "c) Reputation risk.",
-        "d) Outsourcing risk."
+        "a) Material topics and their management",
+        "b) Shareholder returns",
+        "c) Audit procedures",
+        "d) Tax obligations"
       ],
-      correctAnswer: "b) Underwriting and claims risk.",
-      explanation: "Liability valuation is directly influenced by claim frequency, severity, lapse, and other underwriting risks."
+      correctAnswer: "a) Material topics and their management",
+      explanation: "GRI 3 primarily requires organizations to disclose material topics and their management."
     },
     {
       id: 9,
-      // section: "Asset-Liability Management",
-      question: "In an FCR, the assessment of asset–liability management (ALM) primarily focuses on:",
+      // section: "GRI STANDARDS",
+      question: "Which GRI standard covers anti-corruption practices?",
       options: [
-        "a) Ensuring investment assets mature in line with liability cashflows.",
-        "b) Comparing asset returns with competitors.",
-        "c) Maximizing short-term investment income.",
-        "d) Reducing operational expenses through automation."
+        "a) GRI 201",
+        "b) GRI 205",
+        "c) GRI 403",
+        "d) GRI 414"
       ],
-      correctAnswer: "a) Ensuring investment assets mature in line with liability cashflows.",
-      explanation: "ALM analysis in the FCR examines whether the timing, amount, and nature of assets appropriately back liability obligations."
+      correctAnswer: "b) GRI 205",
+      explanation: "GRI 205 covers anti-corruption practices."
     },
     {
       id: 10,
-      // section: "Reinsurance Assessment",
-      question: "When evaluating reinsurance arrangements in the FCR, the actuary should focus most on:",
+      // section: "GRI STANDARDS",
+      question: "Which of the following is a social topic standard?",
       options: [
-        "a) Whether reinsurers offer loyalty discounts.",
-        "b) The reinsurer's marketing activities.",
-        "c) How reinsurance affects net solvency and capital strain under adverse scenarios.",
-        "d) Historical commission rates alone."
+        "a) GRI 305",
+        "b) GRI 401",
+        "c) GRI 302",
+        "d) GRI 204"
       ],
-      correctAnswer: "c) How reinsurance affects net solvency and capital strain under adverse scenarios.",
-      explanation: "The FCR must assess whether reinsurance genuinely reduces risk and improves solvency under both base and stressed conditions."
+      correctAnswer: "b) GRI 401",
+      explanation: "GRI 401 falls under the social topic standards."
     },
     {
       id: 11,
-      // section: "FCR Recommendations",
-      question: "Which situation would most likely trigger an explicit recommendation in the FCR?",
+      // section: "GRI STANDARDS",
+      question: "GRI encourages organizations to report impacts across which scope?",
       options: [
-        "a) A minor year-on-year fluctuation in claim ratios.",
-        "b) A consistent divergence between actual experience and booked assumptions.",
-        "c) A change in the insurer's corporate branding.",
-        "d) A routine board committee restructure."
+        "a) Internal operations only",
+        "b) Suppliers only",
+        "c) Entire value chain",
+        "d) Customers only"
       ],
-      correctAnswer: "b) A consistent divergence between actual experience and booked assumptions.",
-      explanation: "Persistent assumption-experience mismatches may signal emerging risks or require model refinements, warranting formal recommendations."
+      correctAnswer: "c) Entire value chain",
+      explanation: "GRI encourages reporting impacts across the entire value chain."
     },
     {
       id: 12,
-      // section: "Business Plan Review",
-      question: "In reviewing the insurer's business plan within the FCR, the actuary is primarily concerned with:",
+      // section: "GRI STANDARDS",
+      question: "Which GRI standard addresses energy consumption?",
       options: [
-        "a) Whether projected growth is supported by adequate capital and risk controls.",
-        "b) Whether the Board prefers aggressive expansion.",
-        "c) The company's branding and marketing strategy.",
-        "d) The number of new distribution channels planned."
+        "a) GRI 302",
+        "b) GRI 305",
+        "c) GRI 403",
+        "d) GRI 404"
       ],
-      correctAnswer: "a) Whether projected growth is supported by adequate capital and risk controls.",
-      explanation: "The actuary assesses whether the business plan is realistic relative to the insurer's solvency position and risk appetite."
+      correctAnswer: "a) GRI 302",
+      explanation: "GRI 302 addresses an organization's energy consumption."
+    },
+
+    // Section 3: Principles, Engagement, & Additional GRI Standards
+    {
+      id: 13,
+      // section: "GRI STANDARDS",
+      question: "The concept of stakeholder inclusiveness means:",
+      options: [
+        "a) Only investors are consulted",
+        "b) Stakeholder expectations are considered in reporting",
+        "c) Reports are confidential",
+        "d) Reports are audited"
+      ],
+      correctAnswer: "b) Stakeholder expectations are considered in reporting",
+      explanation: "Stakeholder inclusiveness means stakeholder expectations are factored into the reporting process."
+    },
+    {
+      id: 14,
+      // section: "GRI STANDARDS",
+      question: "Which disclosure includes reporting governance structure?",
+      options: [
+        "a) GRI 2",
+        "b) GRI 3",
+        "c) GRI 205",
+        "d) GRI 302"
+      ],
+      correctAnswer: "a) GRI 2",
+      explanation: "GRI 2 includes the reporting of governance structures."
+    },
+    {
+      id: 15,
+      // section: "GRI STANDARDS",
+      question: "What does comparability enable stakeholders to do?",
+      options: [
+        "a) Compare sustainability performance across organizations or time",
+        "b) Measure profits",
+        "c) Calculate taxes",
+        "d) Conduct audits"
+      ],
+      correctAnswer: "a) Compare sustainability performance across organizations or time",
+      explanation: "Comparability allows stakeholders to evaluate performance over time and against other entities."
+    },
+    {
+      id: 16,
+      // section: "GRI STANDARDS",
+      question: "Which standard addresses occupational health and safety?",
+      options: [
+        "a) GRI 403",
+        "b) GRI 404",
+        "c) GRI 413",
+        "d) GRI 414"
+      ],
+      correctAnswer: "a) GRI 403",
+      explanation: "GRI 403 outlines occupational health and safety disclosures."
+    },
+    {
+      id: 17,
+      // section: "GRI STANDARDS",
+      question: "GRI reporting primarily focuses on which type of materiality?",
+      options: [
+        "a) Financial materiality",
+        "b) Double materiality",
+        "c) Impact materiality",
+        "d) Market materiality"
+      ],
+      correctAnswer: "c) Impact materiality",
+      explanation: "GRI reporting primarily focuses on impact materiality."
+    },
+    {
+      id: 18,
+      // section: "GRI STANDARDS",
+      question: "Which standard addresses training and education?",
+      options: [
+        "a) GRI 404",
+        "b) GRI 401",
+        "c) GRI 302",
+        "d) GRI 305"
+      ],
+      correctAnswer: "a) GRI 404",
+      explanation: "GRI 404 deals with topics related to training and education."
+    },
+    {
+      id: 19,
+      // section: "GRI STANDARDS",
+      question: "Which environmental standard relates to water use?",
+      options: [
+        "a) GRI 303",
+        "b) GRI 302",
+        "c) GRI 304",
+        "d) GRI 305"
+      ],
+      correctAnswer: "a) GRI 303",
+      explanation: "GRI 303 is the standard that covers water use and interactions."
+    },
+    {
+      id: 20,
+      // section: "GRI STANDARDS",
+      question: "Which principle ensures data is sufficiently detailed for stakeholders to understand impacts?",
+      options: [
+        "a) Clarity",
+        "b) Balance",
+        "c) Completeness",
+        "d) Accuracy"
+      ],
+      correctAnswer: "c) Completeness",
+      explanation: "The Completeness principle ensures sufficient detail is provided."
+    },
+    {
+      id: 21,
+      // section: "GRI STANDARDS",
+      question: "What does accuracy require?",
+      options: [
+        "a) Approximate data",
+        "b) Precise and reliable information",
+        "c) Marketing narratives",
+        "d) Unverified claims"
+      ],
+      correctAnswer: "b) Precise and reliable information",
+      explanation: "Accuracy requires that the information reported is precise and reliable."
+    },
+    {
+      id: 22,
+      // section: "GRI STANDARDS",
+      question: "Which standard addresses supplier environmental assessment?",
+      options: [
+        "a) GRI 308",
+        "b) GRI 414",
+        "c) GRI 302",
+        "d) GRI 305"
+      ],
+      correctAnswer: "a) GRI 308",
+      explanation: "GRI 308 specifically addresses supplier environmental assessments."
+    },
+    {
+      id: 23,
+      // section: "GRI STANDARDS",
+      question: "What does timeliness ensure?",
+      options: [
+        "a) Reports are audited",
+        "b) Information is available when stakeholders need it",
+        "c) Reports are confidential",
+        "d) Reports are summarized"
+      ],
+      correctAnswer: "b) Information is available when stakeholders need it",
+      explanation: "Timeliness ensures that information is accessible to stakeholders precisely when they need it to make decisions."
+    },
+    {
+      id: 24,
+      // section: "GRI STANDARDS",
+      question: "Which standard addresses community impacts?",
+      options: [
+        "a) GRI 413",
+        "b) GRI 305",
+        "c) GRI 302",
+        "d) GRI 201"
+      ],
+      correctAnswer: "a) GRI 413",
+      explanation: "GRI 413 addresses local community impacts."
+    },
+    {
+      id: 25,
+      // section: "GRI STANDARDS",
+      question: "Stakeholder engagement primarily helps organizations identify:",
+      options: [
+        "a) Material topics",
+        "b) Profit margins",
+        "c) Tax rates",
+        "d) Audit risks"
+      ],
+      correctAnswer: "a) Material topics",
+      explanation: "Stakeholder engagement is a primary tool for organizations to identify their material topics."
+    },
+    {
+      id: 26,
+      // section: "GRI STANDARDS",
+      question: "Which principle requires consistent methodologies over time?",
+      options: [
+        "a) Comparability",
+        "b) Accuracy",
+        "c) Balance",
+        "d) Clarity"
+      ],
+      correctAnswer: "a) Comparability",
+      explanation: "Comparability requires the use of consistent methodologies over time."
+    },
+    {
+      id: 27,
+      // section: "GRI STANDARDS",
+      question: "GRI sustainability reports primarily communicate impacts to:",
+      options: [
+        "a) Regulators only",
+        "b) Stakeholders broadly",
+        "c) Internal auditors only",
+        "d) Tax authorities"
+      ],
+      correctAnswer: "b) Stakeholders broadly",
+      explanation: "GRI reports are meant to communicate impacts to a broad range of stakeholders."
+    },
+
+    // Section 4: IFRS S1 & S2 Disclosures
+    {
+      id: 28,
+      // section: "IFRS S1 & S2",
+      question: "What is the objective of IFRS S1?",
+      options: [
+        "a) General sustainability-related financial disclosures",
+        "b) Tax reporting",
+        "c) Accounting standards",
+        "d) Audit controls"
+      ],
+      correctAnswer: "a) General sustainability-related financial disclosures",
+      explanation: "The objective of IFRS S1 is to provide general sustainability-related financial disclosures."
+    },
+    {
+      id: 29,
+      // section: "IFRS S1 & S2",
+      question: "IFRS S2 focuses specifically on:",
+      options: [
+        "a) Biodiversity",
+        "b) Climate-related risks and opportunities",
+        "c) Governance only",
+        "d) Social impacts"
+      ],
+      correctAnswer: "b) Climate-related risks and opportunities",
+      explanation: "IFRS S2 is specifically tailored for climate-related risks and opportunities."
+    },
+    {
+      id: 30,
+      // section: "IFRS S1 & S2",
+      question: "IFRS S1 builds on the structure of which framework?",
+      options: [
+        "a) TCFD",
+        "b) GAAP",
+        "c) Basel III",
+        "d) COSO"
+      ],
+      correctAnswer: "a) TCFD",
+      explanation: "IFRS S1 builds upon the established structure of the TCFD framework."
     }
   ]
 };

@@ -1,6 +1,6 @@
 export const module6Data = {
   id: 6,
-  title: "Financial Profitability Ratios",
+  title: "Financial Performance Analysis",
   shortDescription: "Master financial performance analysis using IFRS 4 and IFRS 17 financials. Learn to calculate and interpret key profitability ratios, analyze financial statements, and prepare accurate performance reports for strategic decision-making.",
   themeColor: "green",
   objectives: {
