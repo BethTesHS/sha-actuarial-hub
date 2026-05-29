@@ -36,76 +36,76 @@ export const module4Data = {
     ],
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "Claims Outstanding",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Data/Claims Outstanding_TRAINING.xlsx",
-        filename: "Claims Outstanding_TRAINING.xlsx",
-        icon: "📊",
-        // icon: "📈",
-        // icon: "📋",
-      },
-      {
-        title: "Claims Paid",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Data/Claims Paid_TRAINING.xlsx",
-        filename: "Claims Paid_TRAINING.xlsx",
-        // icon: "📊",
-        // icon: "📈",
-        icon: "📋",
-      },
-      {
-        title: "FY24_NSE Yield Curve",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Data/FY24_NSE Yield Curve.xlsx",
-        filename: "FY24_NSE Yield Curve.xlsx",
-        // icon: "📊",
-        icon: "📈",
-        // icon: "📋",
-      },
-      {
-        title: "Premium Register",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Data/Premium Register_TRAINING.xlsx",
-        filename: "Premium Register_TRAINING.xlsx",
-        // icon: "📊",
-        // icon: "📈",
-        icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "Discounting Reserves Model - Template",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Working Files/Discounting Reserves Model - Template.xlsx",
-        filename: "Discounting Reserves Model - Template.xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      },
-      {
-        title: "IBNR Computation Training",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Working Files/IBNR Computation Training.xlsx",
-        filename: "IBNR Computation Training.xlsx",
-        // icon: "🛠️",
-        icon: "⚙️",
-      },
-    ],
-    resultFiles: [
-      {
-        title: "Discounting Reserves Model - Results File",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Results Files/Discounting Reserves Model - Results File.xlsx",
-        filename: "Discounting Reserves Model - Results File.xlsx",
-      },
-      {
-        title: "IBNR 2024 Valuation - Results File",
-        url: "/Training Modules/Module 4_General Insurance Valuation/Results Files/IBNR_2024 Valuation_Results File.xlsx",
-        filename: "IBNR_2024 Valuation_Results File.xlsx",
-      },
-    ]
-  },
+  // assignments: {
+  //   dataFiles: [
+  //     {
+  //       title: "Claims Outstanding",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Data/Claims Outstanding_TRAINING.xlsx",
+  //       filename: "Claims Outstanding_TRAINING.xlsx",
+  //       icon: "📊",
+  //       // icon: "📈",
+  //       // icon: "📋",
+  //     },
+  //     {
+  //       title: "Claims Paid",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Data/Claims Paid_TRAINING.xlsx",
+  //       filename: "Claims Paid_TRAINING.xlsx",
+  //       // icon: "📊",
+  //       // icon: "📈",
+  //       icon: "📋",
+  //     },
+  //     {
+  //       title: "FY24_NSE Yield Curve",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Data/FY24_NSE Yield Curve.xlsx",
+  //       filename: "FY24_NSE Yield Curve.xlsx",
+  //       // icon: "📊",
+  //       icon: "📈",
+  //       // icon: "📋",
+  //     },
+  //     {
+  //       title: "Premium Register",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Data/Premium Register_TRAINING.xlsx",
+  //       filename: "Premium Register_TRAINING.xlsx",
+  //       // icon: "📊",
+  //       // icon: "📈",
+  //       icon: "📋",
+  //     },
+  //   ],
+  //   workingFiles: [
+  //     {
+  //       title: "Discounting Reserves Model - Template",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Working Files/Discounting Reserves Model - Template.xlsx",
+  //       filename: "Discounting Reserves Model - Template.xlsx",
+  //       icon: "🛠️",
+  //       // icon: "⚙️",
+  //     },
+  //     {
+  //       title: "IBNR Computation Training",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Working Files/IBNR Computation Training.xlsx",
+  //       filename: "IBNR Computation Training.xlsx",
+  //       // icon: "🛠️",
+  //       icon: "⚙️",
+  //     },
+  //   ],
+  //   resultFiles: [
+  //     {
+  //       title: "Discounting Reserves Model - Results File",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Results Files/Discounting Reserves Model - Results File.xlsx",
+  //       filename: "Discounting Reserves Model - Results File.xlsx",
+  //     },
+  //     {
+  //       title: "IBNR 2024 Valuation - Results File",
+  //       url: "/Training Modules/Module 4_General Insurance Valuation/Results Files/IBNR_2024 Valuation_Results File.xlsx",
+  //       filename: "IBNR_2024 Valuation_Results File.xlsx",
+  //     },
+  //   ]
+  // },
 
   additionalResources: [
     {

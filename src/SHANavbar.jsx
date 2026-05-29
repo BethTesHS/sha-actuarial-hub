@@ -127,8 +127,8 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
   const ifrs17Items = [
     { label: "Module 0 (IFRS 17)", url: "/modules/0", icon: <BookOpen className="w-4 h-4" />, internal: true },
     { label: "Learn17", url: "https://learn17.com/", icon: <BookOpen className="w-4 h-4" /> },
-    { label: "IFRS 17 Insurance Contracts", url: "/pdfs/ifrs-17-insurance-contracts.pdf", icon: <FileText className="w-4 h-4" />, download: true },
-    { label: "IFRS 17 Illustrative Examples", url: "/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf", icon: <FileText className="w-4 h-4" />, download: true },
+    { label: "IFRS 17 Insurance Contracts", url: "/pdfs/ifrs-17-insurance-contracts.pdf", icon: <FileText className="w-4 h-4" /> },
+    { label: "IFRS 17 Illustrative Examples", url: "/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf", icon: <FileText className="w-4 h-4" /> },
   ];
 
   const pricingItems = [
@@ -659,8 +659,6 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                     {resourceItems.map((item, idx) => {
                       const href = item.path || item.url;
                       const isExternal = /^https?:\/\//i.test(href);
-                      const isDownload = item.label === "Qualification Pathway";
-
                       if (!isExternal && item.path) {
                         return (
                           <Link
@@ -679,9 +677,8 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                         <a
                           key={href}
                           href={href}
-                          {...(isDownload ? { download: true } : {})}
-                          target={isDownload ? undefined : "_blank"}
-                          rel={isDownload ? undefined : "noopener noreferrer"}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="flex items-center gap-3 px-4 py-3 text-sm transition-all hover:bg-white/5"
                           style={{ color: colors.text, borderBottom: idx < resourceItems.length - 1 ? '1px solid rgba(255,255,255,0.05)' : undefined }}
                         >
@@ -821,10 +818,10 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                       <a href="https://learn17.com/" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         Learn17
                       </a>
-                      <a href="/pdfs/ifrs-17-insurance-contracts.pdf" download className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                      <a href="/pdfs/ifrs-17-insurance-contracts.pdf" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         IFRS 17 Insurance Contracts
                       </a>
-                      <a href="/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf" download className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                      <a href="/pdfs/IFRS-17-Insurance-contracts-illustrative-examples.pdf" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         IFRS 17 Illustrative Examples
                       </a>
                       <div className="pt-1 pb-1 text-xs uppercase tracking-wide" style={{ color: colors.textSecondary }}>
@@ -909,7 +906,7 @@ export default function SHANavbar({ user, onLogout, theme = "dark" }) {
                       <Link to="/ifrs17-policy-papers" onClick={() => setShowMobileMenu(false)} className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         SHA IFRS 17 Policy Papers
                       </Link>
-                      <a href="/pdfs/qualification-handbook-2025-2026.pdf" download className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
+                      <a href="/pdfs/qualification-handbook-2025-2026.pdf" target="_blank" rel="noopener noreferrer" className="px-3 py-2 rounded-lg text-sm whitespace-nowrap hover:bg-white/5" style={{ color: colors.text }}>
                         Qualification Pathway
                       </a>
                     </div>

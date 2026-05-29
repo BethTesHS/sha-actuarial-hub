@@ -186,18 +186,13 @@ export default function HomePage({ theme = 'dark', user }) {
     }
   };
 
-  const downloadQualificationPathway = () => {
+  const viewQualificationPathway = () => {
     if (!user) {
       navigate('/SHAAuth');
       return;
     }
 
-    const link = document.createElement('a');
-    link.href = QUALIFICATION_PATHWAY_FILE;
-    link.download = '';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    window.open(QUALIFICATION_PATHWAY_FILE, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -220,7 +215,7 @@ export default function HomePage({ theme = 'dark', user }) {
                   handleNavigation={handleNavigation}
                   totalToolsCount={totalToolsCount}
                   totalTrainingModules={totalTrainingModules}
-                  onDownloadQualificationPathway={downloadQualificationPathway}
+                  onDownloadQualificationPathway={viewQualificationPathway}
                 />
               </div>
             );
@@ -267,7 +262,7 @@ export default function HomePage({ theme = 'dark', user }) {
               { icon: <GraduationCap className="w-8 h-8" />, title: "Actuarial Training Hub", desc: `${totalTrainingModules} comprehensive modules covering everything from data cleanup to valuation`, features: ["Structured learning paths", "Real-world case studies", "Progress tracking"], color: currentColors.cyan, link: "/modules" },
               { icon: <BookOpen className="w-8 h-8" />, title: "IFRS 17 Training Hub", desc: "Dedicated platform for mastering the new insurance accounting standard", features: ["25+ detailed lessons", "Interactive examples", "Certification prep"], color: currentColors.purple, link: "https://learn17.com/" },
               { icon: <Calculator className="w-8 h-8" />, title: "Valuation Tools", desc: "Professional-grade models for risk adjustment, LRC, and liability calculations", features: [`${totalToolsCount} actuarial tools`, "Excel integration", "Instant calculations"], color: currentColors.green, link: "/tools" },
-              { icon: <Award className="w-8 h-8" />, title: "Qualification Pathways", desc: "Complete roadmap for actuarial professional exams and certifications", features: ["15+ exam guides", "Study resources", "Career planning"], color: currentColors.orange, action: downloadQualificationPathway },
+              { icon: <Award className="w-8 h-8" />, title: "Qualification Pathways", desc: "Complete roadmap for actuarial professional exams and certifications", features: ["15+ exam guides", "Study resources", "Career planning"], color: currentColors.orange, action: viewQualificationPathway },
               { icon: <Gamepad2 className="w-8 h-8" />, title: "IFRS 17 Game", desc: "Gamified learning experience with competitive leaderboards", features: ["100+ quiz questions", "Global rankings", "Achievement badges"], color: currentColors.pink, link: "https://www.ifrs17game.com/" },
               { icon: <Compass className="w-8 h-8" />, title: "Integrated Experience", desc: "Seamless navigation between all platforms with unified progress tracking", features: ["Single dashboard", "Cross-platform sync", "Unified analytics"], color: currentColors.blue, link: "/my-progress" }
             ].map((platform, i) => (

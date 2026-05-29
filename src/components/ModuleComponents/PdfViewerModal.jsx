@@ -71,7 +71,7 @@ export default function PdfViewerModal({ viewingPdf, setViewingPdf, downloadFile
         >
           <div className="flex items-center justify-center h-full flex-col gap-4 p-6 text-center bg-gray-50">
             <FileText className="w-12 h-12 text-gray-400" />
-            <p className="text-gray-600 max-w-md">The PDF could not be displayed directly in your browser. You can still download it using the button above.</p>
+            <p className="text-gray-600 max-w-md">The PDF could not be displayed directly in your browser.{isDownloadable ? ' You can still download it using the button above.' : ''}</p>
           </div>
         </object>
       </div>

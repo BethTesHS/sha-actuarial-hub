@@ -39,38 +39,7 @@ export const module0Data = {
       }
     ],
   },
-
-  assignments: {
-    dataFiles: [
-      {
-        title: "{dataFileTitle}",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/{moduleName}/Data/{fileName}.xlsx",
-        filename: "{fileName}.xlsx",
-        // icon: "📊",
-        // icon: "📈",
-        // icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "{workingFileTitle}",
-        description: "Excel • Template",
-        url: "/Training Modules/{moduleName}/Working Files/{fileName}.xlsx",
-        filename: "{fileName}.xlsx",
-        // icon: "🛠️",
-        // icon: "⚙️",
-      }
-    ],
-    resultFiles: [
-      {
-        title: "{resultFileTitle}",
-        url: "/Training Modules/{moduleName}/Results Files/{fileName}.xlsx",
-        filename: "{fileName}.xlsx",
-      }
-    ]
-  },
-
+
   additionalResources: [
     {
       title: "{file}",

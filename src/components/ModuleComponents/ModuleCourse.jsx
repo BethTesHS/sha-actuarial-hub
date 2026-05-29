@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FileText, Maximize2, Download } from 'lucide-react';
+import { FileText, Maximize2 } from 'lucide-react';
 import filesService from "../../services/files.service";
 
-export default function ModuleCourse({ courseContent, theme, styles, setViewingPdf, downloadFile }) {
+export default function ModuleCourse({ courseContent, theme, styles, setViewingPdf }) {
   const [activeTab, setActiveTab] = useState(0);
 
   const hasMultipleResources = courseContent.resources && courseContent.resources.length > 1;
@@ -53,17 +53,12 @@ export default function ModuleCourse({ courseContent, theme, styles, setViewingP
                 onClick={() => setViewingPdf({ 
                   url: filesService.getFileUrl(activeResource.url),
                   title: activeResource.title, 
-                  filename: activeResource.filename 
+                  filename: activeResource.filename,
+                  downloadable: false,
                 })}
-                className={`w-full md:w-auto px-4 md:px-6 py-2.5 ${theme === 'light' ? 'bg-gray-200 hover:bg-gray-300 text-gray-800' : 'bg-white/10 hover:bg-white/20 text-white'} rounded-lg transition-all flex items-center justify-center gap-2 text-sm font-medium`}
+                className={`w-full md:w-auto px-4 md:px-6 py-2.5 ${theme === 'light' ? 'bg-gradient-to-r from-purple-600 to-blue-600 shadow-md hover:shadow-lg text-white' : 'bg-gradient-to-r from-purple-500 to-blue-500 shadow-md hover:shadow-lg text-white'} rounded-lg transition-all flex items-center justify-center gap-2 text-sm font-medium`}
               >
                 <Maximize2 className="w-4 h-4" /> Full View
-              </button>
-              <button
-                onClick={() => downloadFile(filesService.getFileUrl(activeResource.url), activeResource.filename)}
-                className={`w-full md:w-auto px-4 md:px-6 py-2.5 ${theme === 'light' ? 'bg-gradient-to-r from-purple-600 to-blue-600 shadow-md hover:shadow-lg' : 'bg-gradient-to-r from-purple-500 to-blue-500 shadow-md hover:shadow-lg'} rounded-lg text-white transition-all flex items-center justify-center gap-2 text-sm font-medium`}
-              >
-                <Download className="w-4 h-4" /> Download PDF
               </button>
             </div>
           </div>
@@ -75,7 +70,7 @@ export default function ModuleCourse({ courseContent, theme, styles, setViewingP
             >
               <div className="flex items-center justify-center h-full flex-col gap-4 p-6 text-center bg-gray-50">
                 <FileText className="w-12 h-12 text-gray-400" />
-                <p className="text-gray-600 max-w-md">The PDF could not be displayed directly in your browser. You can still download it using the button above.</p>
+                <p className="text-gray-600 max-w-md">The PDF could not be displayed directly in your browser. Use Full View to open it in the viewer.</p>
               </div>
             </object>
           </div>

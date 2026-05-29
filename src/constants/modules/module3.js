@@ -33,62 +33,62 @@ export const module3Data = {
     ]
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "Premium Register_31_12_2024.xlsx",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 3_LRC/Data/Premium Register_31_12_2024.xlsx",
-        filename: "Premium Register_31_12_2024.xlsx",
-        // icon: "📊",
-        // icon: "📈",
-        icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "LRC & ARC_Analysis (International Clients)",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 3_LRC/Working Files/LRC & ARC_Analysis(International Clients).xlsx",
-        filename: "LRC & ARC_Analysis (International Clients).xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      },
-      {
-        title: "LRC & ARC_Analysis (Kenyan Clients)",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 3_LRC/Working Files/LRC & ARC_Analysis(Kenyan Clients).xlsx",
-        filename: "LRC & ARC_Analysis (Kenyan Clients).xlsx",
-        // icon: "🛠️",
-        icon: "⚙️",
-      },
-      {
-        title: "UPR, GEP & DAC Analysis",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 3_LRC/Working Files/UPR,GEP & DAC_Analysis.xlsx",
-        filename: "UPR,GEP & DAC_Analysis.xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      },
-    ],
-    resultFiles: [
-      {
-        title: "LRC & ARC _Results (International Clients)",
-        url: "/Training Modules/Module 3_LRC/Results Files/LRC & ARC _Results(International Clients).xlsx",
-        filename: "LRC & ARC _Results (International Clients).xlsx",
-      },
-      {
-        title: "LRC & ARC _Results (Kenyan Clients)",
-        url: "/Training Modules/Module 3_LRC/Results Files/LRC & ARC _Results(Kenyan Clients).xlsx",
-        filename: "LRC & ARC _Results (Kenyan Clients).xlsx",
-      },
-      {
-        title: "UPR,GEP & DAC Results",
-        url: "/Training Modules/Module 3_LRC/Results Files/UPR,GEP & DAC Results.xlsx",
-        filename: "UPR,GEP & DAC Results.xlsx",
-      },
-    ]
-  },
+  // assignments: {
+  //   dataFiles: [
+  //     {
+  //       title: "Premium Register_31_12_2024.xlsx",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 3_LRC/Data/Premium Register_31_12_2024.xlsx",
+  //       filename: "Premium Register_31_12_2024.xlsx",
+  //       // icon: "📊",
+  //       // icon: "📈",
+  //       icon: "📋",
+  //     },
+  //   ],
+  //   workingFiles: [
+  //     {
+  //       title: "LRC & ARC_Analysis (International Clients)",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 3_LRC/Working Files/LRC & ARC_Analysis(International Clients).xlsx",
+  //       filename: "LRC & ARC_Analysis (International Clients).xlsx",
+  //       icon: "🛠️",
+  //       // icon: "⚙️",
+  //     },
+  //     {
+  //       title: "LRC & ARC_Analysis (Kenyan Clients)",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 3_LRC/Working Files/LRC & ARC_Analysis(Kenyan Clients).xlsx",
+  //       filename: "LRC & ARC_Analysis (Kenyan Clients).xlsx",
+  //       // icon: "🛠️",
+  //       icon: "⚙️",
+  //     },
+  //     {
+  //       title: "UPR, GEP & DAC Analysis",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 3_LRC/Working Files/UPR,GEP & DAC_Analysis.xlsx",
+  //       filename: "UPR,GEP & DAC_Analysis.xlsx",
+  //       icon: "🛠️",
+  //       // icon: "⚙️",
+  //     },
+  //   ],
+  //   resultFiles: [
+  //     {
+  //       title: "LRC & ARC _Results (International Clients)",
+  //       url: "/Training Modules/Module 3_LRC/Results Files/LRC & ARC _Results(International Clients).xlsx",
+  //       filename: "LRC & ARC _Results (International Clients).xlsx",
+  //     },
+  //     {
+  //       title: "LRC & ARC _Results (Kenyan Clients)",
+  //       url: "/Training Modules/Module 3_LRC/Results Files/LRC & ARC _Results(Kenyan Clients).xlsx",
+  //       filename: "LRC & ARC _Results (Kenyan Clients).xlsx",
+  //     },
+  //     {
+  //       title: "UPR,GEP & DAC Results",
+  //       url: "/Training Modules/Module 3_LRC/Results Files/UPR,GEP & DAC Results.xlsx",
+  //       filename: "UPR,GEP & DAC Results.xlsx",
+  //     },
+  //   ]
+  // },
 
   // aiQuizQuestions: [
   //   {

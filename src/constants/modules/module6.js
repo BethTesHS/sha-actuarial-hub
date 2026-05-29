@@ -33,36 +33,36 @@ export const module6Data = {
     ]
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "Financial Performance Data",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 6_Financial Performance Analysis/Data/data.xlsx",
-        filename: "data.xlsx",
-        // icon: "📊",
-        icon: "📈",
-        // icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "Ratios Template",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 6_Financial Performance Analysis/Working Files/Ratios Template.xlsx",
-        filename: "Ratios Template.xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      }
-    ],
-    resultFiles: [
-      {
-        title: "Ratios Results",
-        url: "/Training Modules/Module 6_Financial Performance Analysis/Results Files/Ratios Results.xlsx",
-        filename: "Ratios Results.xlsx",
-      }
-    ]
-  },
+  // assignments: {
+  //   dataFiles: [
+  //     {
+  //       title: "Financial Performance Data",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 6_Financial Performance Analysis/Data/data.xlsx",
+  //       filename: "data.xlsx",
+  //       // icon: "📊",
+  //       icon: "📈",
+  //       // icon: "📋",
+  //     },
+  //   ],
+  //   workingFiles: [
+  //     {
+  //       title: "Ratios Template",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 6_Financial Performance Analysis/Working Files/Ratios Template.xlsx",
+  //       filename: "Ratios Template.xlsx",
+  //       icon: "🛠️",
+  //       // icon: "⚙️",
+  //     }
+  //   ],
+  //   resultFiles: [
+  //     {
+  //       title: "Ratios Results",
+  //       url: "/Training Modules/Module 6_Financial Performance Analysis/Results Files/Ratios Results.xlsx",
+  //       filename: "Ratios Results.xlsx",
+  //     }
+  //   ]
+  // },
 
   // aiQuizQuestions: [
   //   {

@@ -33,58 +33,58 @@ export const module5Data = {
     ]
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "Sample Balance Sheet - GI",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 5_Capital Adequacy/Data/Sample Balance Sheet_GI.xlsx",
-        filename: "Sample Balance Sheet_GI.xlsx",
-        icon: "📊",
-        // icon: "📈",
-        // icon: "📋",
-      },
-      {
-        title: "Sample Balance Sheet - Life",
-        description: "Excel • Sample dataset",
-        url: "/Training Modules/Module 5_Capital Adequacy/Data/Sample Balance Sheet_Life.xlsx",
-        filename: "Sample Balance Sheet_Life.xlsx",
-        // icon: "📊",
-        icon: "📈",
-        // icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "IFRS 17 CAR Template - GI",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 5_Capital Adequacy/Working Files/IFRS 17 CAR Template_GI.xlsx",
-        filename: "IFRS 17 CAR Template_GI.xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      },
-      {
-        title: "IFRS 17 CAR Template - Life",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 5_Capital Adequacy/Working Files/IFRS 17 CAR Template_Life.xlsx",
-        filename: "IFRS 17 CAR Template_Life.xlsx",
-        // icon: "🛠️",
-        // icon: "⚙️",
-      }
-    ],
-    resultFiles: [
-      {
-        title: "IFRS 17 CAR Template - GI - Results File",
-        url: "/Training Modules/Module 5_Capital Adequacy/Results Files/IFRS 17 CAR Template_GI_Results File.xlsx",
-        filename: "IFRS 17 CAR Template_GI_Results File.xlsx",
-      },
-      {
-        title: "IFRS 17 CAR Template - Life - Results File",
-        url: "/Training Modules/Module 5_Capital Adequacy/Results Files/IFRS 17 CAR Template_Life - Results File.xlsx",
-        filename: "IFRS 17 CAR Template_Life - Results File.xlsx",
-      }
-    ]
-  },
+  // assignments: {
+  //   dataFiles: [
+  //     {
+  //       title: "Sample Balance Sheet - GI",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 5_Capital Adequacy/Data/Sample Balance Sheet_GI.xlsx",
+  //       filename: "Sample Balance Sheet_GI.xlsx",
+  //       icon: "📊",
+  //       // icon: "📈",
+  //       // icon: "📋",
+  //     },
+  //     {
+  //       title: "Sample Balance Sheet - Life",
+  //       description: "Excel • Sample dataset",
+  //       url: "/Training Modules/Module 5_Capital Adequacy/Data/Sample Balance Sheet_Life.xlsx",
+  //       filename: "Sample Balance Sheet_Life.xlsx",
+  //       // icon: "📊",
+  //       icon: "📈",
+  //       // icon: "📋",
+  //     },
+  //   ],
+  //   workingFiles: [
+  //     {
+  //       title: "IFRS 17 CAR Template - GI",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 5_Capital Adequacy/Working Files/IFRS 17 CAR Template_GI.xlsx",
+  //       filename: "IFRS 17 CAR Template_GI.xlsx",
+  //       icon: "🛠️",
+  //       // icon: "⚙️",
+  //     },
+  //     {
+  //       title: "IFRS 17 CAR Template - Life",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 5_Capital Adequacy/Working Files/IFRS 17 CAR Template_Life.xlsx",
+  //       filename: "IFRS 17 CAR Template_Life.xlsx",
+  //       // icon: "🛠️",
+  //       // icon: "⚙️",
+  //     }
+  //   ],
+  //   resultFiles: [
+  //     {
+  //       title: "IFRS 17 CAR Template - GI - Results File",
+  //       url: "/Training Modules/Module 5_Capital Adequacy/Results Files/IFRS 17 CAR Template_GI_Results File.xlsx",
+  //       filename: "IFRS 17 CAR Template_GI_Results File.xlsx",
+  //     },
+  //     {
+  //       title: "IFRS 17 CAR Template - Life - Results File",
+  //       url: "/Training Modules/Module 5_Capital Adequacy/Results Files/IFRS 17 CAR Template_Life - Results File.xlsx",
+  //       filename: "IFRS 17 CAR Template_Life - Results File.xlsx",
+  //     }
+  //   ]
+  // },
 
   additionalResources: [
     {

@@ -48,6 +48,7 @@ export default function IFRS17PolicyPapers({ theme = "dark" }) {
       url: paper.url,
       title: paper.title,
       filename: paper.filename,
+      downloadable: false,
     });
   }, []);
 

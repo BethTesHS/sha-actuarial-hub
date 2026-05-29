@@ -22,13 +22,7 @@ export const module8Data = {
     description: "This module is under construction. Course materials will be added soon.",
     resources: [],
   },
-
-  assignments: {
-    dataFiles: [],
-    workingFiles: [],
-    resultFiles: [],
-  },
-
+
   quizTitle: "Quiz: Post Retirement Medical Fund (Coming Soon)",
   quizQuestions: [],
 };

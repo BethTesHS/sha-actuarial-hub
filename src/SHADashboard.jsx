@@ -22,7 +22,7 @@ export default function SHADashboard({ user: userProp, theme = "dark" }) {
     const user = userProp || JSON.parse(localStorage.getItem('user') || '{}');
 
     const quickAccessCards = [
-        { title: "Training Modules", description: "18 actuarial training modules with quizzes and assignments", icon: <BookOpen className="w-8 h-8" />, color: colors.blue, link: "/modules" },
+        { title: "Training Modules", description: "18 actuarial training modules with multiple choice quizzes", icon: <BookOpen className="w-8 h-8" />, color: colors.blue, link: "/modules" },
         { title: "My Progress", description: "Track completion across all modules", icon: <BarChart3 className="w-8 h-8" />, color: colors.green, link: "/my-progress" },
         { title: "Tools", description: "Actuarial calculators and utilities", icon: <Wrench className="w-8 h-8" />, color: colors.cyan, link: "/tools" },
         { title: "QAS Reports", description: "Quality assurance and reporting resources", icon: <FileText className="w-8 h-8" />, color: colors.purple, link: "/qas-reports" },

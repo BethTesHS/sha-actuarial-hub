@@ -33,53 +33,53 @@
     ]
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "2025 Budget Data",
-        description: "Excel ΓÇó Sample dataset",
-        url: "/Training Modules/Module 9_FCR/Data/2025 Budget.xlsx",
-        filename: "2025 Budget.xlsx",
-        // icon: "≡ƒôè",
-        // icon: "≡ƒôê",
-        icon: "≡ƒôï",
-      },
-      {
-        title: "Final Audited Financial Statements FY 2024",
-        description: "Word ΓÇó Sample dataset",
-        url: "/Training Modules/Module 9_FCR/Data/PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
-        filename: "PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
-        // icon: "≡ƒôè",
-        icon: "≡ƒôê",
-        // icon: "≡ƒôï",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "Pioneer General - FCR 2023 Working File V2",
-        description: "Excel ΓÇó Template",
-        url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General - FCR 2023 Working File V2.xlsx",
-        filename: "Pioneer General - FCR 2023 Working File V2.xlsx",
-        icon: "≡ƒ¢á∩╕Å",
-        // icon: "ΓÜÖ∩╕Å",
-      },
-      {
-        title: "Pioneer General FCR 2023 - Final Report",
-        description: "Word ΓÇó Template",
-        url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General FCR 2023 - Final Report (290424).docx",
-        filename: "Pioneer General FCR 2023 - Final Report.docx",
-        // icon: "≡ƒ¢á∩╕Å",
-        icon: "ΓÜÖ∩╕Å",
-      },
-    ],
-    resultFiles: [
-      {
-        title: "Pioneer General FCR 2024 - Final Report",
-        url: "/Training Modules/Module 9_FCR/Results Files/Pioneer General FCR 2024 - Final Report (250325).pdf",
-        filename: "Pioneer General FCR 2024 - Final Report.pdf",
-      }
-    ]
-  },
+  // assignments: {
+  //   dataFiles: [
+  //     {
+  //       title: "2025 Budget Data",
+  //       description: "Excel ΓÇó Sample dataset",
+  //       url: "/Training Modules/Module 9_FCR/Data/2025 Budget.xlsx",
+  //       filename: "2025 Budget.xlsx",
+  //       // icon: "≡ƒôè",
+  //       // icon: "≡ƒôê",
+  //       icon: "≡ƒôï",
+  //     },
+  //     {
+  //       title: "Final Audited Financial Statements FY 2024",
+  //       description: "Word ΓÇó Sample dataset",
+  //       url: "/Training Modules/Module 9_FCR/Data/PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
+  //       filename: "PIONEER General Insurance Company Limited - Final Audited Financial statements FY 2024 - 23-03.doc",
+  //       // icon: "≡ƒôè",
+  //       icon: "≡ƒôê",
+  //       // icon: "≡ƒôï",
+  //     },
+  //   ],
+  //   workingFiles: [
+  //     {
+  //       title: "Pioneer General - FCR 2023 Working File V2",
+  //       description: "Excel ΓÇó Template",
+  //       url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General - FCR 2023 Working File V2.xlsx",
+  //       filename: "Pioneer General - FCR 2023 Working File V2.xlsx",
+  //       icon: "≡ƒ¢á∩╕Å",
+  //       // icon: "ΓÜÖ∩╕Å",
+  //     },
+  //     {
+  //       title: "Pioneer General FCR 2023 - Final Report",
+  //       description: "Word ΓÇó Template",
+  //       url: "/Training Modules/Module 9_FCR/Working Files/Pioneer General FCR 2023 - Final Report (290424).docx",
+  //       filename: "Pioneer General FCR 2023 - Final Report.docx",
+  //       // icon: "≡ƒ¢á∩╕Å",
+  //       icon: "ΓÜÖ∩╕Å",
+  //     },
+  //   ],
+  //   resultFiles: [
+  //     {
+  //       title: "Pioneer General FCR 2024 - Final Report",
+  //       url: "/Training Modules/Module 9_FCR/Results Files/Pioneer General FCR 2024 - Final Report (250325).pdf",
+  //       filename: "Pioneer General FCR 2024 - Final Report.pdf",
+  //     }
+  //   ]
+  // },
 
 additionalResources: [
   {

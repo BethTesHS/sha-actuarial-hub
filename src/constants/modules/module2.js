@@ -35,45 +35,45 @@ export const module2Data = {
     ]
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "Claims Data",
-        description: "Excel • Claims dataset",
-        url: "/Training Modules/Module 2_Pricing_Fundamentals/Data/Claims Data.xlsx",
-        filename: "Claims Data.xlsx",
-        // icon: "📊",
-        // icon: "📈",
-        icon: "📋",
-      },
-      {
-        title: "Premium Data",
-        description: "Excel • Premium dataset",
-        url: "/Training Modules/Module 2_Pricing_Fundamentals/Data/Premium Data.xlsx",
-        filename: "Premium Data.xlsx",
-        // icon: "📊",
-        icon: "📈",
-        // icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "Frequency & Severity Template",
-        description: "Excel • Template",
-        url: "/Training Modules/Module 2_Pricing_Fundamentals/Working Files/Frequency and Severity Template.xlsx",
-        filename: "Frequency and Severity Template.xlsx",
-        icon: "🛠️",
-        // icon: "⚙️",
-      }
-    ],
-    resultFiles: [
-      {
-        title: "Frequency & Severity Results",
-        url: "/Training Modules/Module 2_Pricing_Fundamentals/Results Files/Frequency and Severity.xlsx",
-        filename: "Frequency and Severity.xlsx",
-      }
-    ]
-  },
+  // assignments: {
+  //   dataFiles: [
+  //     {
+  //       title: "Claims Data",
+  //       description: "Excel • Claims dataset",
+  //       url: "/Training Modules/Module 2_Pricing_Fundamentals/Data/Claims Data.xlsx",
+  //       filename: "Claims Data.xlsx",
+  //       // icon: "📊",
+  //       // icon: "📈",
+  //       icon: "📋",
+  //     },
+  //     {
+  //       title: "Premium Data",
+  //       description: "Excel • Premium dataset",
+  //       url: "/Training Modules/Module 2_Pricing_Fundamentals/Data/Premium Data.xlsx",
+  //       filename: "Premium Data.xlsx",
+  //       // icon: "📊",
+  //       icon: "📈",
+  //       // icon: "📋",
+  //     },
+  //   ],
+  //   workingFiles: [
+  //     {
+  //       title: "Frequency & Severity Template",
+  //       description: "Excel • Template",
+  //       url: "/Training Modules/Module 2_Pricing_Fundamentals/Working Files/Frequency and Severity Template.xlsx",
+  //       filename: "Frequency and Severity Template.xlsx",
+  //       icon: "🛠️",
+  //       // icon: "⚙️",
+  //     }
+  //   ],
+  //   resultFiles: [
+  //     {
+  //       title: "Frequency & Severity Results",
+  //       url: "/Training Modules/Module 2_Pricing_Fundamentals/Results Files/Frequency and Severity.xlsx",
+  //       filename: "Frequency and Severity.xlsx",
+  //     }
+  //   ]
+  // },
 
   // aiQuizQuestions: [
   //   {

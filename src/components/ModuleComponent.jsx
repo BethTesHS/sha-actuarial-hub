@@ -1,5 +1,5 @@
 // src/components/ModuleComponent.jsx
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Book, CheckCircle2 } from "lucide-react";
 import { supabase } from "../supabaseClient";
@@ -12,23 +12,14 @@ import ModuleCourse from "./ModuleComponents/ModuleCourse";
 import Module18Course from "./ModuleComponents/Module18Course";
 import ModuleVideos from "./ModuleComponents/ModuleVideos";
 import ModuleQuiz from "./ModuleComponents/ModuleQuiz";
-import ModuleAssignments from "./ModuleComponents/ModuleAssignments";
 import ModuleAdditionalResources from "./ModuleComponents/ModuleAdditionalResources";
-
-const BUCKET_NAME = 'submissions';
 
 export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
   const [activeTab, setActiveTab] = useState("overview");
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuizResults, setShowQuizResults] = useState(false);
-  const [uploadedFiles, setUploadedFiles] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [viewingPdf, setViewingPdf] = useState(null);
-  const [uploading, setUploading] = useState(false);
-  const [uploadError, setUploadError] = useState(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
-  const [loadingFiles, setLoadingFiles] = useState(false);
 
   // AI Quiz Grading state
   const [aiQuizAnswers, setAiQuizAnswers] = useState({});
@@ -41,20 +32,9 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
   // Loading Fetch States
   const [isFetchingQuiz, setIsFetchingQuiz] = useState(true);
   const [isFetchingAiQuiz, setIsFetchingAiQuiz] = useState(true);
-  const [isFetchingAssignment, setIsFetchingAssignment] = useState(true);
-
-  // Assignment Submission State
-  const [assignmentStatus, setAssignmentStatus] = useState(null);
-  const [assignmentSubmission, setAssignmentSubmission] = useState(null);
-  const [savedSubmissionFiles, setSavedSubmissionFiles] = useState([]);
-  const [isResubmitting, setIsResubmitting] = useState(false);
 
   // Progress State
   const [progressPercentage, setProgressPercentage] = useState(0);
-
-  // Scroll Refs for UX
-  const successViewRef = useRef(null);
-  const uploadViewRef = useRef(null);
 
   const { title, description, shortDescription, objectives, learningOutcomes, themeColor, courseContent, additionalResources } = moduleData;
 
@@ -351,68 +331,18 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
     fetchPreviousAiSubmission();
   }, [user?.id, moduleData?.id, moduleData?.disableQuiz]);
 
-  // 3. Fetch Assignments background
-  useEffect(() => {
-    const fetchAssignmentSubmission = async () => {
-      if (moduleData?.disableAssignments || !moduleData?.assignments) {
-        setIsFetchingAssignment(false);
-        return;
-      }
-      if (!user?.id || !moduleData?.id) {
-        setIsFetchingAssignment(false);
-        return;
-      }
-      
-      try {
-        const { data, error } = await supabase
-          .from('assignment_submissions')
-          .select('*')
-          .eq('user_id', user.id)
-          .eq('module_id', String(moduleData.id))
-          .limit(1)
-          .maybeSingle();
-          
-        if (error) throw error;
-        if (data) {
-          setAssignmentSubmission(data);
-          setAssignmentStatus(data.status);
-          setSavedSubmissionFiles(data.files || []);
-        } else {
-          setAssignmentSubmission(null);
-        }
-      } catch (err) {
-        console.error("Error fetching assignment submission:", err);
-      } finally {
-        setIsFetchingAssignment(false);
-      }
-    };
-    fetchAssignmentSubmission();
-  }, [user?.id, moduleData?.id, moduleData?.disableAssignments, moduleData?.assignments]);
-
-  // 4. Calculate Progress AND Save to Database
+  // 3. Calculate Progress AND Save to Database (multiple choice quiz only)
   useEffect(() => {
     if (moduleData?.disableProgress) {
       setProgressPercentage(0);
       return;
     }
     const hasQuizTask = !moduleData?.disableQuiz;
-    const hasAssignmentTask = moduleData?.assignments && !moduleData?.disableAssignments;
 
-    // Prevent calculation/saving until progress-counted background fetches are complete.
-    // AI quiz is no longer part of the product, so it must never affect progress.
-    if ((hasQuizTask && isFetchingQuiz) || (hasAssignmentTask && isFetchingAssignment)) return;
+    if (hasQuizTask && isFetchingQuiz) return;
 
-    const progressTasks = [];
-    const isMCQuizDone = showQuizResults || (quizAnswers && Object.keys(quizAnswers).length > 0);
-    const isAssignmentDone = assignmentStatus || submitSuccess || (savedSubmissionFiles && savedSubmissionFiles.length > 0);
-
-    if (hasQuizTask) progressTasks.push(isMCQuizDone);
-    if (hasAssignmentTask) progressTasks.push(isAssignmentDone);
-
-    const completed = progressTasks.filter(Boolean).length;
-    const calculatedProgress = progressTasks.length
-      ? Math.round((completed / progressTasks.length) * 100)
-      : 0;
+    const isMCQuizDone = showQuizResults;
+    const calculatedProgress = hasQuizTask ? (isMCQuizDone ? 100 : 0) : 0;
     setProgressPercentage(calculatedProgress);
 
     // Save to Database
@@ -440,44 +370,7 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
 
     saveProgressToDB();
 
-  }, [
-    isFetchingQuiz, isFetchingAssignment,
-    showQuizResults, quizAnswers,
-    assignmentStatus, submitSuccess, savedSubmissionFiles, 
-    moduleData, user?.id
-  ]);
-
-  // Fetch Uploaded Files
-  useEffect(() => {
-    const fetchUploadedFiles = async () => {
-      if (moduleData?.disableAssignments || !moduleData?.assignments) return;
-      if (!user?.id || !moduleData?.id) return;
-      setLoadingFiles(true);
-      try {
-        const folderPath = `${user.id}/${moduleData.id}`;
-        const { data, error } = await supabase.storage.from(BUCKET_NAME).list(folderPath, { limit: 100, sortBy: { column: 'created_at', order: 'desc' } });
-        if (error) throw error;
-        if (data && data.length > 0) {
-          const existingFiles = data.map(file => ({
-            id: file.id || file.name,
-            name: file.name.replace(/^\d+_/, ''), 
-            storageName: file.name,
-            size: file.metadata?.size ? (file.metadata.size / (1024 * 1024)).toFixed(2) + ' MB' : 'N/A',
-            type: file.metadata?.mimetype || 'application/octet-stream',
-            uploadDate: file.created_at ? new Date(file.created_at).toLocaleDateString() : 'Unknown',
-            storagePath: `${folderPath}/${file.name}`,
-            uploaded: true
-          }));
-          setUploadedFiles(existingFiles);
-        }
-      } catch (err) {
-        console.error('Error fetching uploaded files:', err);
-      } finally {
-        setLoadingFiles(false);
-      }
-    };
-    fetchUploadedFiles();
-  }, [user?.id, moduleData?.id, moduleData?.disableAssignments, moduleData?.assignments]);
+  }, [isFetchingQuiz, showQuizResults, moduleData, user?.id]);
 
   const downloadFile = async (url, filename) => {
     try {
@@ -523,9 +416,6 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
         }
         if (!moduleData?.disableQuiz) {
           tabs.push('quiz');
-        }
-        if (moduleData?.assignments && !moduleData?.disableAssignments) {
-          tabs.push('assignments');
         }
         if (additionalResources && additionalResources.length > 0) {
           tabs.push('resources');
@@ -620,20 +510,14 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
               </div>
               
               {/* Progress Breakdown Indicators */}
+              {!moduleData?.disableQuiz && (
               <div className="flex gap-4 mt-3 text-xs">
-                {!moduleData?.disableQuiz && (
                   <div className="flex items-center gap-1.5">
-                    <div className={`w-2 h-2 rounded-full ${(showQuizResults || Object.keys(quizAnswers).length > 0) ? 'bg-green-500' : 'bg-gray-400'}`}></div>
+                    <div className={`w-2 h-2 rounded-full ${showQuizResults ? 'bg-green-500' : 'bg-gray-400'}`}></div>
                     <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>MC Quiz</span>
                   </div>
-                )}
-                {moduleData?.assignments && !moduleData?.disableAssignments && (
-                  <div className="flex items-center gap-1.5">
-                    <div className={`w-2 h-2 rounded-full ${(assignmentStatus || submitSuccess || savedSubmissionFiles?.length > 0) ? 'bg-green-500' : 'bg-gray-400'}`}></div>
-                    <span className={theme === 'light' ? 'text-gray-600' : 'text-gray-400'}>Assignment</span>
-                  </div>
-                )}
               </div>
+              )}
             </div>
             )}
 
@@ -674,7 +558,7 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
                   styles={styles}
                 />
               )
-              : <ModuleCourse courseContent={courseContent} theme={theme} styles={styles} setViewingPdf={setViewingPdf} downloadFile={downloadFile} />
+              : <ModuleCourse courseContent={courseContent} theme={theme} styles={styles} setViewingPdf={setViewingPdf} />
           )}
 
           {activeTab === 'videos' && (
@@ -698,24 +582,7 @@ export default function ModuleComponent({ theme = 'dark', moduleData, user }) {
             />
           )}
 
-          {activeTab === 'assignments' && moduleData.assignments && !moduleData?.disableAssignments && (
-            <ModuleAssignments
-              moduleData={moduleData} user={user} theme={theme} styles={styles} downloadFile={downloadFile}
-              assignmentStatus={assignmentStatus} setAssignmentStatus={setAssignmentStatus}
-              assignmentSubmission={assignmentSubmission} setAssignmentSubmission={setAssignmentSubmission}
-              savedSubmissionFiles={savedSubmissionFiles} setSavedSubmissionFiles={setSavedSubmissionFiles}
-              isResubmitting={isResubmitting} setIsResubmitting={setIsResubmitting}
-              uploadedFiles={uploadedFiles} setUploadedFiles={setUploadedFiles}
-              uploading={uploading} setUploading={setUploading}
-              uploadError={uploadError} setUploadError={setUploadError}
-              submitting={submitting} setSubmitting={setSubmitting}
-              submitSuccess={submitSuccess} setSubmitSuccess={setSubmitSuccess}
-              loadingFiles={loadingFiles}
-              successViewRef={successViewRef} uploadViewRef={uploadViewRef}
-            />
-          )}
-
-          {/* New Additional Resources Tab Content Component */}
+          {/* Additional Resources Tab */}
           {activeTab === 'resources' && (
             <ModuleAdditionalResources
               additionalResources={additionalResources}

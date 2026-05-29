@@ -32,59 +32,59 @@ export const module1Data = {
     ]
   },
 
-  assignments: {
-    dataFiles: [
-      {
-        title: "Premium Register Data",
-        description: "Excel • 1,000 records • Sample dataset",
-        url: "/Training Modules/Module 1_Data Clean Up/Data/premium_register_1000.xlsx",
-        filename: "premium_register_1000.xlsx",
-        icon: "📊",
-      },
-      {
-        title: "Paid Claims Data",
-        description: "Excel • 5,000 records • Sample dataset",
-        url: "/Training Modules/Module 1_Data Clean Up/Data/paid_claims_5000.xlsx",
-        filename: "paid_claims_5000.xlsx",
-        icon: "📈",
-      },
-      {
-        title: "Outstanding Claims Data",
-        description: "Excel • 2,000 records • Sample dataset",
-        url: "/Training Modules/Module 1_Data Clean Up/Data/outstanding_claims_2000.xlsx",
-        filename: "outstanding_claims_2000.xlsx",
-        icon: "📋",
-      },
-    ],
-    workingFiles: [
-      {
-        title: "Claims Data Clean Up Template",
-        description: "Excel • Structured template for claims validation",
-        url: "/Training Modules/Module 1_Data Clean Up/Working Files/Claims Data_Clean_Up_Template.xlsx",
-        filename: "Claims Data_Clean_Up_Template.xlsx",
-        icon: "🛠️",
-      },
-      {
-        title: "Premium Data Clean Up Template",
-        description: "Excel • Structured template for premium validation",
-        url: "/Training Modules/Module 1_Data Clean Up/Working Files/Premium_Data_Clean_Up_Template.xlsx",
-        filename: "Premium_Data_Clean_Up_Template.xlsx",
-        icon: "⚙️",
-      }
-    ],
-    resultFiles: [
-      {
-        title: "Claims Data Clean Up Result",
-        url: "/Training Modules/Module 1_Data Clean Up/Results Files/Claims Data_Clean_Up.xlsx",
-        filename: "Claims Data_Clean_Up.xlsx",
-      },
-      {
-        title: "Premium Data Clean Up Result",
-        url: "/Training Modules/Module 1_Data Clean Up/Results Files/Premium_Data_Clean_Up.xlsx",
-        filename: "Premium_Data_Clean_Up.xlsx",
-      }
-    ]
-  },
+  // assignments: {
+  //   dataFiles: [
+  //     {
+  //       title: "Premium Register Data",
+  //       description: "Excel • 1,000 records • Sample dataset",
+  //       url: "/Training Modules/Module 1_Data Clean Up/Data/premium_register_1000.xlsx",
+  //       filename: "premium_register_1000.xlsx",
+  //       icon: "📊",
+  //     },
+  //     {
+  //       title: "Paid Claims Data",
+  //       description: "Excel • 5,000 records • Sample dataset",
+  //       url: "/Training Modules/Module 1_Data Clean Up/Data/paid_claims_5000.xlsx",
+  //       filename: "paid_claims_5000.xlsx",
+  //       icon: "📈",
+  //     },
+  //     {
+  //       title: "Outstanding Claims Data",
+  //       description: "Excel • 2,000 records • Sample dataset",
+  //       url: "/Training Modules/Module 1_Data Clean Up/Data/outstanding_claims_2000.xlsx",
+  //       filename: "outstanding_claims_2000.xlsx",
+  //       icon: "📋",
+  //     },
+  //   ],
+  //   workingFiles: [
+  //     {
+  //       title: "Claims Data Clean Up Template",
+  //       description: "Excel • Structured template for claims validation",
+  //       url: "/Training Modules/Module 1_Data Clean Up/Working Files/Claims Data_Clean_Up_Template.xlsx",
+  //       filename: "Claims Data_Clean_Up_Template.xlsx",
+  //       icon: "🛠️",
+  //     },
+  //     {
+  //       title: "Premium Data Clean Up Template",
+  //       description: "Excel • Structured template for premium validation",
+  //       url: "/Training Modules/Module 1_Data Clean Up/Working Files/Premium_Data_Clean_Up_Template.xlsx",
+  //       filename: "Premium_Data_Clean_Up_Template.xlsx",
+  //       icon: "⚙️",
+  //     }
+  //   ],
+  //   resultFiles: [
+  //     {
+  //       title: "Claims Data Clean Up Result",
+  //       url: "/Training Modules/Module 1_Data Clean Up/Results Files/Claims Data_Clean_Up.xlsx",
+  //       filename: "Claims Data_Clean_Up.xlsx",
+  //     },
+  //     {
+  //       title: "Premium Data Clean Up Result",
+  //       url: "/Training Modules/Module 1_Data Clean Up/Results Files/Premium_Data_Clean_Up.xlsx",
+  //       filename: "Premium_Data_Clean_Up.xlsx",
+  //     }
+  //   ]
+  // },
 
   // aiQuizQuestions: [
   //   {

@@ -31,6 +31,7 @@ export default function ModuleAdditionalResources({ additionalResources, theme, 
       setViewingPdf({
         ...resource,
         url: resolvedUrl,
+        downloadable: false,
       });
     } else {
       window.open(resolvedUrl, '_blank');
@@ -51,7 +52,7 @@ export default function ModuleAdditionalResources({ additionalResources, theme, 
           if (typeLower.includes('pdf')) ResourceIcon = FileText;
           if (typeLower.includes('excel') || typeLower.includes('csv')) ResourceIcon = FileSpreadsheet;
 
-          const isDownloadable = resource.downloadable !== false;
+          const isDownloadable = resource.downloadable === true;
 
           return (
             <div key={index} className={`p-6 rounded-2xl border transition-all duration-200 flex flex-col h-full ${
